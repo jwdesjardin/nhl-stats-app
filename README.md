@@ -57,29 +57,26 @@ npx create-react-app client --template @chakra-ui/typescript
 
 ## state
 ```js
+  injuries: [ {Injury } ]
+  skaters: [ { Skater } ]
+  goalies: [ { Goalie } ]
+  standings: [ { title: '', teams:[ { Team } ] } ]
+  games: [ { Game } ]
+
+  
   team: {
-    injuries : []
-    roster_stats: []
-    scoring_stats: []
-    games: []
-  }
-  leaders: {
-    goals: []
-    assists: []
-    points: []
-    goals_against_avg: []
-    save_percent: []
-    shutouts: []
-    avg_time_on_ice: []
-    penalty_minutes: []
+    roster_stats: [ { Player } ]
+    skater_stats: [ { Skater } ]
+    goalie_stats: [ { Goalie } ]
   }
   game: {
-    pims: []
-    scoring: []
-    home_scoring: []
-    away_scoring: []
-    home_goalie: []
-    away_goalie: []
+    box_score: { { GameDetails }, home_totals: { TeamGame }, away_totals: { TeamGame } }
+    home_scoring: [ { SkaterGame } ]
+    home_goalie: [ { GoalieGame } ]
+    away_scoring: [ { SkaterGame } ]
+    away_goalie: [ { GoalieGame } ]
+    scoring_summary: [ { title: '', [ { Goal, SO_Goal } ] } ]
+    penalty_summary: [ { title: '', [ { Penalty } ] }]
   }
 ```
   #### how state will be used in the app: 
