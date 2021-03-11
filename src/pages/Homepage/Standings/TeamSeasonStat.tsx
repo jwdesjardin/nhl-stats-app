@@ -1,8 +1,8 @@
 import { Td, Tr, Image } from '@chakra-ui/react'
 import React from 'react'
-import { teams } from '../../../../data/teams'
+import { teams } from '../../../data/teams'
 
-import { Team, TeamSeasonStats } from '../../../../types/app'
+import { Team, TeamSeasonStats } from '../../../types/app'
 
 interface TeamSeasonStatProps {
   stats: TeamSeasonStats

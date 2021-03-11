@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { GameSummary } from './GameSummary'
 import { PenaltiesSummary } from './PenalitesSummary'
+import { ScoringByPeriod } from './ScoringByPeriod'
 
 export const GameSummaryPage = () => {
   return (
@@ -32,12 +33,12 @@ export const GameSummaryPage = () => {
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
           <PenaltiesSummary></PenaltiesSummary>
         </Box>
-        {/* scoring summary
+        {/* scoring summary */}
         <Box>
           <Heading textAlign='center'>Scoring By Period</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <GoalsByPeriod></GoalsByPeriod>
-        </Box> */}
+          <ScoringByPeriod></ScoringByPeriod>
+        </Box>
       </VStack>
     </Container>
   )

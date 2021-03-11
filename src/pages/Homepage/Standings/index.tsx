@@ -2,7 +2,7 @@ import { Tr, Box, Heading, Table, Thead, Th, Tbody, VStack } from '@chakra-ui/re
 import React from 'react'
 
 //Types
-import { Conference } from '../../../../types/app'
+import { Conference } from '../../../types/app'
 //Components
 import { TeamSeasonStat } from './TeamSeasonStat'
 
