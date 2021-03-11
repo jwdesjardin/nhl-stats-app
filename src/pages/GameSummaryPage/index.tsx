@@ -46,25 +46,25 @@ export const GameSummaryPage = () => {
         <Box w='100%'>
           <Heading textAlign='center'>Home Scoring</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <SkatersScoringSummary></SkatersScoringSummary>
+          <SkatersScoringSummary summary={GAMESUMMARY.home_team_scoring}></SkatersScoringSummary>
         </Box>
         {/* away skaters scoring summary */}
         <Box w='100%'>
           <Heading textAlign='center'>Away Scoring</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <SkatersScoringSummary></SkatersScoringSummary>
+          <SkatersScoringSummary summary={GAMESUMMARY.away_team_scoring}></SkatersScoringSummary>
         </Box>
         {/* home goalies summary */}
         <Box w='100%'>
           <Heading textAlign='center'>Home Goalies</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <GoalieScoringSummary></GoalieScoringSummary>
+          <GoalieScoringSummary summary={GAMESUMMARY.home_team_goalies}></GoalieScoringSummary>
         </Box>
         {/* away goalies summary */}
         <Box w='100%'>
           <Heading textAlign='center'>Away Goalies</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <GoalieScoringSummary></GoalieScoringSummary>
+          <GoalieScoringSummary summary={GAMESUMMARY.away_team_goalies}></GoalieScoringSummary>
         </Box>
       </VStack>
     </Container>

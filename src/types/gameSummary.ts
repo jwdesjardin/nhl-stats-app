@@ -15,15 +15,15 @@ export interface SkaterGame {
   goals: number
   assists: number
   points: number
-  plus_minus: number
+  plus_minus: number | null
   penalty_minutes: number
   ev_goals: number
   sh_goals: number
   pp_goals: number
   gw_goals: number
   shots_on_goal: number
-  shooting_percentage: number
-  shifts: number
+  shooting_percentage: number | null
+  shifts: number | null
   time_on_ice: number
 }
 
