@@ -1,15 +1,3 @@
-import  './app'
-import  './team'
-import  './gameSummary'
-
-
-
-
-
-
-
-
-
-
-
-
+import './app'
+import './team'
+import './gameSummary'

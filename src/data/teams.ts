@@ -1,9 +1,4 @@
-export interface Team {
-	teamID: string
-	name: string
-	image_url: string
-	conference: string
-}
+import { Team } from '../types/app'
 
 export const teams: Team[] = [
 	{

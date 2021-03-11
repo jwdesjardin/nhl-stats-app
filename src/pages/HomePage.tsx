@@ -4,9 +4,9 @@ import React from 'react'
 import GAMELOG from '../data/gamelog.json'
 import STANDINGS from '../data/standings.json'
 
-import { Game, GameStats } from '../components/Game'
-import { Conference } from '../types/app'
-import { ConferenceStandings, TeamSeasonStat } from '../components/Standings'
+import { Game } from '../components/Game'
+import { Conference, GameStats } from '../types/app'
+import { ConferenceStandings } from '../components/Standings'
 
 const HomePage: React.FC = () => {
 	const [todaysGames, setTodaysGames] = React.useState<GameStats[]>([])

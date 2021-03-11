@@ -1,27 +1,13 @@
 import { Text, Box, Link, Image, Badge } from '@chakra-ui/react'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-
 import { Icon } from '@chakra-ui/react'
 import { SportsHockey } from '@material-ui/icons'
 
-// import GAMELOG from '../data/gamelog.json'
-// import STANDINGS from '../data/standings.json'
-
+//Data
 import { teams } from '../../data/teams'
-
-export interface GameStats {
-	id: number
-	date: string
-	home_team: string
-	home_goals: number | null
-	away_team: string
-	away_goals: number | null
-	overtime: string
-	attendance: number | null
-	length_of_game: string
-	notes: string
-}
+//Types
+import { GameStats } from '../../types/app'
 
 interface GameProps {
 	game: GameStats
