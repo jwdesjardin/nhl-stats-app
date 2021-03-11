@@ -1,24 +1,25 @@
 # NHL Stats App
 
-this project was bootstrapped using: 
+this project was bootstrapped using:
 
 ```
 npx create-react-app client --template @chakra-ui/typescript
 ```
 
 ## screens
-- [.] home page
+
+- [x] home page
 - [.] team page
 - [.] players page
-- [.] leders page
+- [.] leaders page
 - [.] game page
-- [.] menu page
-
+- [x] menu page
 
 ## features
-- [.] home page
-  - [.] todays games
-  - [.] standings
+
+- [x] home page
+  - [x] todays games
+  - [x] standings
 - [.] team page
   - [.] team data
   - [.] recent games
@@ -37,7 +38,7 @@ npx create-react-app client --template @chakra-ui/typescript
   - [.] points leaderboard
   - [.] season scoring
   - [.] goalies stats GAA, s%, SO
-- [.] leders page
+- [.] leaders page
   - [.] leaderboard
   - [.] toggle by stat
     - [.] goals, points, assists
@@ -49,13 +50,14 @@ npx create-react-app client --template @chakra-ui/typescript
   - [.] penalties by period
   - [.] scoring by period
   - [.] home and away scoring
-- [.] menu page
-  - [.] navigation links
-  - [.] menu overlay
-  - [.] conference dropdowns
-  - [.] team link dropdowns
+- [x] menu page
+  - [x] navigation links
+  - [x] menu overlay
+  - [x] conference dropdowns
+  - [x] team link dropdowns
 
 ## state
+
 ```js
   injuries: [ {Injury } ]
   skaters: [ { Skater } ]
@@ -63,7 +65,7 @@ npx create-react-app client --template @chakra-ui/typescript
   standings: [ { title: '', teams:[ { Team } ] } ]
   games: [ { Game } ]
 
-  
+
   team: {
     roster_stats: [ { Player } ]
     skater_stats: [ { Skater } ]
@@ -79,27 +81,29 @@ npx create-react-app client --template @chakra-ui/typescript
     penalty_summary: [ { title: '', [ { Penalty } ] }]
   }
 ```
-  #### how state will be used in the app: 
+
+#### how state will be used in the app:
+
 - get all games
 - get all skater data
 
 ## computations
-compute scoring leaders
-compute conference standings 
-create recent games 
 
+compute scoring leaders
+compute conference standings
+create recent games
 
 - when you go to a team page or player page
   - fetch the team roster data and injury data
-  
-- when you go to a game page 
+- when you go to a game page
   - fetch the game data
 
-our client will reach out to web scraping server which will fetch pages containing nhl data. the server will return the data to the client. 
+our client will reach out to web scraping server which will fetch pages containing nhl data. the server will return the data to the client.
 
 ## getting data from api
 
 **on app load**
+
 - get gamelog
 - get skaters
 - get goalies
@@ -107,5 +111,6 @@ our client will reach out to web scraping server which will fetch pages containi
 - get standings
 
 **on page request**
+
 - get team (teamid)
 - get gameSummary (gameid)
