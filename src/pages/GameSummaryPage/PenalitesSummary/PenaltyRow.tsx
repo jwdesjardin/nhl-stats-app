@@ -1,23 +1,28 @@
 import * as React from 'react'
 import { Link, Td, Tr } from '@chakra-ui/react'
 import { Link as BrowserLink } from 'react-router-dom'
+import { Penalty } from '../../../types/gameSummary'
 
-export const PenaltyRow = () => {
+interface PenaltyRowProps {
+  penalty: Penalty
+}
+
+export const PenaltyRow: React.FC<PenaltyRowProps> = ({ penalty }) => {
   return (
     <Tr>
-      <Td p={2}>06:34</Td>
+      <Td p={2}>{penalty.time}</Td>
       <Td p={2}>
         <Link as={BrowserLink} to='/team'>
-          OTT
+          {penalty.team_id}
         </Link>
       </Td>
       <Td p={2}>
         <Link as={BrowserLink} to='/player'>
-          Joe Thornton
+          {penalty.player}
         </Link>
       </Td>
-      <Td p={2}>Delay of Game</Td>
-      <Td p={2}>2m</Td>
+      <Td p={2}>{penalty.type}</Td>
+      <Td p={2}>{penalty.duration}m</Td>
     </Tr>
   )
 }

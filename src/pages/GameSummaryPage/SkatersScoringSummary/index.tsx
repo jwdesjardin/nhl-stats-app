@@ -3,7 +3,7 @@ import * as React from 'react'
 
 export const SkatersScoringSummary = () => {
   return (
-    <Box bg='white' border='2px solid black' p={4} borderRadius='lg'>
+    <Box bg='white' border='2px solid black' p={2} borderRadius='lg'>
       <Table size='sm'>
         <Thead>
           <Tr>

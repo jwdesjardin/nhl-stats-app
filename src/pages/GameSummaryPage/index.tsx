@@ -18,6 +18,7 @@ import { PenaltiesSummary } from './PenalitesSummary'
 import { ScoringByPeriod } from './ScoringByPeriod'
 import { SkatersScoringSummary } from './SkatersScoringSummary'
 import { GoalieScoringSummary } from './GoalieScoringSummary'
+import GAMESUMMARY from '../../data/gameSummary.json'
 
 export const GameSummaryPage = () => {
   return (
@@ -27,19 +28,19 @@ export const GameSummaryPage = () => {
         <Box w='100%'>
           <Heading textAlign='center'>Game Summary</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <GameSummary></GameSummary>
+          <GameSummary boxScore={GAMESUMMARY.box_score}></GameSummary>
         </Box>
         {/* penalties by period */}
         <Box w='100%'>
           <Heading textAlign='center'>Penalities By Period</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <PenaltiesSummary></PenaltiesSummary>
+          <PenaltiesSummary penaltySummary={GAMESUMMARY.penalty_summary}></PenaltiesSummary>
         </Box>
         {/* scoring by period */}
         <Box w='100%'>
           <Heading textAlign='center'>Scoring By Period</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-          <ScoringByPeriod></ScoringByPeriod>
+          <ScoringByPeriod scoringSummary={GAMESUMMARY.scoring_summary}></ScoringByPeriod>
         </Box>
         {/* home skaters scoring summary */}
         <Box w='100%'>
