@@ -1,27 +1,28 @@
 import { Box, VStack, Container, Heading } from '@chakra-ui/react'
 import React from 'react'
 
-import GAMELOG from '../data/gamelog.json'
-import STANDINGS from '../data/standings.json'
-
 import { Game } from '../components/Game'
 import { Conference, GameStats } from '../types/app'
 import { ConferenceStandings } from '../components/Standings'
+import { useStandings, useGamelog } from '../context'
 
 const HomePage: React.FC = () => {
+	const { standings } = useStandings()
+	const { gamelog } = useGamelog()
+
 	const [todaysGames, setTodaysGames] = React.useState<GameStats[]>([])
 
 	const [westernConference, setWesternConference] = React.useState<Conference | undefined>(
-		STANDINGS.find((conference) => conference.name === 'West Division')
+		standings.find((conference) => conference.name === 'West Division')
 	)
 	const [easternConference, setEasternConference] = React.useState<Conference | undefined>(
-		STANDINGS.find((conference) => conference.name === 'East Division')
+		standings.find((conference) => conference.name === 'East Division')
 	)
 	const [centralConference, setCentralConference] = React.useState<Conference | undefined>(
-		STANDINGS.find((conference) => conference.name === 'Central Division')
+		standings.find((conference) => conference.name === 'Central Division')
 	)
 	const [northernConference, setNorthernConference] = React.useState<Conference | undefined>(
-		STANDINGS.find((conference) => conference.name === 'North Division')
+		standings.find((conference) => conference.name === 'North Division')
 	)
 
 	const getTodaysGames = (gamelog: GameStats[]): GameStats[] => {
@@ -45,7 +46,7 @@ const HomePage: React.FC = () => {
 	}
 
 	React.useEffect(() => {
-		const todays_games = getTodaysGames(GAMELOG)
+		const todays_games = getTodaysGames(gamelog)
 		setTodaysGames(todays_games)
 		console.log('todays games', todays_games)
 	}, [])
