@@ -19,8 +19,8 @@ export const SOAttemptRow = () => {
         </Link>
       </Td>
       <Td p={2}>
-        <CheckIcon ml={4} color='green.500' />
-        {/* <CloseIcon ml={4} color='red.500' /> */}
+        <CheckIcon color='green.500' />
+        {/* <CloseIcon color='red.500' /> */}
       </Td>
       <Td p={2}>
         <Link as={BrowserLink} to='/player'>

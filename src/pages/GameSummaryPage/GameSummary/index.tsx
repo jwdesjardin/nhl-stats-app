@@ -11,6 +11,7 @@ export const GameSummary = () => {
         <VStack>
           <Image src='images/mapleleafs.gif' />
           <Text>0-3-4</Text>
+          <Text fontWeight='bold'>Away</Text>
         </VStack>
         {/* game details */}
         <VStack>
@@ -29,6 +30,7 @@ export const GameSummary = () => {
         <VStack>
           <Image src='images/senators.gif' />
           <Text>0-2-5</Text>
+          <Text fontWeight='bold'>Home</Text>
         </VStack>
       </HStack>
 

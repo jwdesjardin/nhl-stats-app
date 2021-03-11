@@ -45,11 +45,11 @@ npx create-react-app client --template @chakra-ui/typescript
     - [.] gw, sh, pp
     - [.] gaa, s%, SO
     - [.] pims, +/-, atoi
-- [.] game page
+- [x] game page
   - [x] head to head summary
   - [x] penalties by period
-  - [.] scoring by period
-  - [.] home and away scoring
+  - [x] scoring by period
+  - [x] home and away scoring
 - [x] menu page
   - [x] navigation links
   - [x] menu overlay
