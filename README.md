@@ -12,7 +12,7 @@ npx create-react-app client --template @chakra-ui/typescript
 - [.] team page
 - [.] players page
 - [.] leaders page
-- [.] game page
+- [x] game page
 - [x] menu page
 
 ## features
@@ -46,8 +46,8 @@ npx create-react-app client --template @chakra-ui/typescript
     - [.] gaa, s%, SO
     - [.] pims, +/-, atoi
 - [.] game page
-  - [.] head to head summary
-  - [.] penalties by period
+  - [x] head to head summary
+  - [x] penalties by period
   - [.] scoring by period
   - [.] home and away scoring
 - [x] menu page
