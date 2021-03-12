@@ -11,7 +11,7 @@ npx create-react-app client --template @chakra-ui/typescript
 - [x] home page
 - [.] team page
 - [.] players page
-- [.] leaders page
+- [x] leaders page
 - [x] game page
 - [x] menu page
 
@@ -38,13 +38,14 @@ npx create-react-app client --template @chakra-ui/typescript
   - [.] points leaderboard
   - [.] season scoring
   - [.] goalies stats GAA, s%, SO
-- [.] leaders page
-  - [.] leaderboard
+- [x] leaders page
+  - [x] leaderboard
   - [.] toggle by stat
-    - [.] goals, points, assists
-    - [.] gw, sh, pp
-    - [.] gaa, s%, SO
-    - [.] pims, +/-, atoi
+    - [x] goals, points, assists
+    - [x] gw, sh, pp
+    - [x] shots, hits, fo %, fo wins
+    - [x] gaa, s%, SO, ga, saves
+    - [x] pims, +/-, atoi
 - [x] game page
   - [x] head to head summary
   - [x] penalties by period

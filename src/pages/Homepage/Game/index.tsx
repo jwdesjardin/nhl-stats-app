@@ -56,7 +56,7 @@ export const Game: React.FC<GameProps> = ({ game }) => {
         <Text>
           {game_date.getMonth() + 1}
           {'/'}
-          {game_date.getDate()}
+          {game_date.getDate() + 1}
         </Text>
       </Box>
       {home_team && away_team && (
@@ -77,11 +77,11 @@ export const Game: React.FC<GameProps> = ({ game }) => {
           {game.overtime}
         </Badge>
       )}
-      {game_link !== '' && (
+      {/* {game_link !== '' && (
         <Link as={RouterLink} to={`games/${game_link}`}>
           <Icon as={SportsHockey} />
         </Link>
-      )}
+      )} */}
     </Box>
   )
 }

@@ -31,12 +31,14 @@ export const HomePage: React.FC = () => {
     const date = today.getDate()
     const year = today.getFullYear()
 
+    console.log(today, month, date, year)
+
     const todays_games = gamelog.filter((game) => {
       const game_date = new Date(game.date)
       if (
         game_date.getFullYear() === year &&
         game_date.getMonth() === month &&
-        game_date.getDate() === date
+        game_date.getDate() + 1 === date
       )
         return true
       return false

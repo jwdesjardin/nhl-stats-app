@@ -29,7 +29,7 @@ export interface GoalieScoring {
   goals_against: number
   shots_against: number
   saves: number
-  save_percentage: number
+  save_percentage: number | null
   goals_against_average: number
   shutouts: number
 }
@@ -62,14 +62,14 @@ export interface SkaterScoring {
   pp_goals: number
   gw_goals: number
   shots_on_goal: number
-  shooting_percentage: number
+  shooting_percentage: number | null
   time_on_ice: number
   average_time_on_ice: string
   blocks: number
   hits: number
   faceoff_wins: number
   faceoff_losses: number
-  faceoff_percentage: number
+  faceoff_percentage: number | null
 }
 
 // standings
