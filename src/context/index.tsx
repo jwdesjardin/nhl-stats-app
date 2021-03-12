@@ -5,10 +5,12 @@ import STANDINGS from '../data/standings.json'
 import GAMELOG from '../data/gamelog.json'
 import SKATERS from '../data/skaters.json'
 import GOALIES from '../data/goalies.json'
+import INJURIES from '../data/injuries.json'
 
-// interface InjuriesContextType {
-// 	injuries: Injury[]
-// }
+interface InjuriesContextType {
+  injuries: Injury[]
+}
+
 interface PlayersContextType {
   skaters: SkaterScoring[]
   goalies: GoalieScoring[]
@@ -23,13 +25,13 @@ interface GamelogContextType {
 }
 
 // create context
-// export const InjuriesContext = React.createContext<InjuriesContextType | undefined>(undefined)
+export const InjuriesContext = React.createContext<InjuriesContextType>({ injuries: [] })
 export const PlayersContext = React.createContext<PlayersContextType>({ skaters: [], goalies: [] })
 export const GamelogContext = React.createContext<GamelogContextType>({ gamelog: [] })
 export const StandingsContext = React.createContext<StandingsContextType>({ standings: [] })
 
 // create hooks
-// export const useInjuries = () => React.useContext(InjuriesContext)
+export const useInjuries = () => React.useContext(InjuriesContext)
 export const usePlayers = () => React.useContext(PlayersContext)
 export const useGamelog = () => React.useContext(GamelogContext)
 export const useStandings = () => React.useContext(StandingsContext)
@@ -68,4 +70,15 @@ export const PlayersProvider: React.FC = ({ children }) => {
   }
 
   return <PlayersContext.Provider value={value}>{children}</PlayersContext.Provider>
+}
+
+export const InjuriesProvider: React.FC = ({ children }) => {
+  // set state
+  const [injuries, setInjuries] = React.useState<Injury[]>(INJURIES)
+
+  const value = {
+    injuries,
+  }
+
+  return <InjuriesContext.Provider value={value}>{children}</InjuriesContext.Provider>
 }

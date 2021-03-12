@@ -21,7 +21,7 @@ export interface RosterStat {
   draft: {
     year: number | null
     team_id: string | null
-    round: number | null
+    round: string | null
     overall: number | null
   }
 }

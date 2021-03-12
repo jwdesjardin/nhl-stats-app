@@ -29,16 +29,22 @@ export const Game: React.FC<GameProps> = ({ game }) => {
   // create a date object
   const game_date = new Date(game.date)
 
-  // create game_link
+  // create game_link if game was not yesterday or earlier
   let game_link = ''
   if (home_team) {
-    game_link =
-      game_date.getFullYear().toString() +
-      padStart((game_date.getMonth() + 1).toString()) +
-      padStart((game_date.getDate() + 1).toString()) +
-      0 +
-      home_team.teamID
-    console.log(game_link)
+    const game_time = game_date.getTime()
+    //get now - 1 day
+    const now = Date.now() - 3600 * 1000 * 24
+
+    if (game_time < now) {
+      game_link =
+        game_date.getFullYear().toString() +
+        padStart((game_date.getMonth() + 1).toString()) +
+        padStart((game_date.getDate() + 1).toString()) +
+        0 +
+        home_team.teamID
+      console.log(game_link)
+    }
   }
 
   return (
@@ -72,16 +78,20 @@ export const Game: React.FC<GameProps> = ({ game }) => {
           </Text>
         </Box>
       )}
-      {game.overtime && (
+      {game.overtime ? (
         <Badge p={1} mr={2}>
           {game.overtime}
         </Badge>
+      ) : (
+        <Badge bg='white' p={3} mr={2}></Badge>
       )}
-      {/* {game_link !== '' && (
+      {game_link !== '' ? (
         <Link as={RouterLink} to={`games/${game_link}`}>
           <Icon as={SportsHockey} />
         </Link>
-      )} */}
+      ) : (
+        <Box />
+      )}
     </Box>
   )
 }

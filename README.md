@@ -21,16 +21,16 @@ npx create-react-app client --template @chakra-ui/typescript
   - [x] todays games
   - [x] standings
 - [.] team page
-  - [.] team data
-  - [.] recent games
-    - [.] toggle more games
-  - [.] scoring leaders
-  - [.] injuries
-  - [.] goalie stats
-  - [.] conference standings
-  - [.] upcoming games
+  - [x] team data
+  - [x] recent games
+    - [x] toggle more games
+  - [x] scoring leaders
+  - [x] injuries
+  - [x] goalie stats
+  - [x] conference standings
+  - [x] upcoming games
     - [.] full schedule
-  - [.] roster stats
+  - [x] roster stats
 - [.] players page
   - [.] player data
   - [.] goals leaderboard

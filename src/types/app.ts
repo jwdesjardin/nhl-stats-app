@@ -39,7 +39,9 @@ export interface Injury {
   id: number
   player: string
   player_id: string
-  date: Date
+  date: string
+  team: string
+  team_id: string
   type: string
   note: string
 }
@@ -55,7 +57,7 @@ export interface SkaterScoring {
   goals: number
   assists: number
   points: number
-  plus_minus: number
+  plus_minus: number | null
   penalty_minutes: number
   ev_goals: number
   sh_goals: number

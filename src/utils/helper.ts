@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const getStatHeader = (leaderStat: string, setState: (str: string) => void) => {
   switch (leaderStat) {
     case 'goals':
@@ -56,6 +58,27 @@ export const getStatHeader = (leaderStat: string, setState: (str: string) => voi
       break
     case 'shutouts':
       setState('SO')
+      break
+    case 'salary':
+      setState('SALARY')
+      break
+    case 'age':
+      setState('AGE')
+      break
+    case 'height':
+      setState('HEIGHT')
+      break
+    case 'weight':
+      setState('WEIGHT')
+      break
+    case 'experience':
+      setState('EXP')
+      break
+    case 'draft':
+      setState('DRAFT')
+      break
+    case 'country':
+      setState('COUNTRY')
       break
     default:
       setState('')

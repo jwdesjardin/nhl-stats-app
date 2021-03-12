@@ -5,6 +5,7 @@ import { Navbar } from './utils/Navbar'
 import { Box } from '@chakra-ui/react'
 import { LeadersPage } from './pages/LeadersPage'
 import { GameSummaryPage } from './pages/GameSummaryPage'
+import { TeamPage } from './pages/TeamPage'
 
 // import app data
 
@@ -17,6 +18,7 @@ export const App = () => {
           <Route exact path='/' render={() => <Redirect to='/home' />} />
           <Route path='/home' component={HomePage} />
           <Route path='/leaders' component={LeadersPage} />
+          <Route path='/team' component={TeamPage} />
           <Route path='/game-summary' component={GameSummaryPage} />
         </Switch>
       </Box>

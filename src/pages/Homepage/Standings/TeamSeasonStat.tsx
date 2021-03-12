@@ -6,9 +6,10 @@ import { Team, TeamSeasonStats } from '../../../types/app'
 
 interface TeamSeasonStatProps {
   stats: TeamSeasonStats
+  selected: boolean
 }
 
-export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats }) => {
+export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected }) => {
   const getTeamImage = (teams: Team[], teamName: string) => {
     const team: Team | undefined = teams.find((team) => team.name === teamName)
     if (!team) return
@@ -16,7 +17,7 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats }) => {
   }
 
   return (
-    <Tr>
+    <Tr bg={selected ? 'yellow.200' : 'white'}>
       <Td p={2}>
         <Image width='37px' src={`${getTeamImage(teams, stats.name)}`}></Image>
       </Td>

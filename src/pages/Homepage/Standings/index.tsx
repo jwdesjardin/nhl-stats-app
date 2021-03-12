@@ -8,9 +8,13 @@ import { TeamSeasonStat } from './TeamSeasonStat'
 
 interface ConferenceStandingsProps {
   conference: Conference
+  team_id?: string
 }
 
-export const ConferenceStandings: React.FC<ConferenceStandingsProps> = ({ conference }) => {
+export const ConferenceStandings: React.FC<ConferenceStandingsProps> = ({
+  conference,
+  team_id,
+}) => {
   return (
     <VStack>
       <Box w='100%'>
@@ -43,7 +47,7 @@ export const ConferenceStandings: React.FC<ConferenceStandingsProps> = ({ confer
           </Thead>
           <Tbody>
             {conference.teams.map((team) => (
-              <TeamSeasonStat key={team._id} stats={team} />
+              <TeamSeasonStat key={team._id} stats={team} selected={team.team_id === team_id} />
             ))}
           </Tbody>
         </Table>

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { usePlayers } from '../../context'
 import { GoalieScoring, SkaterScoring } from '../../types/app'
 import { Link as BrowserLink } from 'react-router-dom'
-import { getStatHeader } from './helper'
+import { getStatHeader } from '../../utils/helper'
 
 export const LeadersPage = () => {
   const { skaters, goalies } = usePlayers()
