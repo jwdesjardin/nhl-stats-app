@@ -55,9 +55,11 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
         onChange={(e) => {
           setScoringStat(e.target.value)
         }}
-        bg='green.600'
+        bg='cyan.200'
         defaultValue='save_percentage'
         my={3}
+        w='80%'
+        mx='auto'
       >
         <option value='goals_against_average'>Goals Against Avg.</option>
         <option value='shutouts'>Shutouts</option>

@@ -1,4 +1,4 @@
-import { Box, Text, VStack, Container, Heading, Center } from '@chakra-ui/react'
+import { Box, Text, VStack, Container, Heading, Center, Button, Link } from '@chakra-ui/react'
 import React from 'react'
 
 import { GameStats } from '../../../types/app'
@@ -6,6 +6,7 @@ import { GameStats } from '../../../types/app'
 import { useGamelog } from '../../../context'
 import { Game } from '../../Homepage/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
+import { Link as BrowserLink } from 'react-router-dom'
 
 interface UpcomingGamesProps {
   team_id: string
@@ -50,9 +51,15 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
           {upcomingGames.slice(0, 10).map((game) => (
             <Game key={game.id} game={game} />
           ))}
-          <Center>
+          <Center my={2}>
+            <Link as={BrowserLink} to={`/schedule/${team_id}`}>
+              <Button bg='orange.300'>Full Schedule</Button>
+            </Link>
+          </Center>
+
+          <Center onClick={() => setUpcomingGamesToggle(false)}>
             <Text>{`See Less Games`.toUpperCase()}</Text>
-            <TriangleUpIcon mx={2} onClick={() => setUpcomingGamesToggle(false)} />
+            <TriangleUpIcon mx={2} />
           </Center>
         </Box>
       ) : (
@@ -60,9 +67,9 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
           {upcomingGames.slice(0, 5).map((game) => (
             <Game key={game.id} game={game} />
           ))}
-          <Center>
+          <Center onClick={() => setUpcomingGamesToggle(true)}>
             <Text>{`See More Games`.toUpperCase()}</Text>
-            <TriangleDownIcon mx={2} onClick={() => setUpcomingGamesToggle(true)} />
+            <TriangleDownIcon mx={2} />
           </Center>
         </Box>
       )}

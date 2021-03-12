@@ -41,11 +41,17 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         const B = Object.entries(b)
         const stat_B = (B.find((entry) => entry[0] === attr) || ['', ''])[1]
 
-        if (stat_A !== '' && stat_B !== '') {
+        if (stat_A !== null && stat_B !== null) {
           return parseFloat(stat_B) - parseFloat(stat_A)
         }
-        // fails no attr found NEVER
-        return -1
+        //move nulls to the bottom
+        if (stat_A === null) {
+          return 1
+        }
+        if (stat_B === null) {
+          return -1
+        }
+        return 0
       })
       .slice(0, 50)
   }
@@ -57,10 +63,13 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         onChange={(e) => {
           setScoringStat(e.target.value)
         }}
-        bg='green.600'
+        bg='cyan.200'
         defaultValue='points'
         my={3}
+        w='80%'
+        mx='auto'
       >
+        <option value='games_played'>Game Played</option>
         <option value='goals'>Goals</option>
         <option value='assists'>Assists</option>
         <option value='points'>Points</option>
@@ -81,15 +90,11 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         <Table size='sm'>
           <Thead>
             <Tr>
+              <Th p={2}>RK</Th>
+              <Th p={2}>POS</Th>
               <Th p={2}>Player</Th>
               <Th p={2} isNumeric>
                 GP
-              </Th>
-              <Th p={2} isNumeric>
-                G
-              </Th>
-              <Th p={2} isNumeric>
-                A
               </Th>
               <Th p={2} isNumeric>
                 PTS
@@ -100,21 +105,18 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
             </Tr>
           </Thead>
           <Tbody>
-            {sortedSkaters.map((skater) => {
+            {sortedSkaters.map((skater, idx) => {
               const stat = Object.entries(skater).find((entry) => entry[0] === scoringStat)
 
               return (
                 <Tr key={skater.player_id}>
+                  <Td p={2}>{idx + 1}</Td>
+                  <Td p={2}>{skater.position}</Td>
                   <Td p={2}>{skater.player}</Td>
                   <Td p={2} isNumeric>
                     {skater.games_played}
                   </Td>
-                  <Td p={2} isNumeric>
-                    {skater.goals}
-                  </Td>
-                  <Td p={2} isNumeric>
-                    {skater.assists}
-                  </Td>
+
                   <Td p={2} isNumeric>
                     {skater.points}
                   </Td>

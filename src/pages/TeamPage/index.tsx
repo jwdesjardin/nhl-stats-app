@@ -39,7 +39,7 @@ export const TeamPage = () => {
       <VStack spacing={6}>
         {/* Team Summary */}
         <Box w='100%'>
-          <TeamSummary></TeamSummary>
+          <TeamSummary team_id={team_id}></TeamSummary>
         </Box>
 
         <Box w='100%'>

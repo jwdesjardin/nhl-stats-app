@@ -57,9 +57,9 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
           {recentGames.slice(0, 10).map((game) => (
             <Game key={game.id} game={game} />
           ))}
-          <Center>
+          <Center onClick={() => setRecentGamesToggle(false)}>
             <Text>{`See Less Games`.toUpperCase()}</Text>
-            <TriangleUpIcon mx={2} onClick={() => setRecentGamesToggle(false)} />
+            <TriangleUpIcon mx={2} />
           </Center>
         </Box>
       ) : (
@@ -67,9 +67,9 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
           {recentGames.slice(0, 5).map((game) => (
             <Game key={game.id} game={game} />
           ))}
-          <Center>
+          <Center onClick={() => setRecentGamesToggle(true)}>
             <Text>{`See More Games`.toUpperCase()}</Text>
-            <TriangleDownIcon mx={2} onClick={() => setRecentGamesToggle(true)} />
+            <TriangleDownIcon mx={2} />
           </Center>
         </Box>
       )}

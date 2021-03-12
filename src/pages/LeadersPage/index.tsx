@@ -71,9 +71,11 @@ export const LeadersPage = () => {
         onChange={(e) => {
           setLeaderStat(e.target.value)
         }}
-        bg='green.600'
+        bg='cyan.200'
         defaultValue='points'
         my={3}
+        w='80%'
+        mx='auto'
       >
         <option disabled>SKATERS</option>
         <option value='points'>Points</option>

@@ -143,9 +143,11 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
         onChange={(e) => {
           setRosterStat(e.target.value)
         }}
-        bg='green.600'
+        bg='cyan.200'
         defaultValue='age'
         my={3}
+        w='80%'
+        mx='auto'
       >
         <option value='salary'>Salary</option>
         <option value='age'>Age</option>

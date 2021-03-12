@@ -2,6 +2,9 @@ import React from 'react'
 
 export const getStatHeader = (leaderStat: string, setState: (str: string) => void) => {
   switch (leaderStat) {
+    case 'games_played':
+      setState('GP')
+      break
     case 'goals':
       setState('G')
       break
