@@ -4,7 +4,7 @@ import { Box, Heading, Image, Link, Text, VStack } from '@chakra-ui/react'
 import { teams } from '../../../data/teams'
 import { usePlayers, useStandings } from '../../../context'
 import { Conference, SkaterScoring, Team, TeamSeasonStats } from '../../../types/app'
-import { RosterStat, TeamSummary } from '../../../types/team'
+import { RosterStat, TeamSummaryStats } from '../../../types/team'
 import TEAMSUMMARY from '../../../data/team.json'
 import Flag from 'react-flagkit'
 import { Link as BrowserLink } from 'react-router-dom'
@@ -13,19 +13,17 @@ import { RosterStats } from '../../TeamPage/RosterStats'
 interface PlayerSummaryProps {
   player_id: string
   team: Team
+  teamRosterStats: RosterStat[]
 }
 
-export const PlayerSummary: React.FC<PlayerSummaryProps> = ({ player_id, team }) => {
-  let teamSummary: TeamSummary | undefined
-  if (team) {
-    teamSummary = TEAMSUMMARY
-  }
+export const PlayerSummary: React.FC<PlayerSummaryProps> = ({
+  player_id,
+  team,
+  teamRosterStats,
+}) => {
+  const playerRoster = teamRosterStats.find((stat) => stat.player_id === player_id)
 
-  let playerRoster: RosterStat | undefined
-  if (teamSummary) {
-    playerRoster = teamSummary.rosterStats.find((stat) => stat.player_id === player_id)
-  }
-
+  console.log(team, playerRoster)
   return (
     <>
       {team && playerRoster && (

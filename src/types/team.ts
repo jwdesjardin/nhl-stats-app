@@ -1,6 +1,6 @@
 import { SkaterScoring, GoalieScoring } from './app'
 
-export interface TeamSummary {
+export interface TeamSummaryStats {
   rosterStats: RosterStat[]
   skaterStats: SkaterScoring[]
   goalieStats: GoalieScoring[]

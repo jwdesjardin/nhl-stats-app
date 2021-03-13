@@ -16,15 +16,16 @@ import {
 } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'
-import TEAMSUMMARY from '../../../data/team.json'
 import { usePlayers } from '../../../context'
 import { Link as BrowserLink } from 'react-router-dom'
+import { TeamSummaryStats } from '../../../types/team'
 
 interface PlayerPointsProps {
   skater: SkaterScoring
+  teamSummary: TeamSummaryStats
 }
 
-export const PlayerPoints: React.FC<PlayerPointsProps> = ({ skater }) => {
+export const PlayerPoints: React.FC<PlayerPointsProps> = ({ skater, teamSummary }) => {
   const { skaters } = usePlayers()
 
   const [teamClosest, setTeamClosest] = React.useState<SkaterScoring[]>([])
@@ -35,8 +36,8 @@ export const PlayerPoints: React.FC<PlayerPointsProps> = ({ skater }) => {
 
   React.useEffect(() => {
     setLeagueClosest(getClosestPoints(skaters, skater, setLeaguePointsIndex))
-    setTeamClosest(getClosestPoints(TEAMSUMMARY.skaterStats, skater, setTeamPointsIndex))
-  }, [skater])
+    setTeamClosest(getClosestPoints(teamSummary.skaterStats, skater, setTeamPointsIndex))
+  }, [skater, teamSummary])
 
   const getClosestPoints = (
     teamScoring: SkaterScoring[],

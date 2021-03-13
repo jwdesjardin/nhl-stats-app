@@ -16,15 +16,19 @@ import {
 } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
-import TEAMSUMMARY from '../../../data/team.json'
 import { usePlayers } from '../../../context'
 import { Link as BrowserLink } from 'react-router-dom'
+import { TeamSummaryStats } from '../../../types/team'
 
 interface GoalieSavePercentageProps {
   goalie: GoalieScoring
+  teamSummary: TeamSummaryStats
 }
 
-export const GoalieSavePercentage: React.FC<GoalieSavePercentageProps> = ({ goalie }) => {
+export const GoalieSavePercentage: React.FC<GoalieSavePercentageProps> = ({
+  goalie,
+  teamSummary,
+}) => {
   const { goalies } = usePlayers()
 
   const [teamClosest, setTeamClosest] = React.useState<GoalieScoring[]>([])
@@ -35,8 +39,8 @@ export const GoalieSavePercentage: React.FC<GoalieSavePercentageProps> = ({ goal
 
   React.useEffect(() => {
     setLeagueClosest(getClosestSavePercent(goalies, goalie, setLeagueSavePercentIndex))
-    setTeamClosest(getClosestSavePercent(TEAMSUMMARY.goalieStats, goalie, setTeamSavePercentIndex))
-  }, [goalie])
+    setTeamClosest(getClosestSavePercent(teamSummary.goalieStats, goalie, setTeamSavePercentIndex))
+  }, [goalie, teamSummary])
 
   const getClosestSavePercent = (
     teamScoring: GoalieScoring[],

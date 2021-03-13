@@ -19,12 +19,14 @@ import { GoalieScoring } from '../../../types/app'
 import TEAMSUMMARY from '../../../data/team.json'
 import { usePlayers } from '../../../context'
 import { Link as BrowserLink } from 'react-router-dom'
+import { TeamSummaryStats } from '../../../types/team'
 
 interface GoalieGoalsAgainstProps {
   goalie: GoalieScoring
+  teamSummary: TeamSummaryStats
 }
 
-export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ goalie }) => {
+export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ teamSummary, goalie }) => {
   const { goalies } = usePlayers()
 
   const [teamClosest, setTeamClosest] = React.useState<GoalieScoring[]>([])
@@ -35,8 +37,8 @@ export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ goalie }
 
   React.useEffect(() => {
     setLeagueClosest(getClosestGA(goalies, goalie, setLeagueGAIndex))
-    setTeamClosest(getClosestGA(TEAMSUMMARY.goalieStats, goalie, setTeamGAIndex))
-  }, [goalie])
+    setTeamClosest(getClosestGA(teamSummary.goalieStats, goalie, setTeamGAIndex))
+  }, [goalie, teamSummary])
 
   const getClosestGA = (
     teamScoring: GoalieScoring[],

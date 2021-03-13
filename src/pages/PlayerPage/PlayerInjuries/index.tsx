@@ -31,7 +31,7 @@ export const PlayerInjuries: React.FC<PlayerInjuriesProps> = ({ player_id }) => 
 
   React.useEffect(() => {
     setPlayerInjuries(getPlayerInjuries(player_id, injuries))
-  }, [])
+  }, [player_id])
 
   const getPlayerInjuries = (player_id: string, injuries: Injury[]) => {
     return injuries.filter((injury) => injury.player_id === player_id)
