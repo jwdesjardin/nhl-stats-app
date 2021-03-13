@@ -1,5 +1,5 @@
 // gameSummary - gameSummary
-export interface GameSummary {
+export interface GameSummaryStats {
   scoring_summary: Period[]
   penalty_summary: Period[]
   home_team_scoring: SkaterGame[]

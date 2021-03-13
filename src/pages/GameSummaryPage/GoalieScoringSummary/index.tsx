@@ -22,7 +22,7 @@ export const GoalieScoringSummary: React.FC<GoalieScoringSummaryProps> = ({ summ
         </Thead>
         <Tbody>
           {summary.map((goalie) => (
-            <Tr>
+            <Tr key={goalie.player_id}>
               <Td>
                 <Link as={BrowserLink} to={`/player/${goalie.player_id}`}>
                   {goalie.player}

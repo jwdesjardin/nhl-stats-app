@@ -22,13 +22,13 @@ export const SkatersScoringSummary: React.FC<SkatersScoringSummaryProps> = ({ su
         </Thead>
         <Tbody>
           {summary.map((skater) => (
-            <Tr>
+            <Tr key={skater.player_id}>
               <Td>{skater.player}</Td>
-              <Td isNumberic>{skater.goals}</Td>
-              <Td isNumberic>{skater.assists}</Td>
-              <Td isNumberic>{skater.points}</Td>
-              <Td isNumberic>{skater.shots_on_goal}</Td>
-              <Td isNumberic>{skater.time_on_ice}</Td>
+              <Td isNumeric>{skater.goals}</Td>
+              <Td isNumeric>{skater.assists}</Td>
+              <Td isNumeric>{skater.points}</Td>
+              <Td isNumeric>{skater.shots_on_goal}</Td>
+              <Td isNumeric>{skater.time_on_ice}</Td>
             </Tr>
           ))}
         </Tbody>

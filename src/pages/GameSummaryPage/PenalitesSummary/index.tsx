@@ -8,7 +8,7 @@ import { Penalty } from '../../../types/gameSummary'
 interface PenaltiesSummaryProps {
   penaltySummary: {
     title: string
-    penalties: Penalty[]
+    penalties?: Penalty[]
   }[]
 }
 
@@ -18,13 +18,16 @@ export const PenaltiesSummary: React.FC<PenaltiesSummaryProps> = ({ penaltySumma
       <Table size='sm'>
         <Tbody>
           {penaltySummary.map((period) => {
-            const penalties = period.penalties.map((penalty, idx) => (
-              <PenaltyRow key={idx} penalty={penalty}></PenaltyRow>
+            const penalties = period.penalties?.map((penalty, idx) => (
+              <PenaltyRow
+                key={`${penalty.player_id}${penalty.time}`}
+                penalty={penalty}
+              ></PenaltyRow>
             ))
 
             return (
               <>
-                <Tr>
+                <Tr key={period.title}>
                   <Th colSpan={5} textAlign='center' bg='blackAlpha.600' color='white'>
                     {period.title}
                   </Th>

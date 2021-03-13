@@ -23,12 +23,12 @@ export const ScoringByPeriod: React.FC<ScoringByPeriodProps> = ({ scoringSummary
         <Tbody>
           {regulation_scoring.map((period) => {
             const goals = period.goals?.map((goal, idx) => (
-              <GoalRow key={idx} goal={goal}></GoalRow>
+              <GoalRow key={`${goal.scorer_id}${goal.count}`} goal={goal}></GoalRow>
             ))
 
             return (
               <>
-                <Tr>
+                <Tr key={period.title}>
                   <Th colSpan={5} textAlign='center' bg='blackAlpha.600' color='white'>
                     {period.title}
                   </Th>

@@ -87,7 +87,7 @@ export const Game: React.FC<GameProps> = ({ game }) => {
         <Badge bg='white' p={3} mr={2}></Badge>
       )}
       {game_link !== '' ? (
-        <Link as={RouterLink} to={`games/${game_link}`}>
+        <Link as={RouterLink} to={`/game-summary/${game_link}`}>
           <Icon as={SportsHockey} />
         </Link>
       ) : (
