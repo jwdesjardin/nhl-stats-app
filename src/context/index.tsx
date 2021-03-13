@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Conference, GameStats, GoalieScoring, Injury, SkaterScoring } from '../types/app'
 
+// TESTING / DEVELOPMENT DATA
 // import STANDINGS from '../data/standings.json'
 // import GAMELOG from '../data/gamelog.json'
-import SKATERS from '../data/skaters.json'
-import GOALIES from '../data/goalies.json'
-import INJURIES from '../data/injuries.json'
+// import SKATERS from '../data/skaters.json'
+// import GOALIES from '../data/goalies.json'
+// import INJURIES from '../data/injuries.json'
 import { STATS_API_KEY } from '../config'
 
 interface InjuriesContextType {
