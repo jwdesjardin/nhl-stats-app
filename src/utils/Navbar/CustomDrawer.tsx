@@ -53,7 +53,7 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({ isOpen, onClose }) =
           <DrawerCloseButton />
           {/* drawer header */}
           <Box d='flex' p={2}>
-            <Image htmlWidth='55px' src='/images/nhl.gif' objectFit='cover' />
+            <Image htmlWidth='55px' src='/images/nhl.gif' objectFit='contain' />
             <Heading fontFamily='heading' fontSize={32} fontWeight='extrabold'>
               NHLStats
             </Heading>

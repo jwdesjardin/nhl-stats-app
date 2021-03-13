@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
 
       {/* site name and logo */}
       <Box d='flex'>
-        <Image htmlWidth='55px' src='/images/nhl.gif' objectFit='cover' />
+        <Image htmlWidth='55px' src='/images/nhl.gif' objectFit='contain' />
         <Heading fontFamily='heading' fontSize={32} fontWeight='extrabold'>
           NHLStats
         </Heading>
