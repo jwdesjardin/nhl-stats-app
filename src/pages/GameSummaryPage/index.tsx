@@ -19,8 +19,13 @@ import { ScoringByPeriod } from './ScoringByPeriod'
 import { SkatersScoringSummary } from './SkatersScoringSummary'
 import { GoalieScoringSummary } from './GoalieScoringSummary'
 import GAMESUMMARY from '../../data/gameSummary.json'
+import { RouteComponentProps } from 'react-router-dom'
 
-export const GameSummaryPage = () => {
+interface TeamSchedulePageProps extends RouteComponentProps<any> {}
+
+export const GameSummaryPage: React.FC<TeamSchedulePageProps> = ({ match }) => {
+  const { game_id } = match.params
+
   return (
     <Container pt={12}>
       <VStack spacing={6}>

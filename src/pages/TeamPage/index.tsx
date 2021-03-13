@@ -25,9 +25,13 @@ import { useStandings } from '../../context'
 import { teams } from '../../data/teams'
 import { UpcomingGames } from './UpcomingGames'
 import { RecentGames } from './RecentGames'
+import { RouteComponentProps } from 'react-router-dom'
 
-export const TeamPage = () => {
-  const team_id = TEAMSUMMARY.skaterStats[0].team_id
+interface TeamPageProps extends RouteComponentProps<any> {}
+
+export const TeamPage: React.FC<TeamPageProps> = ({ match }) => {
+  const { team_id } = match.params
+
   const { standings } = useStandings()
 
   const division = teams.find((team) => team.teamID === team_id)?.conference

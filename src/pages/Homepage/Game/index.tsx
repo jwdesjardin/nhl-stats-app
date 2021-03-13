@@ -17,6 +17,7 @@ export const Game: React.FC<GameProps> = ({ game }) => {
   // find the team object
   const home_team = teams.find((team) => team.name === game.home_team)
   const away_team = teams.find((team) => team.name === game.away_team)
+  console.log(home_team, away_team)
 
   // helper function to pad single digit months and dates
   const padStart = (str: string) => {

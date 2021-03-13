@@ -6,6 +6,7 @@ import { Box } from '@chakra-ui/react'
 import { LeadersPage } from './pages/LeadersPage'
 import { GameSummaryPage } from './pages/GameSummaryPage'
 import { TeamPage } from './pages/TeamPage'
+import { TeamSchedulePage } from './pages/TeamSchedulePage'
 
 // import app data
 
@@ -18,8 +19,9 @@ export const App = () => {
           <Route exact path='/' render={() => <Redirect to='/home' />} />
           <Route path='/home' component={HomePage} />
           <Route path='/leaders' component={LeadersPage} />
-          <Route path='/team' component={TeamPage} />
-          <Route path='/game-summary' component={GameSummaryPage} />
+          <Route path='/team/:team_id' component={TeamPage} />
+          <Route path='/game-summary/:game_id' component={GameSummaryPage} />
+          <Route path='/full-schedule/:id' component={TeamSchedulePage} />
         </Switch>
       </Box>
     </Router>

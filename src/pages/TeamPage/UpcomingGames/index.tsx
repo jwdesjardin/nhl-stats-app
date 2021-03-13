@@ -52,7 +52,7 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
             <Game key={game.id} game={game} />
           ))}
           <Center my={2}>
-            <Link as={BrowserLink} to={`/schedule/${team_id}`}>
+            <Link as={BrowserLink} to={`/full-schedule/${team_id}`}>
               <Button bg='orange.300'>Full Schedule</Button>
             </Link>
           </Center>
