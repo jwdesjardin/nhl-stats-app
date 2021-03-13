@@ -20,7 +20,9 @@ export const GameSummaryPage: React.FC<TeamSchedulePageProps> = ({ match }) => {
 
   const getGameSummary = async (game_id: string) => {
     console.log('game_id', game_id)
-    const res = await fetch(`/api/game/${game_id}?API_KEY=${STATS_API_KEY}`)
+    const res = await fetch(
+      `https://ts-node-scraping-nhl.herokuapp.com/api/game/${game_id}?API_KEY=${STATS_API_KEY}`
+    )
     const data = await res.json()
     console.log('game summary', data)
     setGameSummary(data)

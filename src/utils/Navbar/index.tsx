@@ -8,7 +8,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <Box
-      h='50px'
+      h='70px'
       w='100vw'
       d='flex'
       bg='white'
@@ -22,9 +22,9 @@ export const Navbar: React.FC = () => {
       <Box />
 
       {/* site name and logo */}
-      <Box d='flex'>
+      <Box d='flex' alignItems='center'>
         <Image htmlWidth='55px' src='/images/nhl.gif' objectFit='contain' />
-        <Heading fontFamily='heading' fontSize={32} fontWeight='extrabold'>
+        <Heading fontFamily='heading' fontSize={36} fontWeight='extrabold'>
           NHLStats
         </Heading>
       </Box>
