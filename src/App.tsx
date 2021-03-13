@@ -7,6 +7,7 @@ import { LeadersPage } from './pages/LeadersPage'
 import { GameSummaryPage } from './pages/GameSummaryPage'
 import { TeamPage } from './pages/TeamPage'
 import { TeamSchedulePage } from './pages/TeamSchedulePage'
+import { PlayerPage } from './pages/PlayerPage'
 
 // import app data
 
@@ -22,6 +23,7 @@ export const App = () => {
           <Route path='/team/:team_id' component={TeamPage} />
           <Route path='/game-summary/:game_id' component={GameSummaryPage} />
           <Route path='/full-schedule/:id' component={TeamSchedulePage} />
+          <Route path='/player/:player_id' component={PlayerPage} />
         </Switch>
       </Box>
     </Router>

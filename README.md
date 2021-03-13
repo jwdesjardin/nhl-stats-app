@@ -10,8 +10,8 @@ npx create-react-app client --template @chakra-ui/typescript
 
 - [x] home page
 - [x] team page
-- [.] players page
-- [.] full schedule page
+- [x] players page
+- [x] full schedule page
 - [x] leaders page
 - [x] game page
 - [x] menu page
@@ -32,16 +32,16 @@ npx create-react-app client --template @chakra-ui/typescript
   - [x] upcoming games
     - [x] full schedule link
   - [x] roster stats
-- [.] full schedule page
-- [.] previous games
-- [.] upcoming games
-- [.] players page
-  - [.] player data
-  - [.] goals leaderboard
-  - [.] assists leaderboard
-  - [.] points leaderboard
-  - [.] season scoring
-  - [.] goalies stats GAA, s%, SO
+- [x] full schedule page
+  - [x] previous games
+  - [x] upcoming games
+- [x] players page
+  - [x] player data
+  - [x] goals leaderboard
+  - [x] assists leaderboard
+  - [x] points leaderboard
+  - [x] season scoring
+  - [x] goalies stats GAA, s%, SO
 - [x] leaders page
   - [x] leaderboard
   - [.] toggle by stat (logic tweaks nulls and accending stats)
