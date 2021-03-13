@@ -1,20 +1,7 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/layout'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 
-import TEAMSUMMARY from '../../data/team.json'
 import { TeamSummary } from './TeamSummary'
 import { SkaterScoringLeaders } from './SkaterScoringLeaders'
 import { GoalieScoringLeaders } from './GoalieScoringLeaders'

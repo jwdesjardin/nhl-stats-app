@@ -17,13 +17,7 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
   React.useEffect(() => {
     const team = teams.find((team) => team.teamID === stats.team_id)
     setTeam(team)
-  }, [])
-
-  const getTeamImage = (teams: Team[], teamName: string) => {
-    const team: Team | undefined = teams.find((team) => team.name === teamName)
-    if (!team) return
-    return team.image_url
-  }
+  }, [stats])
 
   return (
     <Tr bg={selected ? 'yellow.200' : 'white'}>

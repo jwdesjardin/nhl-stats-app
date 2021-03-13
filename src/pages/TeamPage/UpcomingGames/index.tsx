@@ -1,4 +1,4 @@
-import { Box, Text, VStack, Container, Heading, Center, Button, Link } from '@chakra-ui/react'
+import { Box, Text, Center, Button, Link } from '@chakra-ui/react'
 import React from 'react'
 
 import { GameStats } from '../../../types/app'

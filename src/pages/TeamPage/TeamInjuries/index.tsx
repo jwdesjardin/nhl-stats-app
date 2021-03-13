@@ -1,21 +1,7 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-  Select,
-  Link,
-} from '@chakra-ui/react'
-import { teams } from '../../../data/teams'
+
+import { Box, Table, Tbody, Td, Th, Thead, Tr, Link } from '@chakra-ui/react'
+
 import { useInjuries } from '../../../context'
 import { Injury } from '../../../types/app'
 import { Link as RouterLink } from 'react-router-dom'

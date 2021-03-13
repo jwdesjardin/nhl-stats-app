@@ -1,14 +1,12 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import { Box, Heading, Image, Link, Text, VStack } from '@chakra-ui/react'
-import { teams } from '../../../data/teams'
-import { usePlayers, useStandings } from '../../../context'
-import { Conference, SkaterScoring, Team, TeamSeasonStats } from '../../../types/app'
-import { RosterStat, TeamSummaryStats } from '../../../types/team'
-import TEAMSUMMARY from '../../../data/team.json'
+
+import { Box, Image, Link, Text, VStack } from '@chakra-ui/react'
+
+import { Team } from '../../../types/app'
+import { RosterStat } from '../../../types/team'
+
 import Flag from 'react-flagkit'
 import { Link as RouterLink } from 'react-router-dom'
-import { RosterStats } from '../../TeamPage/RosterStats'
 
 interface PlayerSummaryProps {
   player_id: string

@@ -1,22 +1,7 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-  Select,
-  Link,
-} from '@chakra-ui/react'
 
-import { teams } from '../../../data/teams'
+import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link } from '@chakra-ui/react'
+
 import { RosterStat } from '../../../types/team'
 import { getStatHeader } from '../../../utils/helper'
 import Flag from 'react-flagkit'
@@ -46,7 +31,7 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
   }, [rosterStat, rosterStats])
 
   const getSortedRosterNumeric = (roster: RosterStat[], attr: string) => {
-    return rosterStats.sort((a, b) => {
+    return roster.sort((a, b) => {
       // either two stats values or two empty strings
       const A = Object.entries(a)
       const stat_A = (A.find((entry) => entry[0] === attr) || ['', 0])[1]

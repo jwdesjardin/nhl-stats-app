@@ -1,22 +1,10 @@
-import {
-  Box,
-  Image,
-  Text,
-  VStack,
-  Container,
-  Heading,
-  Center,
-  Button,
-  Link,
-} from '@chakra-ui/react'
+import { Box, Image, Button, Link } from '@chakra-ui/react'
 import React from 'react'
-
-import { GameStats } from '../../../types/app'
 
 import { teams } from '../../../data/teams'
 import { useGamelog } from '../../../context'
 import { Game } from '../../Homepage/Game'
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
+
 import { Link as RouterLink } from 'react-router-dom'
 
 interface FullScheduleProps {

@@ -1,20 +1,6 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-  Select,
-  Link,
-} from '@chakra-ui/react'
+
+import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'
 import { getStatHeader } from '../../../utils/helper'

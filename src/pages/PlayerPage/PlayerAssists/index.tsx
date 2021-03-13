@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
+
 import {
   Box,
   Heading,
@@ -37,7 +37,7 @@ export const PlayerAssists: React.FC<PlayerAssistsProps> = ({ skater, teamSummar
   React.useEffect(() => {
     setLeagueClosest(getClosestAssists(skaters, skater, setLeagueAssistsIndex))
     setTeamClosest(getClosestAssists(teamSummary.skaterStats, skater, setTeamAssistsIndex))
-  }, [skater, teamSummary])
+  }, [skater, teamSummary, skaters])
 
   const getClosestAssists = (
     teamScoring: SkaterScoring[],

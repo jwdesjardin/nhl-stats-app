@@ -23,7 +23,7 @@ export const LeadersPage = () => {
       setTop50Skaters([])
     }
     getStatHeader(leaderStat, setStatHeader)
-  }, [leaderStat])
+  }, [leaderStat, goalies, skaters])
 
   const findTop50Skaters = (skaters: SkaterScoring[], attr: string) => {
     return skaters

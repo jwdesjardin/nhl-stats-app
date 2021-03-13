@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
+
 import {
   Box,
   Heading,
@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
-import TEAMSUMMARY from '../../../data/team.json'
+
 import { usePlayers } from '../../../context'
 import { Link as RouterLink } from 'react-router-dom'
 import { TeamSummaryStats } from '../../../types/team'
@@ -41,7 +41,7 @@ export const GoalieGoalsAgainstAvg: React.FC<GoalieGoalsAgainstAvgProps> = ({
   React.useEffect(() => {
     setLeagueClosest(getClosestGAA(goalies, goalie, setLeagueGAAIndex))
     setTeamClosest(getClosestGAA(teamSummary.goalieStats, goalie, setTeamGAAIndex))
-  }, [goalie, teamSummary])
+  }, [goalie, teamSummary, goalies])
 
   const getClosestGAA = (
     teamScoring: GoalieScoring[],

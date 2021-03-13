@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { HStack } from '@chakra-ui/layout'
+
 import { Box, Table, Tbody, Th, Tr } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
+
 import { PenaltyRow } from './PenaltyRow'
 import { Penalty } from '../../../types/gameSummary'
 
@@ -18,7 +18,7 @@ export const PenaltiesSummary: React.FC<PenaltiesSummaryProps> = ({ penaltySumma
       <Table size='sm'>
         <Tbody>
           {penaltySummary.map((period) => {
-            const penalties = period.penalties?.map((penalty, idx) => (
+            const penalties = period.penalties?.map((penalty) => (
               <PenaltyRow
                 key={`${penalty.player_id}${penalty.time}`}
                 penalty={penalty}

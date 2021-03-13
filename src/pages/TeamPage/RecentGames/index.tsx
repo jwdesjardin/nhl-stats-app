@@ -1,4 +1,4 @@
-import { Box, Text, VStack, Container, Heading, Center } from '@chakra-ui/react'
+import { Box, Text, Center } from '@chakra-ui/react'
 import React from 'react'
 
 import { GameStats } from '../../../types/app'
@@ -47,7 +47,7 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
     const recent_games = getRecentGames(teams_games)
     setRecentGames(recent_games)
     console.log('recent games', recent_games)
-  }, [team_id])
+  }, [team_id, gamelog])
 
   return (
     <>

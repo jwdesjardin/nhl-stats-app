@@ -1,18 +1,6 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/layout'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 
 import { RouteComponentProps } from 'react-router-dom'
 import { PlayerInjuries } from './PlayerInjuries'
@@ -82,7 +70,7 @@ export const PlayerPage: React.FC<PlayerPageProps> = ({ match }) => {
         }
       }
     }
-  }, [player_id])
+  }, [player_id, goalies, skaters])
 
   console.log(skater, team, teamSummary)
 

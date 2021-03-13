@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
+
 import {
   Box,
   Heading,
@@ -40,7 +40,7 @@ export const GoalieSavePercentage: React.FC<GoalieSavePercentageProps> = ({
   React.useEffect(() => {
     setLeagueClosest(getClosestSavePercent(goalies, goalie, setLeagueSavePercentIndex))
     setTeamClosest(getClosestSavePercent(teamSummary.goalieStats, goalie, setTeamSavePercentIndex))
-  }, [goalie, teamSummary])
+  }, [goalie, teamSummary, goalies])
 
   const getClosestSavePercent = (
     teamScoring: GoalieScoring[],

@@ -1,28 +1,15 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
-import {
-  Box,
-  Heading,
-  Image,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/layout'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 import { GameSummary } from './GameSummary'
 import { PenaltiesSummary } from './PenalitesSummary'
 import { ScoringByPeriod } from './ScoringByPeriod'
 import { SkatersScoringSummary } from './SkatersScoringSummary'
 import { GoalieScoringSummary } from './GoalieScoringSummary'
-import GAMESUMMARY from '../../data/gameSummary.json'
+
 import { RouteComponentProps } from 'react-router-dom'
 import { GameSummaryStats } from '../../types/gameSummary'
 import { STATS_API_KEY } from '../../config'
-import { globalAgent } from 'node:http'
 
 interface TeamSchedulePageProps extends RouteComponentProps<any> {}
 
