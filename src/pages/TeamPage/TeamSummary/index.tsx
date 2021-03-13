@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, HStack } from '@chakra-ui/layout'
+
 import { Box, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import { teams } from '../../../data/teams'
 import { useStandings } from '../../../context'

@@ -17,10 +17,6 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
   const [recentGames, setRecentGames] = React.useState<GameStats[]>([])
   const [recentGamesToggle, setRecentGamesToggle] = React.useState(false)
 
-  const teams_games = gamelog.filter(
-    (game) => game.away_team_id === team_id || game.home_team_id === team_id
-  )
-
   const getRecentGames = (gamelog: GameStats[]): GameStats[] => {
     // get yesterday at this time
     const now = Date.now() - 3600 * 24 * 1000
@@ -45,10 +41,13 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
   }
 
   React.useEffect(() => {
+    const teams_games = gamelog.filter(
+      (game) => game.away_team_id === team_id || game.home_team_id === team_id
+    )
     const recent_games = getRecentGames(teams_games)
     setRecentGames(recent_games)
     console.log('recent games', recent_games)
-  }, [])
+  }, [team_id])
 
   return (
     <>

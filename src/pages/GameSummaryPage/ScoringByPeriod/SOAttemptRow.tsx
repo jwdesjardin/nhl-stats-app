@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link, Td, Tr } from '@chakra-ui/react'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import { SO_Attempt } from '../../../types/gameSummary'
 
@@ -13,12 +13,12 @@ export const SOAttemptRow: React.FC<SOAttemptRowProps> = ({ attempt }) => {
     <Tr>
       <Td p={2}>{attempt.shot_number}</Td>
       <Td p={2}>
-        <Link as={BrowserLink} to={`/team/${attempt.team_id}`}>
+        <Link as={RouterLink} to={`/team/${attempt.team_id}`}>
           {attempt.team_id}
         </Link>
       </Td>
       <Td p={2}>
-        <Link as={BrowserLink} to={`/player/${attempt.scorer_id}`}>
+        <Link as={RouterLink} to={`/player/${attempt.scorer_id}`}>
           {attempt.scorer}
         </Link>
       </Td>
@@ -26,7 +26,7 @@ export const SOAttemptRow: React.FC<SOAttemptRowProps> = ({ attempt }) => {
         {attempt.success ? <CheckIcon color='green.500' /> : <CloseIcon color='red.500' />}
       </Td>
       <Td p={2}>
-        <Link as={BrowserLink} to={`/player/${attempt.goalie_id}`}>
+        <Link as={RouterLink} to={`/player/${attempt.goalie_id}`}>
           {attempt.goalie}
         </Link>
       </Td>

@@ -3,7 +3,7 @@ import { Box, Heading, Link, Select, Table, Tbody, Td, Th, Thead, Tr } from '@ch
 import * as React from 'react'
 import { usePlayers } from '../../context'
 import { GoalieScoring, SkaterScoring } from '../../types/app'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { getStatHeader } from '../../utils/helper'
 
 export const LeadersPage = () => {
@@ -123,12 +123,12 @@ export const LeadersPage = () => {
                 <Tr>
                   <Td p={2}>{idx + 1}</Td>
                   <Td p={2}>
-                    <Link as={BrowserLink} to={`/team/${player.team_id}`}>
+                    <Link as={RouterLink} to={`/team/${player.team_id}`}>
                       {player.team_id}
                     </Link>
                   </Td>
                   <Td p={2}>
-                    <Link as={BrowserLink} to={`/player/${player.player_id}`}>
+                    <Link as={RouterLink} to={`/player/${player.player_id}`}>
                       {player.player}
                     </Link>
                   </Td>
@@ -148,12 +148,12 @@ export const LeadersPage = () => {
                 <Tr>
                   <Td p={2}>{idx + 1}</Td>
                   <Td p={2}>
-                    <Link as={BrowserLink} to={`/team/${player.team_id}`}>
+                    <Link as={RouterLink} to={`/team/${player.team_id}`}>
                       {player.team_id}
                     </Link>
                   </Td>
                   <Td p={2}>
-                    <Link as={BrowserLink} to={`/player/${player.player_id}`}>
+                    <Link as={RouterLink} to={`/player/${player.player_id}`}>
                       {player.player}
                     </Link>
                   </Td>

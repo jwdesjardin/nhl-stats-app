@@ -17,7 +17,7 @@ import {
 
 import { SkaterScoring } from '../../../types/app'
 import { usePlayers } from '../../../context'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { TeamSummaryStats } from '../../../types/team'
 
 interface PlayerAssistsProps {
@@ -109,12 +109,12 @@ export const PlayerAssists: React.FC<PlayerAssistsProps> = ({ skater, teamSummar
                   >
                     <Td p={2}>{teamAssistsIndex + idx + 1}</Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/player/${row.player_id}`}>
+                      <Link as={RouterLink} to={`/player/${row.player_id}`}>
                         {row.player}
                       </Link>
                     </Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/team/${row.team_id}`}>
+                      <Link as={RouterLink} to={`/team/${row.team_id}`}>
                         {row.team_id}
                       </Link>
                     </Td>
@@ -136,12 +136,12 @@ export const PlayerAssists: React.FC<PlayerAssistsProps> = ({ skater, teamSummar
                   >
                     <Td p={2}>{leagueAssistsIndex + idx + 1}</Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/player/${row.player_id}`}>
+                      <Link as={RouterLink} to={`/player/${row.player_id}`}>
                         {row.player}
                       </Link>
                     </Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/team/${row.team_id}`}>
+                      <Link as={RouterLink} to={`/team/${row.team_id}`}>
                         {row.team_id}
                       </Link>
                     </Td>

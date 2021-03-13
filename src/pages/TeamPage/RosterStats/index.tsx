@@ -13,13 +13,14 @@ import {
   Tr,
   VStack,
   Select,
+  Link,
 } from '@chakra-ui/react'
 
 import { teams } from '../../../data/teams'
 import { RosterStat } from '../../../types/team'
 import { getStatHeader } from '../../../utils/helper'
 import Flag from 'react-flagkit'
-
+import { Link as RouterLink } from 'react-router-dom'
 interface RosterStatsProps {
   rosterStats: RosterStat[]
 }
@@ -42,7 +43,7 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
       setSortedRoster(getSortedRosterCountry(rosterStats))
     }
     getStatHeader(rosterStat, setStatHeader)
-  }, [rosterStat])
+  }, [rosterStat, rosterStats])
 
   const getSortedRosterNumeric = (roster: RosterStat[], attr: string) => {
     return rosterStats.sort((a, b) => {
@@ -201,7 +202,12 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
                 <Tr key={player.player_id}>
                   <Td>{player.number}</Td>
                   <Td>{player.position}</Td>
-                  <Td>{player.player}</Td>
+                  <Td>
+                    {' '}
+                    <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                      {player.player}
+                    </Link>
+                  </Td>
                   <Td>{stat}</Td>
                 </Tr>
               )

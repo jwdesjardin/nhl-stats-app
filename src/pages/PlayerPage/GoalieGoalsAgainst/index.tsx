@@ -18,7 +18,7 @@ import {
 import { GoalieScoring } from '../../../types/app'
 import TEAMSUMMARY from '../../../data/team.json'
 import { usePlayers } from '../../../context'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { TeamSummaryStats } from '../../../types/team'
 
 interface GoalieGoalsAgainstProps {
@@ -121,12 +121,12 @@ export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ teamSumm
                   >
                     <Td p={2}>{teamGAIndex + idx + 1}</Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/team/${row.team_id}`}>
+                      <Link as={RouterLink} to={`/team/${row.team_id}`}>
                         {row.team_id}
                       </Link>
                     </Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/player/${row.player_id}`}>
+                      <Link as={RouterLink} to={`/player/${row.player_id}`}>
                         {row.player}
                       </Link>
                     </Td>
@@ -149,12 +149,12 @@ export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ teamSumm
                   >
                     <Td p={2}>{leagueGAIndex + idx + 1}</Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/team/${row.team_id}`}>
+                      <Link as={RouterLink} to={`/team/${row.team_id}`}>
                         {row.team_id}
                       </Link>
                     </Td>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/player/${row.player_id}`}>
+                      <Link as={RouterLink} to={`/player/${row.player_id}`}>
                         {row.player}
                       </Link>
                     </Td>

@@ -12,18 +12,10 @@ export const HomePage: React.FC = () => {
 
   const [todaysGames, setTodaysGames] = React.useState<GameStats[]>([])
 
-  const [westernConference, setWesternConference] = React.useState<Conference | undefined>(
-    standings.find((conference) => conference.name === 'West Division')
-  )
-  const [easternConference, setEasternConference] = React.useState<Conference | undefined>(
-    standings.find((conference) => conference.name === 'East Division')
-  )
-  const [centralConference, setCentralConference] = React.useState<Conference | undefined>(
-    standings.find((conference) => conference.name === 'Central Division')
-  )
-  const [northernConference, setNorthernConference] = React.useState<Conference | undefined>(
-    standings.find((conference) => conference.name === 'North Division')
-  )
+  const [westernConference, setWesternConference] = React.useState<Conference | undefined>()
+  const [easternConference, setEasternConference] = React.useState<Conference | undefined>()
+  const [centralConference, setCentralConference] = React.useState<Conference | undefined>()
+  const [northernConference, setNorthernConference] = React.useState<Conference | undefined>()
 
   const getTodaysGames = (gamelog: GameStats[]): GameStats[] => {
     const today = new Date()
@@ -51,7 +43,11 @@ export const HomePage: React.FC = () => {
     const todays_games = getTodaysGames(gamelog)
     setTodaysGames(todays_games)
     console.log('todays games', todays_games)
-  }, [])
+    setWesternConference(standings.find((conference) => conference.name === 'West Division'))
+    setEasternConference(standings.find((conference) => conference.name === 'East Division'))
+    setNorthernConference(standings.find((conference) => conference.name === 'North Division'))
+    setCentralConference(standings.find((conference) => conference.name === 'Central Division'))
+  }, [standings, gamelog])
 
   return (
     <Container pt={12}>

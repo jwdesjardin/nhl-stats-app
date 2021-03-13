@@ -13,11 +13,12 @@ import {
   Tr,
   VStack,
   Select,
+  Link,
 } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
 import { getStatHeader } from '../../../utils/helper'
-
+import { Link as RouterLink } from 'react-router-dom'
 interface GoalieScoringLeadersProps {
   goalieScoring: GoalieScoring[]
 }
@@ -30,7 +31,7 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
   React.useEffect(() => {
     setSortedGoalies(getSortedGoalies(goalieScoring, scoringStat))
     getStatHeader(scoringStat, setStatHeader)
-  }, [scoringStat])
+  }, [scoringStat, goalieScoring])
 
   const getSortedGoalies = (goalies: GoalieScoring[], attr: string) => {
     return goalies.sort((a, b) => {
@@ -94,7 +95,11 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
 
               return (
                 <Tr key={goalie.player_id}>
-                  <Td p={2}>{goalie.player}</Td>
+                  <Td p={2}>
+                    <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
+                      {goalie.player}
+                    </Link>
+                  </Td>
                   <Td p={2} isNumeric>
                     {goalie.games_played}
                   </Td>

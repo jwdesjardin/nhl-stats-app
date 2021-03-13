@@ -111,7 +111,7 @@ export const teams: Team[] = [
   },
   {
     name: 'Edmonton Oilers',
-    teamID: 'EDN',
+    teamID: 'EDM',
     image_url: '/images/oilers.gif',
     conference: 'North',
   },

@@ -18,7 +18,7 @@ import {
 import { teams } from '../../../data/teams'
 import { useInjuries } from '../../../context'
 import { Injury } from '../../../types/app'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface PlayerInjuriesProps {
   player_id: string
@@ -57,7 +57,7 @@ export const PlayerInjuries: React.FC<PlayerInjuriesProps> = ({ player_id }) => 
                 {playerInjuries.map((injury) => (
                   <Tr key={injury.id}>
                     <Td p={2}>
-                      <Link as={BrowserLink} to={`/player/${injury.player_id}`}>
+                      <Link as={RouterLink} to={`/player/${injury.player_id}`}>
                         {injury.player}
                       </Link>
                     </Td>

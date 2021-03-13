@@ -1,7 +1,7 @@
 import { Box, Link, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import * as React from 'react'
 import { GoalieGame } from '../../../types/gameSummary'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface GoalieScoringSummaryProps {
   summary: GoalieGame[]
@@ -24,7 +24,7 @@ export const GoalieScoringSummary: React.FC<GoalieScoringSummaryProps> = ({ summ
           {summary.map((goalie) => (
             <Tr key={goalie.player_id}>
               <Td>
-                <Link as={BrowserLink} to={`/player/${goalie.player_id}`}>
+                <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
                   {goalie.player}
                 </Link>
               </Td>

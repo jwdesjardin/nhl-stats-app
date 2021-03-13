@@ -13,10 +13,13 @@ import {
   Tr,
   VStack,
   Select,
+  Link,
 } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'
 import { getStatHeader } from '../../../utils/helper'
+
+import { Link as RouterLink } from 'react-router-dom'
 
 interface SkaterScoringLeadersProps {
   skaterScoring: SkaterScoring[]
@@ -30,7 +33,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
   React.useEffect(() => {
     setSortedSkaters(getSortedSkaters(skaterScoring, scoringStat))
     getStatHeader(scoringStat, setStatHeader)
-  }, [scoringStat])
+  }, [scoringStat, skaterScoring])
 
   const getSortedSkaters = (skaters: SkaterScoring[], attr: string) => {
     return skaters
@@ -112,7 +115,11 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
                 <Tr key={skater.player_id}>
                   <Td p={2}>{idx + 1}</Td>
                   <Td p={2}>{skater.position}</Td>
-                  <Td p={2}>{skater.player}</Td>
+                  <Td p={2}>
+                    <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                      {skater.player}
+                    </Link>
+                  </Td>
                   <Td p={2} isNumeric>
                     {skater.games_played}
                   </Td>

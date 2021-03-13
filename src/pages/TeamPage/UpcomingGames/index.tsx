@@ -6,7 +6,7 @@ import { GameStats } from '../../../types/app'
 import { useGamelog } from '../../../context'
 import { Game } from '../../Homepage/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface UpcomingGamesProps {
   team_id: string
@@ -17,10 +17,6 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
 
   const [upcomingGames, setUpcomingGames] = React.useState<GameStats[]>([])
   const [upcomingGamesToggle, setUpcomingGamesToggle] = React.useState(false)
-
-  const teams_games = gamelog.filter(
-    (game) => game.away_team_id === team_id || game.home_team_id === team_id
-  )
 
   const getUpcomingGames = (gamelog: GameStats[]): GameStats[] => {
     const now = Date.now()
@@ -39,10 +35,13 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
   }
 
   React.useEffect(() => {
+    const teams_games = gamelog.filter(
+      (game) => game.away_team_id === team_id || game.home_team_id === team_id
+    )
     const upcoming_games = getUpcomingGames(teams_games)
     setUpcomingGames(upcoming_games)
     console.log('upcoming games', upcoming_games)
-  }, [])
+  }, [team_id, gamelog])
 
   return (
     <>
@@ -52,7 +51,7 @@ export const UpcomingGames: React.FC<UpcomingGamesProps> = ({ team_id }) => {
             <Game key={game.id} game={game} />
           ))}
           <Center my={2}>
-            <Link as={BrowserLink} to={`/full-schedule/${team_id}`}>
+            <Link as={RouterLink} to={`/full-schedule/${team_id}`}>
               <Button bg='orange.300'>Full Schedule</Button>
             </Link>
           </Center>

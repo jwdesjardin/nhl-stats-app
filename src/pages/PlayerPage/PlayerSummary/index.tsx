@@ -7,7 +7,7 @@ import { Conference, SkaterScoring, Team, TeamSeasonStats } from '../../../types
 import { RosterStat, TeamSummaryStats } from '../../../types/team'
 import TEAMSUMMARY from '../../../data/team.json'
 import Flag from 'react-flagkit'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { RosterStats } from '../../TeamPage/RosterStats'
 
 interface PlayerSummaryProps {
@@ -31,7 +31,7 @@ export const PlayerSummary: React.FC<PlayerSummaryProps> = ({
           <VStack w='100%' justifyContent='center'>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Team:</Text>
-              <Link as={BrowserLink} to={`/team/${team.teamID}`}>
+              <Link as={RouterLink} to={`/team/${team.teamID}`}>
                 <Box d='flex' alignItems='center'>
                   <Image w='65px' alignSelf='flex-end' src={team.image_url}></Image>
                   <Text fontSize={18}>{team.name}</Text>

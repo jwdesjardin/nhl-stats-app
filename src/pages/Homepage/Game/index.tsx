@@ -68,12 +68,18 @@ export const Game: React.FC<GameProps> = ({ game }) => {
       </Box>
       {home_team && away_team && (
         <Box d='flex' alignItems='center'>
-          <Image w='45px' src={away_team.image_url} />
+          <Link as={RouterLink} to={`/team/${away_team.teamID}`}>
+            <Image w='45px' src={away_team.image_url} />
+          </Link>
+
           <Text fontSize={16} fontWeight='bold' mr={2}>
             {game.away_goals}
           </Text>
           <Text mr={2}>@</Text>
-          <Image w='45px' src={home_team.image_url} />
+          <Link as={RouterLink} to={`/team/${home_team.teamID}`}>
+            <Image w='45px' src={home_team.image_url} />
+          </Link>
+
           <Text fontSize={16} fontWeight='bold' mr={4}>
             {game.home_goals}
           </Text>

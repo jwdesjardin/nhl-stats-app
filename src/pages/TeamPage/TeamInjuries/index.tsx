@@ -18,7 +18,7 @@ import {
 import { teams } from '../../../data/teams'
 import { useInjuries } from '../../../context'
 import { Injury } from '../../../types/app'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface TeamInjuriesProps {
   team_id: string
@@ -31,7 +31,7 @@ export const TeamInjuries: React.FC<TeamInjuriesProps> = ({ team_id }) => {
 
   React.useEffect(() => {
     setTeamInjuries(getTeamInjuries(team_id, injuries))
-  }, [])
+  }, [team_id, injuries])
 
   const getTeamInjuries = (team_id: string, injuries: Injury[]) => {
     return injuries.filter((injury) => injury.team_id === team_id)
@@ -53,7 +53,7 @@ export const TeamInjuries: React.FC<TeamInjuriesProps> = ({ team_id }) => {
             {teamInjuries.map((injury) => (
               <Tr key={injury.id}>
                 <Td p={2}>
-                  <Link as={BrowserLink} to={`/player/${injury.player_id}`}>
+                  <Link as={RouterLink} to={`/player/${injury.player_id}`}>
                     {injury.player}
                   </Link>
                 </Td>

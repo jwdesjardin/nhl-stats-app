@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Conference, GameStats, GoalieScoring, Injury, SkaterScoring } from '../types/app'
 
-import STANDINGS from '../data/standings.json'
-import GAMELOG from '../data/gamelog.json'
+// import STANDINGS from '../data/standings.json'
+// import GAMELOG from '../data/gamelog.json'
 import SKATERS from '../data/skaters.json'
 import GOALIES from '../data/goalies.json'
 import INJURIES from '../data/injuries.json'
+import { STATS_API_KEY } from '../config'
 
 interface InjuriesContextType {
   injuries: Injury[]
@@ -39,46 +40,93 @@ export const useStandings = () => React.useContext(StandingsContext)
 // create providers
 export const GamelogProvider: React.FC = ({ children }) => {
   // set state
-  const [gamelog, setGamelog] = React.useState<GameStats[]>(GAMELOG)
+  const [gamelog, setGamelog] = React.useState<GameStats[]>([])
 
-  const value = {
-    gamelog,
+  const getGamelog = async () => {
+    try {
+      const res = await fetch(`/api/games?API_KEY=${STATS_API_KEY}`)
+      const data = await res.json()
+      console.log('setting gamelog', data)
+      setGamelog(data)
+    } catch {
+      console.log('Gamelog not found')
+    }
   }
 
-  return <GamelogContext.Provider value={value}>{children}</GamelogContext.Provider>
+  React.useEffect(() => {
+    getGamelog()
+  }, [])
+
+  return <GamelogContext.Provider value={{ gamelog }}>{children}</GamelogContext.Provider>
 }
 
 export const StandingsProvider: React.FC = ({ children }) => {
   // set state
-  const [standings, setStandings] = React.useState<Conference[]>(STANDINGS)
+  const [standings, setStandings] = React.useState<Conference[]>([])
 
-  const value = {
-    standings,
+  const getStandings = async () => {
+    try {
+      const res = await fetch(`/api/standings?API_KEY=${STATS_API_KEY}`)
+      const data = await res.json()
+      console.log('setting standings', data)
+      setStandings(data)
+    } catch {
+      console.log('Standings not found')
+    }
   }
 
-  return <StandingsContext.Provider value={value}>{children}</StandingsContext.Provider>
+  React.useEffect(() => {
+    getStandings()
+  }, [])
+
+  return <StandingsContext.Provider value={{ standings }}>{children}</StandingsContext.Provider>
 }
 
 export const PlayersProvider: React.FC = ({ children }) => {
   // set state
-  const [skaters, setSkaters] = React.useState<SkaterScoring[]>(SKATERS)
-  const [goalies, setGoalies] = React.useState<GoalieScoring[]>(GOALIES)
+  const [skaters, setSkaters] = React.useState<SkaterScoring[]>([])
+  const [goalies, setGoalies] = React.useState<GoalieScoring[]>([])
 
-  const value = {
-    skaters,
-    goalies,
+  const getPlayers = async () => {
+    try {
+      const res1 = await fetch(`/api/skaters?API_KEY=${STATS_API_KEY}`)
+      const data1 = await res1.json()
+      console.log('setting skaters', data1)
+      setSkaters(data1)
+      const res2 = await fetch(`/api/goalies?API_KEY=${STATS_API_KEY}`)
+      const data2 = await res2.json()
+      console.log('setting goalies', data2)
+      setGoalies(data2)
+    } catch {
+      console.log('Players not found')
+    }
   }
 
-  return <PlayersContext.Provider value={value}>{children}</PlayersContext.Provider>
+  React.useEffect(() => {
+    getPlayers()
+  }, [])
+
+  return <PlayersContext.Provider value={{ skaters, goalies }}>{children}</PlayersContext.Provider>
 }
 
 export const InjuriesProvider: React.FC = ({ children }) => {
   // set state
-  const [injuries, setInjuries] = React.useState<Injury[]>(INJURIES)
+  const [injuries, setInjuries] = React.useState<Injury[]>([])
 
-  const value = {
-    injuries,
+  const getInjuries = async () => {
+    try {
+      const res = await fetch(`/api/injuries?API_KEY=${STATS_API_KEY}`)
+      const data = await res.json()
+      console.log('setting standings', data)
+      setInjuries(data)
+    } catch {
+      console.log('Injuries not found')
+    }
   }
 
-  return <InjuriesContext.Provider value={value}>{children}</InjuriesContext.Provider>
+  React.useEffect(() => {
+    getInjuries()
+  }, [])
+
+  return <InjuriesContext.Provider value={{ injuries }}>{children}</InjuriesContext.Provider>
 }

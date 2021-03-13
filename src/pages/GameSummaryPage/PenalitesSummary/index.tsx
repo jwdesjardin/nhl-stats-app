@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { HStack } from '@chakra-ui/layout'
 import { Box, Table, Tbody, Th, Tr } from '@chakra-ui/react'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { PenaltyRow } from './PenaltyRow'
 import { Penalty } from '../../../types/gameSummary'
 

@@ -17,7 +17,7 @@ import { teams } from '../../../data/teams'
 import { useGamelog } from '../../../context'
 import { Game } from '../../Homepage/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
-import { Link as BrowserLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface FullScheduleProps {
   team_id: string
@@ -37,7 +37,7 @@ export const FullSchedule: React.FC<FullScheduleProps> = ({ team_id }) => {
   return (
     <Box>
       {team && (
-        <Link as={BrowserLink} to={`/team/${team_id}`}>
+        <Link as={RouterLink} to={`/team/${team_id}`}>
           <Button border='2px solid black' bg='white'>
             <Image w='35px' src={team.image_url} />
             {team.name}
