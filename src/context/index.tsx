@@ -45,7 +45,9 @@ export const GamelogProvider: React.FC = ({ children }) => {
 
   const getGamelog = async () => {
     try {
-      const res = await fetch(`/api/games?API_KEY=${STATS_API_KEY}`)
+      const res = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/games?API_KEY=${STATS_API_KEY}`
+      )
       const data = await res.json()
       console.log('setting gamelog', data)
       setGamelog(data)
@@ -67,7 +69,9 @@ export const StandingsProvider: React.FC = ({ children }) => {
 
   const getStandings = async () => {
     try {
-      const res = await fetch(`/api/standings?API_KEY=${STATS_API_KEY}`)
+      const res = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/standings?API_KEY=${STATS_API_KEY}`
+      )
       const data = await res.json()
       console.log('setting standings', data)
       setStandings(data)
@@ -90,11 +94,15 @@ export const PlayersProvider: React.FC = ({ children }) => {
 
   const getPlayers = async () => {
     try {
-      const res1 = await fetch(`/api/skaters?API_KEY=${STATS_API_KEY}`)
+      const res1 = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/skaters?API_KEY=${STATS_API_KEY}`
+      )
       const data1 = await res1.json()
       console.log('setting skaters', data1)
       setSkaters(data1)
-      const res2 = await fetch(`/api/goalies?API_KEY=${STATS_API_KEY}`)
+      const res2 = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/goalies?API_KEY=${STATS_API_KEY}`
+      )
       const data2 = await res2.json()
       console.log('setting goalies', data2)
       setGoalies(data2)
@@ -116,7 +124,9 @@ export const InjuriesProvider: React.FC = ({ children }) => {
 
   const getInjuries = async () => {
     try {
-      const res = await fetch(`/api/injuries?API_KEY=${STATS_API_KEY}`)
+      const res = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/injuries?API_KEY=${STATS_API_KEY}`
+      )
       const data = await res.json()
       console.log('setting standings', data)
       setInjuries(data)

@@ -33,7 +33,9 @@ export const PlayerPage: React.FC<PlayerPageProps> = ({ match }) => {
 
   React.useEffect(() => {
     const getTeamSummary = async (team: Team) => {
-      const res = await fetch(`/api/team/${team.teamID}?API_KEY=${STATS_API_KEY}`)
+      const res = await fetch(
+        `https://ts-node-scraping-nhl.herokuapp.com/api/team/${team.teamID}?API_KEY=${STATS_API_KEY}`
+      )
       const data = await res.json()
       setTeamSummary(data)
     }
