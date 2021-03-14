@@ -1,4 +1,4 @@
-import { Text, Box, Link, Image, Badge } from '@chakra-ui/react'
+import { Text, Box, Link, Image, Badge, HStack, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { Icon } from '@chakra-ui/react'
@@ -11,13 +11,54 @@ import { GameStats } from '../../types/app'
 
 interface GameProps {
   game: GameStats
+  decision_team_id?: string
 }
 
-export const Game: React.FC<GameProps> = ({ game }) => {
+export const Game: React.FC<GameProps> = ({ game, decision_team_id }) => {
   // find the team object
   const home_team = teams.find((team) => team.name === game.home_team)
   const away_team = teams.find((team) => team.name === game.away_team)
-  console.log(home_team, away_team)
+
+  const dec_team = home_team?.teamID === decision_team_id ? 'home' : 'away'
+
+  const [decision, setDecision] = React.useState('')
+  const [gameLink, setGameLink] = React.useState('')
+  const [gameDate, setGameDate] = React.useState<Date | undefined>()
+
+  React.useEffect(() => {
+    // create a date object
+    const game_date = new Date(game.date)
+    setGameDate(game_date)
+
+    // create game_link if game was not yesterday or earlier
+    let game_link = ''
+    if (home_team) {
+      const game_time = game_date.getTime()
+      //get now - 1 day
+      const now = Date.now() - 3600 * 1000 * 24
+
+      if (game_time < now) {
+        game_link =
+          game_date.getFullYear().toString() +
+          padStart((game_date.getMonth() + 1).toString()) +
+          padStart((game_date.getDate() + 1).toString()) +
+          0 +
+          home_team.teamID
+        setGameLink(game_link)
+      }
+    }
+
+    // decision
+
+    if (game.home_goals !== null && game.away_goals !== null && dec_team) {
+      const home_value = dec_team === 'home' ? game.home_goals : game.away_goals
+      const away_value = dec_team === 'home' ? game.away_goals : game.home_goals
+
+      const result = home_value - away_value > 0 ? 'Win' : 'Loss'
+
+      setDecision(result)
+    }
+  }, [])
 
   // helper function to pad single digit months and dates
   const padStart = (str: string) => {
@@ -25,27 +66,6 @@ export const Game: React.FC<GameProps> = ({ game }) => {
     if (number < 10) {
       return '0' + str
     } else return str
-  }
-
-  // create a date object
-  const game_date = new Date(game.date)
-
-  // create game_link if game was not yesterday or earlier
-  let game_link = ''
-  if (home_team) {
-    const game_time = game_date.getTime()
-    //get now - 1 day
-    const now = Date.now() - 3600 * 1000 * 24
-
-    if (game_time < now) {
-      game_link =
-        game_date.getFullYear().toString() +
-        padStart((game_date.getMonth() + 1).toString()) +
-        padStart((game_date.getDate() + 1).toString()) +
-        0 +
-        home_team.teamID
-      console.log(game_link)
-    }
   }
 
   return (
@@ -59,13 +79,18 @@ export const Game: React.FC<GameProps> = ({ game }) => {
       justifyContent='space-evenly'
       my={1}
     >
-      <Box d='flex' flexDirection='column' alignItems='center' p={1}>
-        <Text>
-          {game_date.getMonth() + 1}
-          {'/'}
-          {game_date.getDate() + 1}
-        </Text>
-      </Box>
+      {/* game date */}
+      {gameDate && (
+        <Box d='flex' flexDirection='column' alignItems='center' p={1}>
+          <Text>
+            {gameDate.getMonth() + 1}
+            {'/'}
+            {gameDate.getDate() + 1}
+          </Text>
+        </Box>
+      )}
+
+      {/* score */}
       {home_team && away_team && (
         <Box d='flex' alignItems='center'>
           <Link as={RouterLink} to={`/team/${away_team.teamID}`}>
@@ -85,20 +110,39 @@ export const Game: React.FC<GameProps> = ({ game }) => {
           </Text>
         </Box>
       )}
-      {game.overtime ? (
-        <Badge p={1} mr={2}>
-          {game.overtime}
-        </Badge>
-      ) : (
-        <Badge bg='white' p={3} mr={2}></Badge>
-      )}
-      {game_link !== '' ? (
-        <Link as={RouterLink} to={`/game-summary/${game_link}`}>
-          <Icon as={SportsHockey} />
-        </Link>
-      ) : (
-        <Box />
-      )}
+
+      {/* result */}
+      <HStack spacing={2}>
+        {/* ot */}
+        {game.overtime ? (
+          <Badge p={1} mr={2}>
+            {game.overtime}
+          </Badge>
+        ) : (
+          <Badge bg='white' p={3} mr={2}></Badge>
+        )}
+
+        {/* decision */}
+        {decision !== '' && decision === 'Win' && (
+          <Badge w={5} textAlign='center' colorScheme='green' p={1} mr={2}>
+            W
+          </Badge>
+        )}
+        {decision !== '' && decision === 'Loss' && (
+          <Badge w={5} textAlign='center' colorScheme='orange' p={1} mr={2}>
+            L
+          </Badge>
+        )}
+
+        {/* match details */}
+        {gameLink !== '' ? (
+          <Link as={RouterLink} to={`/game-summary/${gameLink}`}>
+            <Heading fontSize={14}>GAME</Heading>
+          </Link>
+        ) : (
+          <Box />
+        )}
+      </HStack>
     </Box>
   )
 }

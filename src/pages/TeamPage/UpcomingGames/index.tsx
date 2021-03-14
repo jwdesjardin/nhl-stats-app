@@ -4,7 +4,7 @@ import React from 'react'
 import { GameStats } from '../../../types/app'
 
 import { useGamelog } from '../../../context'
-import { Game } from '../../Homepage/Game'
+import { Game } from '../../../utils/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
 

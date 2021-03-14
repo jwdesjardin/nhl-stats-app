@@ -3,7 +3,7 @@ import React from 'react'
 
 import { teams } from '../../../data/teams'
 import { useGamelog } from '../../../context'
-import { Game } from '../../Homepage/Game'
+import { Game } from '../../../utils/Game'
 
 import { Link as RouterLink } from 'react-router-dom'
 

@@ -4,7 +4,7 @@ import React from 'react'
 import { GameStats } from '../../../types/app'
 
 import { useGamelog } from '../../../context'
-import { Game } from '../../Homepage/Game'
+import { Game } from '../../../utils/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 
 interface RecentGamesProps {
@@ -64,7 +64,7 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
       ) : (
         <Box>
           {recentGames.slice(0, 5).map((game) => (
-            <Game key={game.id} game={game} />
+            <Game key={game.id} game={game} decision_team_id={team_id} />
           ))}
           <Center onClick={() => setRecentGamesToggle(true)}>
             <Text>{`See More Games`.toUpperCase()}</Text>

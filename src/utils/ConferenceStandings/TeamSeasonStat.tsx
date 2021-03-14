@@ -1,8 +1,8 @@
 import { Text, Td, Tr, Image, Link, Box } from '@chakra-ui/react'
 import React from 'react'
-import { teams } from '../../../data/teams'
+import { teams } from '../../data/teams'
 
-import { Team, TeamSeasonStats } from '../../../types/app'
+import { Team, TeamSeasonStats } from '../../types/app'
 
 import { Link as RouterLink } from 'react-router-dom'
 

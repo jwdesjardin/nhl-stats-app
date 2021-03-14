@@ -2,8 +2,8 @@ import { Box, VStack, Container, Heading } from '@chakra-ui/react'
 import React from 'react'
 
 import { Conference, GameStats } from '../../types/app'
-import { ConferenceStandings } from './Standings'
-import { Game } from './Game'
+import { ConferenceStandings } from '../../utils/ConferenceStandings'
+import { Game } from '../../utils/Game'
 import { useStandings, useGamelog } from '../../context'
 
 export const HomePage: React.FC = () => {
