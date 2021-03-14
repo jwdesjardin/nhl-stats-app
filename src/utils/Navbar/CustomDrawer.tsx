@@ -26,7 +26,9 @@ import { ConferenceAccordian } from './ConferenceAccordian'
 // Data
 import { teams } from '../../data/teams'
 // Types
-import { Team } from '../../types/app'
+import { SkaterScoring, Team } from '../../types/app'
+import { usePlayers } from '../../context'
+import { PlayerLink } from './PlayerLink'
 
 interface CustomDrawerProps {
   isOpen: boolean
@@ -46,6 +48,20 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({ isOpen, onClose }) =
   const [northernConference, setNorthernConference] = React.useState<Team[]>([])
   const [centralConference, setCentralConference] = React.useState<Team[]>([])
 
+  const [playerFilter, setPlayerFilter] = React.useState('')
+  const [searchResults, setSearchResults] = React.useState<SkaterScoring[]>([])
+  const { skaters } = usePlayers()
+
+  React.useEffect(() => {
+    if (playerFilter === '') {
+      setSearchResults([])
+    } else {
+      setSearchResults(
+        skaters.filter((skater) => skater.player.toLowerCase().includes(playerFilter.toLowerCase()))
+      )
+    }
+  }, [playerFilter, skaters])
+
   return (
     <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
       <DrawerOverlay>
@@ -62,9 +78,16 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({ isOpen, onClose }) =
           <DrawerBody p={0}>
             {/* player search */}
             <Box d='flex' bg='blackAlpha.600' p={2}>
-              <Input placeholder='skater, goalie...' />
+              <Input
+                value={playerFilter}
+                onChange={(e) => setPlayerFilter(e.target.value)}
+                placeholder='skater, goalie...'
+              />
               <Button>Search</Button>
             </Box>
+
+            {/* search results */}
+            {searchResults && searchResults.map((skater) => <PlayerLink skater={skater} />)}
 
             {/* leaders link */}
             <Link as={RouterLink} to='/leaders'>
