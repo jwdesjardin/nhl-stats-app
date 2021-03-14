@@ -62,7 +62,7 @@ export const LeadersPage = () => {
   }
 
   return (
-    <Container pt={12}>
+    <Container pt={20}>
       <Heading textAlign='center'>Leaders</Heading>
       <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
 

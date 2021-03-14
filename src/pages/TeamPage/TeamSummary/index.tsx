@@ -12,7 +12,10 @@ interface TeamSummaryProps {
 export const TeamSummary: React.FC<TeamSummaryProps> = ({ team_id }) => {
   const { standings } = useStandings()
 
+  // get team
   const team = teams.find((team) => team.teamID === team_id)
+
+  // get team season scoring
   let conference: Conference | undefined
   let team_season: TeamSeasonStats | undefined
   if (team) {
@@ -29,7 +32,7 @@ export const TeamSummary: React.FC<TeamSummaryProps> = ({ team_id }) => {
 
   let seed = ''
   if (conference && team) {
-    seed = conference.teams.findIndex((team) => team.team_id === team_id).toString()
+    seed = (conference.teams.findIndex((team) => team.team_id === team_id) + 1).toString()
   }
 
   console.log(team, team_season, conference)
@@ -42,13 +45,17 @@ export const TeamSummary: React.FC<TeamSummaryProps> = ({ team_id }) => {
             <Image src={team.image_url}></Image>
             <Text>{record}</Text>
           </VStack>
-          <VStack justifyContent='center'>
+          <VStack justifyContent='center' w='100%' ml={4}>
             <Heading fontSize={24} mb={2} textAlign='center'>
               {team.name}
             </Heading>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Seed:</Text>
               <Text>{seed}</Text>
+            </Box>
+            <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
+              <Text fontWeight='semibold'>Win %:</Text>
+              <Text>{team_season.points_pct.toString().slice(1)}</Text>
             </Box>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Division:</Text>

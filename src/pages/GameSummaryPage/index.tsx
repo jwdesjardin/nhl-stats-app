@@ -33,7 +33,7 @@ export const GameSummaryPage: React.FC<TeamSchedulePageProps> = ({ match }) => {
   }, [game_id])
 
   return (
-    <Container pt={12}>
+    <Container pt={20}>
       {gameSummary && (
         <VStack spacing={6}>
           {/* game summary */}

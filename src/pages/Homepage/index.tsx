@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
   }, [standings, gamelog])
 
   return (
-    <Container pt={12}>
+    <Container pt={20}>
       <VStack spacing={4}>
         {/* todays games */}
         <Box p={4} w='100%'>

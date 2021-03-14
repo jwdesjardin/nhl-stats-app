@@ -1,4 +1,4 @@
-import { ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from './App'
@@ -6,6 +6,7 @@ import { GamelogProvider, InjuriesProvider, PlayersProvider, StandingsProvider }
 
 import reportWebVitals from './reportWebVitals'
 import * as serviceWorker from './serviceWorker'
+import { theme } from './theme'
 
 ReactDOM.render(
   <React.StrictMode>

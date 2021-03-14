@@ -1,4 +1,4 @@
-import { Td, Tr, Image, Link } from '@chakra-ui/react'
+import { Text, Td, Tr, Image, Link, Box } from '@chakra-ui/react'
 import React from 'react'
 import { teams } from '../../../data/teams'
 
@@ -24,7 +24,10 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
       {team && (
         <Td p={2}>
           <Link as={RouterLink} to={`/team/${team?.teamID}`}>
-            <Image width='37px' src={team?.image_url}></Image>
+            <Box d='flex' alignItems='center'>
+              <Image width='37px' src={team.image_url} mr={2}></Image>
+              {team.name}
+            </Box>
           </Link>
         </Td>
       )}

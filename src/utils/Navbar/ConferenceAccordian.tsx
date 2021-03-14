@@ -18,9 +18,13 @@ interface ConferenceAccordianProps {
     name: string
     teams: Team[]
   }
+  onClose: () => void
 }
 
-export const ConferenceAccordian: React.FC<ConferenceAccordianProps> = ({ conference }) => {
+export const ConferenceAccordian: React.FC<ConferenceAccordianProps> = ({
+  conference,
+  onClose,
+}) => {
   return (
     <Accordion allowMultiple>
       <AccordionItem>
@@ -37,6 +41,7 @@ export const ConferenceAccordian: React.FC<ConferenceAccordianProps> = ({ confer
               teamID={team.teamID}
               teamName={team.name}
               imgURL={team.image_url}
+              onClose={onClose}
             />
           ))}
         </AccordionPanel>

@@ -87,10 +87,11 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({ isOpen, onClose }) =
             </Box>
 
             {/* search results */}
-            {searchResults && searchResults.map((skater) => <PlayerLink skater={skater} />)}
+            {searchResults &&
+              searchResults.map((skater) => <PlayerLink skater={skater} onClose={onClose} />)}
 
             {/* leaders link */}
-            <Link as={RouterLink} to='/leaders'>
+            <Link as={RouterLink} to='/leaders' onClick={onClose}>
               <Center h='65px' shadow='md'>
                 <Text fontSize={20} fontWeight='bold'>
                   Leaders
@@ -110,15 +111,19 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({ isOpen, onClose }) =
                 <AccordionPanel p={0} m={0}>
                   <ConferenceAccordian
                     conference={{ name: 'Western Conference', teams: westernConference }}
+                    onClose={onClose}
                   />
                   <ConferenceAccordian
                     conference={{ name: 'Eastern Conference', teams: easternConference }}
+                    onClose={onClose}
                   />
                   <ConferenceAccordian
                     conference={{ name: 'Northern Conference', teams: northernConference }}
+                    onClose={onClose}
                   />
                   <ConferenceAccordian
                     conference={{ name: 'Central Conference', teams: centralConference }}
+                    onClose={onClose}
                   />
                 </AccordionPanel>
               </AccordionItem>

@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
       </Box>
 
       {/* menu icon */}
-      <HamburgerIcon onClick={onOpen} m={2} />
+      <HamburgerIcon fontSize={28} onClick={onOpen} mr={4} />
 
       {/* Drawer */}
       <CustomDrawer isOpen={isOpen} onClose={onClose} />
