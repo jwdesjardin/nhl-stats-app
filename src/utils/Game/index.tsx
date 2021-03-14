@@ -5,9 +5,9 @@ import { Icon } from '@chakra-ui/react'
 import { SportsHockey } from '@material-ui/icons'
 
 //Data
-import { teams } from '../../../data/teams'
+import { teams } from '../../data/teams'
 //Types
-import { GameStats } from '../../../types/app'
+import { GameStats } from '../../types/app'
 
 interface GameProps {
   game: GameStats
