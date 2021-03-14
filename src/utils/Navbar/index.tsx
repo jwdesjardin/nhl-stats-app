@@ -17,6 +17,7 @@ export const Navbar: React.FC = () => {
       fontSize='xl'
       p={2}
       pos='fixed'
+      zIndex='banner'
     >
       {/* Empty box for spacing */}
       <Box />

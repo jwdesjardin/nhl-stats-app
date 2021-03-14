@@ -6,20 +6,19 @@ import { SkaterScoring } from '../../../types/app'
 import { getStatHeader } from '../../../utils/helper'
 
 import { Link as RouterLink } from 'react-router-dom'
+import { Category } from '@material-ui/icons'
 
 interface SkaterScoringLeadersProps {
   skaterScoring: SkaterScoring[]
 }
 
 export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skaterScoring }) => {
-  const [scoringStat, setScoringStat] = React.useState('shots_on_goal')
+  const [category, setCategory] = React.useState('points')
   const [sortedSkaters, setSortedSkaters] = React.useState<SkaterScoring[]>([])
-  const [statHeader, setStatHeader] = React.useState('G')
 
   React.useEffect(() => {
-    setSortedSkaters(getSortedSkaters(skaterScoring, scoringStat))
-    getStatHeader(scoringStat, setStatHeader)
-  }, [scoringStat, skaterScoring])
+    setSortedSkaters(getSortedSkaters(skaterScoring, category))
+  }, [category, skaterScoring])
 
   const getSortedSkaters = (skaters: SkaterScoring[], attr: string) => {
     return skaters
@@ -50,7 +49,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
       {/* stat select */}
       <Select
         onChange={(e) => {
-          setScoringStat(e.target.value)
+          setCategory(e.target.value)
         }}
         bg='cyan.200'
         defaultValue='points'
@@ -58,71 +57,295 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         w='80%'
         mx='auto'
       >
-        <option value='games_played'>Game Played</option>
-        <option value='goals'>Goals</option>
-        <option value='assists'>Assists</option>
         <option value='points'>Points</option>
-        <option value='gw_goals'>GW Goals</option>
-        <option value='sh_goals'>SH Goals</option>
-        <option value='pp_goals'>PP Goals</option>
-        <option value='ev_goals'>EV Goals</option>
-        <option value='penalty_minutes'>Penalty Minutes</option>
-        <option value='plus_minus'>Plus-Minus</option>
-        <option value='average_time_on_ice'>Avg. Time on Ice</option>
-        <option value='shots_on_goal'>Shots</option>
-        <option value='hits'>Hits</option>
-        <option value='faceoff_percentage'>Faceoff %</option>
-        <option value='faceoff_wins'>Faceoff Wins</option>
+        <option value='goals'>Goals</option>
+        <option value='shooting'>Shooting</option>
+        <option value='penalties'>Penalties</option>
+        <option value='faceoffs'>Faceoffs</option>
       </Select>
 
       <Box bg='white' border='2px solid black' borderRadius='lg' p={2}>
-        <Table size='sm'>
-          <Thead>
-            <Tr>
-              <Th p={2}>RK</Th>
-              <Th p={2}>POS</Th>
-              <Th p={2}>Player</Th>
-              <Th p={2} isNumeric>
-                GP
-              </Th>
-              <Th p={2} isNumeric>
-                PTS
-              </Th>
-              <Th p={2} isNumeric>
-                {statHeader}
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {sortedSkaters.map((skater, idx) => {
-              const stat = Object.entries(skater).find((entry) => entry[0] === scoringStat)
+        {/* scoring */}
 
-              return (
-                <Tr key={skater.player_id}>
-                  <Td p={2}>{idx + 1}</Td>
-                  <Td p={2}>{skater.position}</Td>
-                  <Td p={2}>
-                    <Link as={RouterLink} to={`/player/${skater.player_id}`}>
-                      {skater.player}
-                    </Link>
-                  </Td>
-                  <Td p={2} isNumeric>
-                    {skater.games_played}
-                  </Td>
-
-                  <Td p={2} isNumeric>
-                    {skater.points}
-                  </Td>
-                  {stat && (
-                    <Td p={2} isNumeric>
-                      {stat[1]}
+        {category === 'points' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th p={2}>RK</Th>
+                <Th p={2}>POS</Th>
+                <Th p={2}>Player</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GP
+                </Th>
+                <Th p={2}>ATOI</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  p
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  G
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  A
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedSkaters.map((skater, idx) => {
+                return (
+                  <Tr key={skater.player_id}>
+                    <Td p={2}>{idx + 1}</Td>
+                    <Td p={2}>{skater.position}</Td>
+                    <Td p={2}>
+                      <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                        {skater.player}
+                      </Link>
                     </Td>
-                  )}
-                </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+                    <Td p={2} isNumeric>
+                      {skater.games_played}
+                    </Td>
+                    <Td p={2}>{skater.average_time_on_ice}</Td>
+                    <Td p={2} isNumeric>
+                      {skater.points}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.goals}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.assists}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {/* goals */}
+        {category === 'goals' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th p={2}>RK</Th>
+                <Th p={2}>POS</Th>
+                <Th p={2}>Player</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GP
+                </Th>
+                <Th p={2}>ATOI</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  G
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  PP
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GW
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  SH
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedSkaters.map((skater, idx) => {
+                return (
+                  <Tr key={skater.player_id}>
+                    <Td p={2}>{idx + 1}</Td>
+                    <Td p={2}>{skater.position}</Td>
+                    <Td p={2}>
+                      <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                        {skater.player}
+                      </Link>
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.games_played}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.average_time_on_ice}
+                    </Td>
+
+                    <Td p={2} isNumeric>
+                      {skater.goals}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.pp_goals}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.gw_goals}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.sh_goals}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {/* shooting */}
+        {category === 'shooting' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th p={2}>RK</Th>
+                <Th p={2}>POS</Th>
+                <Th p={2}>Player</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GP
+                </Th>
+                <Th p={2}>ATOI</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  G
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  S
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  S %
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedSkaters.map((skater, idx) => {
+                return (
+                  <Tr key={skater.player_id}>
+                    <Td p={2}>{idx + 1}</Td>
+                    <Td p={2}>{skater.position}</Td>
+                    <Td p={2}>
+                      <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                        {skater.player}
+                      </Link>
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.games_played}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.average_time_on_ice}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.goals}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.shots_on_goal}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.shooting_percentage}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {/* physical */}
+        {category === 'penalties' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th p={2}>RK</Th>
+                <Th p={2}>POS</Th>
+                <Th p={2}>Player</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GP
+                </Th>
+                <Th p={2}>ATOI</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  PTS
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  HITS
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  PIMS
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedSkaters.map((skater, idx) => {
+                return (
+                  <Tr key={skater.player_id}>
+                    <Td p={2}>{idx + 1}</Td>
+                    <Td p={2}>{skater.position}</Td>
+                    <Td p={2}>
+                      <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                        {skater.player}
+                      </Link>
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.games_played}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.average_time_on_ice}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.points}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.hits}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.penalty_minutes}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {/* faceoffs */}
+        {category === 'faceoffs' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th p={2}>RK</Th>
+                <Th p={2}>POS</Th>
+                <Th p={2}>Player</Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  GP
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  FO WINS
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  FO TAKEN
+                </Th>
+                <Th p={2} isNumeric textDecoration='underline'>
+                  FO %
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedSkaters.map((skater, idx) => {
+                return (
+                  <Tr key={skater.player_id}>
+                    <Td p={2}>{idx + 1}</Td>
+                    <Td p={2}>{skater.position}</Td>
+                    <Td p={2}>
+                      <Link as={RouterLink} to={`/player/${skater.player_id}`}>
+                        {skater.player}
+                      </Link>
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.games_played}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.faceoff_wins}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.faceoff_wins + skater.faceoff_losses}
+                    </Td>
+                    <Td p={2} isNumeric>
+                      {skater.faceoff_percentage}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
       </Box>
     </Box>
   )

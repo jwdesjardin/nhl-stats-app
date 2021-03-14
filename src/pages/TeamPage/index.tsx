@@ -50,31 +50,6 @@ export const TeamPage: React.FC<TeamPageProps> = ({ match }) => {
           </Box>
 
           <Box w='100%'>
-            <Heading textAlign='center'>Recent Games</Heading>
-            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-            {/* bring in games */}
-            <RecentGames team_id={team_id}></RecentGames>
-          </Box>
-
-          <Box w='100%'>
-            <Heading textAlign='center'>Scoring Leaders</Heading>
-            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-            <SkaterScoringLeaders skaterScoring={teamSummary.skaterStats} />
-          </Box>
-
-          <Box w='100%'>
-            <Heading textAlign='center'>Injuries</Heading>
-            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-            <TeamInjuries team_id={team_id} />
-          </Box>
-
-          <Box w='100%'>
-            <Heading textAlign='center'>Goalies</Heading>
-            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
-            <GoalieScoringLeaders goalieScoring={teamSummary.goalieStats} />
-          </Box>
-
-          <Box w='100%'>
             <Heading textAlign='center'>Standings</Heading>
             <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
             {/* bring in standings */}
@@ -84,10 +59,35 @@ export const TeamPage: React.FC<TeamPageProps> = ({ match }) => {
           </Box>
 
           <Box w='100%'>
+            <Heading textAlign='center'>Recent Games</Heading>
+            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+            {/* bring in games */}
+            <RecentGames team_id={team_id}></RecentGames>
+          </Box>
+
+          <Box w='100%'>
             <Heading textAlign='center'>Upcoming Games</Heading>
             <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
             {/* bring in games */}
             <UpcomingGames team_id={team_id}></UpcomingGames>
+          </Box>
+
+          <Box w='100%'>
+            <Heading textAlign='center'>Injuries</Heading>
+            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+            <TeamInjuries team_id={team_id} />
+          </Box>
+
+          <Box w='100%'>
+            <Heading textAlign='center'>Scoring Leaders</Heading>
+            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+            <SkaterScoringLeaders skaterScoring={teamSummary.skaterStats} />
+          </Box>
+
+          <Box w='100%'>
+            <Heading textAlign='center'>Goalies</Heading>
+            <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+            <GoalieScoringLeaders goalieScoring={teamSummary.goalieStats} />
           </Box>
 
           <Box w='100%'>
