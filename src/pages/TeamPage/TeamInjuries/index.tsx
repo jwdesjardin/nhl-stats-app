@@ -25,27 +25,27 @@ export const TeamInjuries: React.FC<TeamInjuriesProps> = ({ team_id }) => {
 
   return (
     <Box>
-      <Box bg='white' border='2px solid black' borderRadius='lg' p={2}>
+      <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
         <Table size='sm'>
           <Thead>
             <Tr>
-              <Th p={2}>Player</Th>
-              <Th p={2}>START</Th>
-              <Th p={2}>TYPE</Th>
-              <Th p={2}>NOTE</Th>
+              <Th px={1}>Player</Th>
+              <Th px={1}>START</Th>
+              <Th px={1}>TYPE</Th>
+              <Th px={1}>NOTE</Th>
             </Tr>
           </Thead>
           <Tbody>
             {teamInjuries.map((injury) => (
               <Tr key={injury.id}>
-                <Td p={2}>
+                <Td px={1}>
                   <Link as={RouterLink} to={`/player/${injury.player_id}`}>
                     {injury.player}
                   </Link>
                 </Td>
-                <Td p={2}>{injury.date}</Td>
-                <Td p={2}>{injury.type}</Td>
-                <Td p={2}>{injury.note}</Td>
+                <Td px={1}>{injury.date}</Td>
+                <Td px={1}>{injury.type}</Td>
+                <Td px={1}>{injury.note}</Td>
               </Tr>
             ))}
           </Tbody>

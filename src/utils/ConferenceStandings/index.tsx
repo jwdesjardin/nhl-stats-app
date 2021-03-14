@@ -24,23 +24,23 @@ export const ConferenceStandings: React.FC<ConferenceStandingsProps> = ({
         <Table justifySelf='center' variant='simple' bg='white' size='sm' borderRadius='md' mb={4}>
           <Thead>
             <Tr>
-              <Th p={2}>TEAM</Th>
-              <Th p={2} isNumeric>
+              <Th px={1}>TEAM</Th>
+              <Th px={1} isNumeric>
                 GP
               </Th>
-              <Th p={2} isNumeric>
+              <Th px={1} isNumeric>
                 W
               </Th>
-              <Th p={2} isNumeric>
+              <Th px={1} isNumeric>
                 L
               </Th>
-              <Th p={2} isNumeric>
+              <Th px={1} isNumeric>
                 OTL
               </Th>
-              <Th p={2} fontWeight='bold' isNumeric>
+              <Th px={1} fontWeight='bold' isNumeric>
                 PTS
               </Th>
-              <Th p={2} isNumeric>
+              <Th px={1} isNumeric>
                 %
               </Th>
             </Tr>

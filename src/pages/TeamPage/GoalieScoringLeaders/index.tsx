@@ -3,21 +3,19 @@ import * as React from 'react'
 import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
-import { getStatHeader } from '../../../utils/helper'
+
 import { Link as RouterLink } from 'react-router-dom'
 interface GoalieScoringLeadersProps {
   goalieScoring: GoalieScoring[]
 }
 
 export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goalieScoring }) => {
-  const [scoringStat, setScoringStat] = React.useState('save_percentage')
+  const [category, setCategory] = React.useState('saves')
   const [sortedGoalies, setSortedGoalies] = React.useState<GoalieScoring[]>([])
-  const [statHeader, setStatHeader] = React.useState('SAVE %')
 
   React.useEffect(() => {
-    setSortedGoalies(getSortedGoalies(goalieScoring, scoringStat))
-    getStatHeader(scoringStat, setStatHeader)
-  }, [scoringStat, goalieScoring])
+    setSortedGoalies(getSortedGoalies(goalieScoring, category))
+  }, [category, goalieScoring])
 
   const getSortedGoalies = (goalies: GoalieScoring[], attr: string) => {
     return goalies.sort((a, b) => {
@@ -40,7 +38,7 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
       {/* stat select */}
       <Select
         onChange={(e) => {
-          setScoringStat(e.target.value)
+          setCategory(e.target.value)
         }}
         bg='cyan.200'
         defaultValue='save_percentage'
@@ -48,63 +46,120 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
         w='80%'
         mx='auto'
       >
-        <option value='goals_against_average'>Goals Against Avg.</option>
-        <option value='shutouts'>Shutouts</option>
-        <option value='save_percentage'>Save %</option>
-        <option value='goals_against'>Goals Against</option>
-        <option value='shots_against'>Shots Against</option>
         <option value='saves'>Saves</option>
+        <option value='goals'>Goals</option>
       </Select>
 
-      <Box bg='white' border='2px solid black' borderRadius='lg' p={2}>
-        <Table size='sm'>
-          <Thead>
-            <Tr>
-              <Th p={2}>Player</Th>
-              <Th p={2} isNumeric>
-                GP
-              </Th>
-              <Th p={2} isNumeric>
-                SHOTS
-              </Th>
-              <Th p={2} isNumeric>
-                GA
-              </Th>
-              <Th p={2} isNumeric>
-                {statHeader}
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {sortedGoalies.map((goalie) => {
-              const stat = Object.entries(goalie).find((entry) => entry[0] === scoringStat)
-
-              return (
-                <Tr key={goalie.player_id}>
-                  <Td p={2}>
-                    <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
-                      {goalie.player}
-                    </Link>
-                  </Td>
-                  <Td p={2} isNumeric>
-                    {goalie.games_played}
-                  </Td>
-                  <Td p={2} isNumeric>
-                    {goalie.shots_against}
-                  </Td>
-                  <Td p={2} isNumeric>
-                    {goalie.goals_against}
-                  </Td>
-                  {stat && (
-                    <Td p={2} isNumeric>
-                      {stat[1]}
+      <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
+        {category === 'saves' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  GS
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  SV
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  SHOTS
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  SV %
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedGoalies.map((goalie, idx) => {
+                return (
+                  <Tr key={goalie.player_id}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{goalie.position}</Td>
+                    <Td px={1}>
+                      <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
+                        {goalie.player}
+                      </Link>
                     </Td>
-                  )}
-                </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+                    <Td px={1} isNumeric>
+                      {goalie.games_started}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.saves}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.shots_against}
+                    </Td>
+
+                    <Td px={1} isNumeric>
+                      {goalie.save_percentage}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {category === 'goals' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th px={1}>RKr</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  GS
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  GA
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  SHOTS
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  GAA
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  SO
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedGoalies.map((goalie, idx) => {
+                return (
+                  <Tr key={goalie.player_id}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{goalie.position}</Td>
+                    <Td px={1}>
+                      <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
+                        {goalie.player}
+                      </Link>
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.games_started}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.goals_against}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.shots_against}
+                    </Td>
+
+                    <Td px={1} isNumeric>
+                      {goalie.goals_against_average}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {goalie.shutouts}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
       </Box>
     </Box>
   )

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link } from '@chakra-ui/react'
+import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link, Center } from '@chakra-ui/react'
 
 import { RosterStat } from '../../../types/team'
 import { getStatHeader } from '../../../utils/helper'
@@ -11,23 +11,33 @@ interface RosterStatsProps {
 }
 
 export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
-  const [rosterStat, setRosterStat] = React.useState('age')
+  const [rosterStat, setRosterStat] = React.useState('bio')
   const [sortedRoster, setSortedRoster] = React.useState<RosterStat[]>([])
   const [statHeader, setStatHeader] = React.useState('')
 
   React.useEffect(() => {
-    if (['age', 'weight'].includes(rosterStat)) {
-      setSortedRoster(getSortedRosterNumeric(rosterStats, rosterStat))
-    } else if (['experience', 'salary'].includes(rosterStat)) {
-      setSortedRoster(getSortedRosterWithNulls(rosterStats, rosterStat))
-    } else if (['height'].includes(rosterStat)) {
-      setSortedRoster(getSortedRosterHeight(rosterStats))
-    } else if (['draft'].includes(rosterStat)) {
-      setSortedRoster(getSortedRosterDraft(rosterStats))
-    } else if (['country'].includes(rosterStat)) {
-      setSortedRoster(getSortedRosterCountry(rosterStats))
+    if (rosterStat === 'bio') {
+      setSortedRoster(getSortedRosterNumeric(rosterStats, 'age'))
     }
-    getStatHeader(rosterStat, setStatHeader)
+    if (rosterStat === 'draft') {
+      setSortedRoster(getSortedRosterDraft(rosterStats))
+    }
+    if (rosterStat === 'salary') {
+      getSortedRosterWithNulls(rosterStats, 'salary')
+    }
+
+    // if (['age', 'weight'].includes(rosterStat)) {
+    //   setSortedRoster(getSortedRosterNumeric(rosterStats, rosterStat))
+    // } else if (['experience', 'salary'].includes(rosterStat)) {
+    //   setSortedRoster(getSortedRosterWithNulls(rosterStats, rosterStat))
+    // } else if (['height'].includes(rosterStat)) {
+    //   setSortedRoster(getSortedRosterHeight(rosterStats))
+    // } else if (['draft'].includes(rosterStat)) {
+    //   setSortedRoster(getSortedRosterDraft(rosterStats))
+    // } else if (['country'].includes(rosterStat)) {
+    //   setSortedRoster(getSortedRosterCountry(rosterStats))
+    // }
+    // getStatHeader(rosterStat, setStatHeader)
   }, [rosterStat, rosterStats])
 
   const getSortedRosterNumeric = (roster: RosterStat[], attr: string) => {
@@ -130,75 +140,172 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
           setRosterStat(e.target.value)
         }}
         bg='cyan.200'
-        defaultValue='age'
+        defaultValue='bio'
         my={3}
         w='80%'
         mx='auto'
       >
         <option value='salary'>Salary</option>
-        <option value='age'>Age</option>
-        <option value='height'>Height</option>
-        <option value='weight'>Weight</option>
-        <option value='experience'>Years Experience</option>
+        <option value='bio'>Bio</option>
         <option value='draft'>Draft</option>
-        <option value='country'>Country</option>
       </Select>
 
-      <Box bg='white' border='2px solid black' borderRadius='lg' p={2}>
-        <Table size='sm'>
-          <Thead>
-            <Tr>
-              <Th>#</Th>
-              <Th>POS</Th>
-              <Th>Player</Th>
+      <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
+        {rosterStat === 'draft' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th px={1}>#</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Age
+                </Th>
 
-              <Th>{statHeader}</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {sortedRoster.map((player) => {
-              let stat = (Object.entries(player).find((entry) => entry[0] === rosterStat) || [
-                '',
-                '',
-              ])[1]
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Round
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Year
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  OVRL
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedRoster.map((player) => {
+                return (
+                  <Tr key={player.player_id}>
+                    <Td px={1}>{player.number}</Td>
+                    <Td px={1}>{player.position}</Td>
+                    <Td px={1}>
+                      {' '}
+                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                        {player.player}
+                      </Link>
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.age}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.draft.round}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.draft.year}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.draft.overall}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
 
-              if (rosterStat === 'draft') {
-                if (stat.round !== null) {
-                  stat =
-                    stat.round +
-                    ' Round ' +
-                    stat.year +
-                    ', ' +
-                    stat.team_id +
-                    ' ' +
-                    '(' +
-                    stat.overall +
-                    ')'
-                } else {
-                  stat = 'N/A'
-                }
-              } else if (rosterStat === 'country') {
-                stat = <Flag country={stat.toUpperCase()} />
-              } else if (rosterStat === 'salary') {
-                stat = stat === null ? 'N/A' : '$' + Number(stat).toLocaleString()
-              }
+        {rosterStat === 'bio' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th px={1}>#</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Age
+                </Th>
 
-              return (
-                <Tr key={player.player_id}>
-                  <Td>{player.number}</Td>
-                  <Td>{player.position}</Td>
-                  <Td>
-                    {' '}
-                    <Link as={RouterLink} to={`/player/${player.player_id}`}>
-                      {player.player}
-                    </Link>
-                  </Td>
-                  <Td>{stat}</Td>
-                </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  HT
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  WT
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  COUNTRY
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedRoster.map((player) => {
+                return (
+                  <Tr key={player.player_id}>
+                    <Td px={1}>{player.number}</Td>
+                    <Td px={1}>{player.position}</Td>
+                    <Td px={1}>
+                      {' '}
+                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                        {player.player}
+                      </Link>
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.age}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.height}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.weight}
+                    </Td>
+                    <Td px={1}>
+                      <Center>
+                        <Flag country={player.country.toUpperCase()} />
+                      </Center>
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
+
+        {rosterStat === 'salary' && (
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th px={1}>#</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Age
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  EXP
+                </Th>
+                <Th px={1} isNumeric textDecoration='underline'>
+                  Salary
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {sortedRoster.map((player) => {
+                return (
+                  <Tr key={player.player_id}>
+                    <Td px={1}>{player.number}</Td>
+                    <Td px={1}>{player.position}</Td>
+                    <Td px={1}>
+                      {' '}
+                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                        {player.player}
+                      </Link>
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.age}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.experience}
+                    </Td>
+                    <Td px={1} isNumeric>
+                      {player.salary === null
+                        ? 'N/A'
+                        : '$' + Number(player.salary).toLocaleString()}
+                    </Td>
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        )}
       </Box>
     </Box>
   )

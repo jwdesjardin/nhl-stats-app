@@ -22,7 +22,7 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
   return (
     <Tr bg={selected ? 'yellow.200' : 'white'}>
       {team && (
-        <Td p={2}>
+        <Td px={1}>
           <Link as={RouterLink} to={`/team/${team?.teamID}`}>
             <Box d='flex' alignItems='center'>
               <Image width='37px' src={team.image_url} mr={2}></Image>
@@ -31,22 +31,22 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
           </Link>
         </Td>
       )}
-      <Td p={2} isNumeric>
+      <Td px={1} isNumeric>
         {stats.games}
       </Td>
-      <Td p={2} isNumeric>
+      <Td px={1} isNumeric>
         {stats.wins}
       </Td>
-      <Td p={2} isNumeric>
+      <Td px={1} isNumeric>
         {stats.losses}
       </Td>
-      <Td p={2} isNumeric>
+      <Td px={1} isNumeric>
         {stats.losses_ot}
       </Td>
-      <Td p={2} fontWeight='bold' isNumeric>
+      <Td px={1} fontWeight='bold' isNumeric>
         {stats.points}
       </Td>
-      <Td p={2} isNumeric>
+      <Td px={1} isNumeric>
         {stats.points_pct}
       </Td>
     </Tr>

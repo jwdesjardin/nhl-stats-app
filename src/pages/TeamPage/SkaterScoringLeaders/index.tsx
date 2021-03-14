@@ -64,27 +64,27 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         <option value='faceoffs'>Faceoffs</option>
       </Select>
 
-      <Box bg='white' border='2px solid black' borderRadius='lg' p={2}>
+      <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
         {/* scoring */}
 
         {category === 'points' && (
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th p={2}>RK</Th>
-                <Th p={2}>POS</Th>
-                <Th p={2}>Player</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GP
                 </Th>
-                <Th p={2}>ATOI</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>ATOI</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   p
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   G
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   A
                 </Th>
               </Tr>
@@ -93,24 +93,24 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
               {sortedSkaters.map((skater, idx) => {
                 return (
                   <Tr key={skater.player_id}>
-                    <Td p={2}>{idx + 1}</Td>
-                    <Td p={2}>{skater.position}</Td>
-                    <Td p={2}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{skater.position}</Td>
+                    <Td px={1}>
                       <Link as={RouterLink} to={`/player/${skater.player_id}`}>
                         {skater.player}
                       </Link>
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.games_played}
                     </Td>
-                    <Td p={2}>{skater.average_time_on_ice}</Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1}>{skater.average_time_on_ice}</Td>
+                    <Td px={1} isNumeric>
                       {skater.points}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.goals}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.assists}
                     </Td>
                   </Tr>
@@ -125,23 +125,23 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th p={2}>RK</Th>
-                <Th p={2}>POS</Th>
-                <Th p={2}>Player</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GP
                 </Th>
-                <Th p={2}>ATOI</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>ATOI</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   G
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   PP
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GW
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   SH
                 </Th>
               </Tr>
@@ -150,30 +150,30 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
               {sortedSkaters.map((skater, idx) => {
                 return (
                   <Tr key={skater.player_id}>
-                    <Td p={2}>{idx + 1}</Td>
-                    <Td p={2}>{skater.position}</Td>
-                    <Td p={2}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{skater.position}</Td>
+                    <Td px={1}>
                       <Link as={RouterLink} to={`/player/${skater.player_id}`}>
                         {skater.player}
                       </Link>
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.games_played}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.average_time_on_ice}
                     </Td>
 
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.goals}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.pp_goals}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.gw_goals}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.sh_goals}
                     </Td>
                   </Tr>
@@ -188,20 +188,20 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th p={2}>RK</Th>
-                <Th p={2}>POS</Th>
-                <Th p={2}>Player</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GP
                 </Th>
-                <Th p={2}>ATOI</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>ATOI</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   G
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   S
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   S %
                 </Th>
               </Tr>
@@ -210,26 +210,26 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
               {sortedSkaters.map((skater, idx) => {
                 return (
                   <Tr key={skater.player_id}>
-                    <Td p={2}>{idx + 1}</Td>
-                    <Td p={2}>{skater.position}</Td>
-                    <Td p={2}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{skater.position}</Td>
+                    <Td px={1}>
                       <Link as={RouterLink} to={`/player/${skater.player_id}`}>
                         {skater.player}
                       </Link>
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.games_played}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.average_time_on_ice}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.goals}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.shots_on_goal}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.shooting_percentage}
                     </Td>
                   </Tr>
@@ -244,20 +244,20 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th p={2}>RK</Th>
-                <Th p={2}>POS</Th>
-                <Th p={2}>Player</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GP
                 </Th>
-                <Th p={2}>ATOI</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>ATOI</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   PTS
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   HITS
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   PIMS
                 </Th>
               </Tr>
@@ -266,26 +266,26 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
               {sortedSkaters.map((skater, idx) => {
                 return (
                   <Tr key={skater.player_id}>
-                    <Td p={2}>{idx + 1}</Td>
-                    <Td p={2}>{skater.position}</Td>
-                    <Td p={2}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{skater.position}</Td>
+                    <Td px={1}>
                       <Link as={RouterLink} to={`/player/${skater.player_id}`}>
                         {skater.player}
                       </Link>
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.games_played}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.average_time_on_ice}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.points}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.hits}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.penalty_minutes}
                     </Td>
                   </Tr>
@@ -300,19 +300,19 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th p={2}>RK</Th>
-                <Th p={2}>POS</Th>
-                <Th p={2}>Player</Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1}>RK</Th>
+                <Th px={1}>POS</Th>
+                <Th px={1}>Player</Th>
+                <Th px={1} isNumeric textDecoration='underline'>
                   GP
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   FO WINS
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   FO TAKEN
                 </Th>
-                <Th p={2} isNumeric textDecoration='underline'>
+                <Th px={1} isNumeric textDecoration='underline'>
                   FO %
                 </Th>
               </Tr>
@@ -321,23 +321,23 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
               {sortedSkaters.map((skater, idx) => {
                 return (
                   <Tr key={skater.player_id}>
-                    <Td p={2}>{idx + 1}</Td>
-                    <Td p={2}>{skater.position}</Td>
-                    <Td p={2}>
+                    <Td px={1}>{idx + 1}</Td>
+                    <Td px={1}>{skater.position}</Td>
+                    <Td px={1}>
                       <Link as={RouterLink} to={`/player/${skater.player_id}`}>
                         {skater.player}
                       </Link>
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.games_played}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.faceoff_wins}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.faceoff_wins + skater.faceoff_losses}
                     </Td>
-                    <Td p={2} isNumeric>
+                    <Td px={1} isNumeric>
                       {skater.faceoff_percentage}
                     </Td>
                   </Tr>
