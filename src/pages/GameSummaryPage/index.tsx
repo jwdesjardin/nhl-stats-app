@@ -11,9 +11,9 @@ import { RouteComponentProps } from 'react-router-dom'
 import { GameSummaryStats } from '../../types/gameSummary'
 import { STATS_API_KEY } from '../../config'
 
-interface TeamSchedulePageProps extends RouteComponentProps<any> {}
+interface GameSumaryPageProps extends RouteComponentProps<any> {}
 
-export const GameSummaryPage: React.FC<TeamSchedulePageProps> = ({ match }) => {
+export const GameSummaryPage: React.FC<GameSumaryPageProps> = ({ match }) => {
   const { game_id } = match.params
 
   const [gameSummary, setGameSummary] = React.useState<GameSummaryStats | undefined>()
