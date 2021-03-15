@@ -39,7 +39,7 @@ export const Game: React.FC<GameProps> = ({ game, decision_team_id }) => {
       // get time of game
       const game_time = game_date.getTime()
 
-      // get this time yesterday
+      // get this time yesterday shifted by 8 hours for UTC
       const yesterday = Date.now() - 3600 * 1000 * 32
 
       console.log(

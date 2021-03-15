@@ -19,8 +19,8 @@ import { SkaterScoring } from '../../../types/app'
 
 import { Link as RouterLink } from 'react-router-dom'
 
-import { SortableTh } from './SortableTh'
-import { SortableButton } from './SortableButton'
+import { SortableTh } from '../../../utils/SortableTh'
+import { SortableButton } from '../../../utils/SortableButton'
 
 interface SkaterScoringLeadersProps {
   skaterScoring: SkaterScoring[]
@@ -51,27 +51,25 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
   }, [category, skaterScoring])
 
   const getSortedSkaters = (skaters: SkaterScoring[], attr: string) => {
-    return skaters
-      .sort((a, b) => {
-        // either two stats values or two empty strings
-        const A = Object.entries(a)
-        const stat_A = (A.find((entry) => entry[0] === attr) || ['', ''])[1]
-        const B = Object.entries(b)
-        const stat_B = (B.find((entry) => entry[0] === attr) || ['', ''])[1]
+    return skaters.sort((a, b) => {
+      // either two stats values or two empty strings
+      const A = Object.entries(a)
+      const stat_A = (A.find((entry) => entry[0] === attr) || ['', ''])[1]
+      const B = Object.entries(b)
+      const stat_B = (B.find((entry) => entry[0] === attr) || ['', ''])[1]
 
-        if (stat_A !== null && stat_B !== null) {
-          return parseFloat(stat_B) - parseFloat(stat_A)
-        }
-        //move nulls to the bottom
-        if (stat_A === null) {
-          return 1
-        }
-        if (stat_B === null) {
-          return -1
-        }
-        return 0
-      })
-      .slice(0, 50)
+      if (stat_A !== null && stat_B !== null) {
+        return parseFloat(stat_B) - parseFloat(stat_A)
+      }
+      //move nulls to the bottom
+      if (stat_A === null) {
+        return 1
+      }
+      if (stat_B === null) {
+        return -1
+      }
+      return 0
+    })
   }
 
   const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
