@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { Box, Table, Tbody, Td, Th, Thead, Tr, Link, Text, HStack } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'

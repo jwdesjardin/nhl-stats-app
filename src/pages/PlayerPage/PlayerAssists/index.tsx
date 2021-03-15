@@ -32,7 +32,7 @@ export const PlayerAssists: React.FC<PlayerAssistsProps> = ({ skater, teamSummar
   const [teamAssistsIndex, setTeamAssistsIndex] = React.useState(0)
   const [leagueClosest, setLeagueClosest] = React.useState<SkaterScoring[]>([])
   const [leagueAssistsIndex, setLeagueAssistsIndex] = React.useState(0)
-  const [radioValue, setRadioValue] = React.useState('league')
+  const [radioValue, setRadioValue] = React.useState('team')
 
   React.useEffect(() => {
     setLeagueClosest(getClosestAssists(skaters, skater, setLeagueAssistsIndex))
@@ -67,7 +67,7 @@ export const PlayerAssists: React.FC<PlayerAssistsProps> = ({ skater, teamSummar
       <Box d='flex' alignItems='center' justifyContent='space-between'>
         <Heading textAlign='center'>Assists</Heading>
         <RadioGroup
-          defaultValue='2'
+          defaultValue='team'
           onChange={(e) => setRadioValue(e.toString())}
           value={radioValue}
         >

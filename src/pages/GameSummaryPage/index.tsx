@@ -33,7 +33,7 @@ export const GameSummaryPage: React.FC<GameSumaryPageProps> = ({ match }) => {
   }, [game_id])
 
   return (
-    <Container pt={20}>
+    <Container pt={20} pb={7}>
       {gameSummary && (
         <VStack spacing={6}>
           {/* game summary */}

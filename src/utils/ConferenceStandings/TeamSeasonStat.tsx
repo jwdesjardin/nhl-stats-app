@@ -1,4 +1,4 @@
-import { Text, Td, Tr, Image, Link, Box } from '@chakra-ui/react'
+import { Td, Tr, Image, Link, Box } from '@chakra-ui/react'
 import React from 'react'
 import { teams } from '../../data/teams'
 
@@ -47,7 +47,7 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
         {stats.points}
       </Td>
       <Td px={1} isNumeric>
-        {stats.points_pct}
+        {stats.points_pct.toFixed(3).toString().slice(1)}
       </Td>
     </Tr>
   )

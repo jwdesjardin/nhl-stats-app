@@ -1,4 +1,4 @@
-import { Box, HStack, Table, Tbody, Td, Th, Thead, Tr, Text, Select } from '@chakra-ui/react'
+import { Box, HStack, Table, Tbody, Td, Th, Thead, Tr, Text } from '@chakra-ui/react'
 import * as React from 'react'
 import { SkaterGame } from '../../../../types/gameSummary'
 import { SortableButton } from '../../../../utils/SortableButton'

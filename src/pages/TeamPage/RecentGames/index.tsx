@@ -1,4 +1,4 @@
-import { Box, Text, Center } from '@chakra-ui/react'
+import { Box, Text, Center, Link, Button } from '@chakra-ui/react'
 import React from 'react'
 
 import { GameStats } from '../../../types/app'
@@ -6,6 +6,8 @@ import { GameStats } from '../../../types/app'
 import { useGamelog } from '../../../context'
 import { Game } from '../../../utils/Game'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
+
+import { Link as RouterLink } from 'react-router-dom'
 
 interface RecentGamesProps {
   team_id: string
@@ -56,6 +58,11 @@ export const RecentGames: React.FC<RecentGamesProps> = ({ team_id }) => {
           {recentGames.slice(0, 10).map((game) => (
             <Game key={game.id} game={game} />
           ))}
+          <Center my={2}>
+            <Link as={RouterLink} to={`/full-schedule/${team_id}`}>
+              <Button bg='orange.300'>Full Schedule</Button>
+            </Link>
+          </Center>
           <Center onClick={() => setRecentGamesToggle(false)}>
             <Text>{`See Less Games`.toUpperCase()}</Text>
             <TriangleUpIcon mx={2} />

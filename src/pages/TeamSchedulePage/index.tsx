@@ -11,7 +11,7 @@ export const TeamSchedulePage: React.FC<TeamSchedulePageProps> = ({ match }) => 
   const { id } = match.params
 
   return (
-    <Container pt={20}>
+    <Container pt={20} pb={7}>
       <VStack spacing={6}>
         {/* Full Schedule */}
         <Box w='100%'>

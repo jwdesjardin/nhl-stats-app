@@ -41,7 +41,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ match }) => {
   const conference = standings.find((conference) => conference.name.includes(division || 'none'))
 
   return (
-    <Container pt={20}>
+    <Container pt={20} pb={7}>
       {teamSummary && (
         <VStack spacing={6}>
           {/* Team Summary */}

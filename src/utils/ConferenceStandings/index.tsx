@@ -41,7 +41,7 @@ export const ConferenceStandings: React.FC<ConferenceStandingsProps> = ({
                 PTS
               </Th>
               <Th px={1} isNumeric>
-                %
+                W%
               </Th>
             </Tr>
           </Thead>

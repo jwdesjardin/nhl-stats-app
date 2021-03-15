@@ -77,7 +77,7 @@ export const PlayerPage: React.FC<PlayerPageProps> = ({ match }) => {
   console.log(skater, team, teamSummary)
 
   return (
-    <Container pt={20}>
+    <Container pt={20} pb={7}>
       {skater && team && teamSummary && (
         <VStack spacing={6}>
           <Box w='100%'>

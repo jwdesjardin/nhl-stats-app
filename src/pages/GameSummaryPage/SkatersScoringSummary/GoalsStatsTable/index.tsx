@@ -1,5 +1,6 @@
-import { Box, HStack, Table, Tbody, Td, Th, Thead, Tr, Text, Select } from '@chakra-ui/react'
 import * as React from 'react'
+import { Box, HStack, Table, Tbody, Td, Th, Thead, Tr, Text } from '@chakra-ui/react'
+
 import { SkaterGame } from '../../../../types/gameSummary'
 import { SortableButton } from '../../../../utils/SortableButton'
 import { SortableTh } from '../../../../utils/SortableTh'
@@ -20,6 +21,13 @@ export const GoalsStatsTable: React.FC<GoalsStatsTableProps> = ({
       <HStack mb={2}>
         <Text>Sort Column:</Text>
         <Box d='flex' alignItems='center' justifyContent='center'>
+          <SortableButton
+            attribute='time_on_ice'
+            sortAttribute={sortAttribute}
+            handleSortColumn={handleSortColumn}
+          >
+            TOI
+          </SortableButton>
           <SortableButton
             attribute='goals'
             sortAttribute={sortAttribute}

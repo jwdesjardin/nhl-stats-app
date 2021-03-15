@@ -4,6 +4,7 @@ import { GoalieGame } from '../../../types/gameSummary'
 import { Link as RouterLink } from 'react-router-dom'
 import { SortableButton } from '../../../utils/SortableButton'
 import { SortableTh } from '../../../utils/SortableTh'
+import { getSortedGoaliesGame } from '../../../utils/helper'
 
 interface GoalieScoringSummaryProps {
   summary: GoalieGame[]
@@ -14,9 +15,9 @@ export const GoalieScoringSummary: React.FC<GoalieScoringSummaryProps> = ({ summ
   const [sortAttribute, setSortAttribute] = React.useState('')
 
   React.useEffect(() => {
-    setSortedGoalies(getSortedGoalies(summary, 'saves'))
+    setSortedGoalies(getSortedGoaliesGame(summary, 'saves'))
     setSortAttribute('saves')
-  }, [])
+  }, [summary])
 
   const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     const target = event.currentTarget as HTMLButtonElement
@@ -24,31 +25,9 @@ export const GoalieScoringSummary: React.FC<GoalieScoringSummaryProps> = ({ summ
     console.log(attr)
 
     if (attr) {
-      setSortedGoalies(getSortedGoalies(summary, attr))
+      setSortedGoalies(getSortedGoaliesGame(summary, attr))
       setSortAttribute(attr)
     }
-  }
-
-  const getSortedGoalies = (skaters: GoalieGame[], attr: string) => {
-    return skaters.sort((a, b) => {
-      // either two stats values or two empty strings
-      const A = Object.entries(a)
-      const stat_A = (A.find((entry) => entry[0] === attr) || ['', ''])[1]
-      const B = Object.entries(b)
-      const stat_B = (B.find((entry) => entry[0] === attr) || ['', ''])[1]
-
-      if (stat_A !== null && stat_B !== null) {
-        return parseFloat(stat_B) - parseFloat(stat_A)
-      }
-      //move nulls to the bottom
-      if (stat_A === null) {
-        return 1
-      }
-      if (stat_B === null) {
-        return -1
-      }
-      return 0
-    })
   }
 
   return (
@@ -107,7 +86,7 @@ export const GoalieScoringSummary: React.FC<GoalieScoringSummaryProps> = ({ summ
             </Tr>
           </Thead>
           <Tbody>
-            {summary.map((goalie) => (
+            {sortedGoalies.map((goalie) => (
               <Tr key={goalie.player_id}>
                 <Td px={1}>
                   <Link as={RouterLink} to={`/player/${goalie.player_id}`}>

@@ -1,8 +1,6 @@
 import { Text, Box, Link, Image, Badge, HStack, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { Icon } from '@chakra-ui/react'
-import { SportsHockey } from '@material-ui/icons'
 
 //Data
 import { teams } from '../../data/teams'
@@ -71,7 +69,7 @@ export const Game: React.FC<GameProps> = ({ game, decision_team_id }) => {
 
       setDecision(result)
     }
-  }, [])
+  }, [dec_team, game, home_team])
 
   // helper function to pad single digit months and dates
   const padStart = (str: string) => {

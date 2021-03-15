@@ -55,7 +55,7 @@ export const TeamSummary: React.FC<TeamSummaryProps> = ({ team_id }) => {
             </Box>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Win %:</Text>
-              <Text>{team_season.points_pct.toString().slice(1)}</Text>
+              <Text>{team_season.points_pct.toFixed(3).toString().slice(1)}</Text>
             </Box>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Division:</Text>
