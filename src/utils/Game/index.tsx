@@ -33,11 +33,24 @@ export const Game: React.FC<GameProps> = ({ game, decision_team_id }) => {
     // create game_link if game was not yesterday or earlier
     let game_link = ''
     if (home_team) {
-      const game_time = game_date.getTime()
-      //get now - 1 day
-      const now = Date.now() - 3600 * 1000 * 24
+      const today = new Date('3/14/2021')
+      const tomorrow = new Date('3/15/2021')
 
-      if (game_time < now) {
+      // get time of game
+      const game_time = game_date.getTime()
+
+      // get this time yesterday
+      const yesterday = Date.now() - 3600 * 1000 * 32
+
+      console.log(
+        tomorrow.getTime() - today.getTime() + +3600000,
+        (tomorrow.getTime() - today.getTime() + 3600000) / 24
+      )
+      console.log(yesterday, today.getTime(), game_time)
+      console.log(today.getTime() - game_time)
+
+      console.log(game_time - yesterday)
+      if (game_time < yesterday) {
         game_link =
           game_date.getFullYear().toString() +
           padStart((game_date.getMonth() + 1).toString()) +

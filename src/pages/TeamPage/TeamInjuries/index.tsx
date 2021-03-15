@@ -36,18 +36,20 @@ export const TeamInjuries: React.FC<TeamInjuriesProps> = ({ team_id }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {teamInjuries.map((injury) => (
-              <Tr key={injury.id}>
-                <Td px={1}>
-                  <Link as={RouterLink} to={`/player/${injury.player_id}`}>
-                    {injury.player}
-                  </Link>
-                </Td>
-                <Td px={1}>{injury.date}</Td>
-                <Td px={1}>{injury.type}</Td>
-                <Td px={1}>{injury.note}</Td>
-              </Tr>
-            ))}
+            {teamInjuries.map((injury) => {
+              return (
+                <Tr key={injury.id}>
+                  <Td px={1}>
+                    <Link as={RouterLink} to={`/player/${injury.player_id}`}>
+                      {injury.player}
+                    </Link>
+                  </Td>
+                  <Td px={1}>{injury.date}</Td>
+                  <Td px={1}>{injury.type}</Td>
+                  <Td px={1}>{injury.note}</Td>
+                </Tr>
+              )
+            })}
           </Tbody>
         </Table>
       </Box>
