@@ -1,44 +1,47 @@
 import * as React from 'react'
 
-import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link, Center } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Select,
+  Link,
+  Center,
+  HStack,
+} from '@chakra-ui/react'
 
 import { RosterStat } from '../../../types/team'
 import { getStatHeader } from '../../../utils/helper'
 import Flag from 'react-flagkit'
 import { Link as RouterLink } from 'react-router-dom'
+import { SortableButton } from '../../../utils/SortableButton'
+import { SortableTh } from '../../../utils/SortableTh'
 interface RosterStatsProps {
   rosterStats: RosterStat[]
 }
 
 export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
-  const [rosterStat, setRosterStat] = React.useState('bio')
+  const [category, setCategory] = React.useState('bio')
   const [sortedRoster, setSortedRoster] = React.useState<RosterStat[]>([])
-  const [statHeader, setStatHeader] = React.useState('')
+  const [sortAttribute, setSortAttribute] = React.useState('')
 
   React.useEffect(() => {
-    if (rosterStat === 'bio') {
-      setSortedRoster(getSortedRosterNumeric(rosterStats, 'age'))
+    if (category === 'bio') {
+      setSortedRoster(getSortedRosterWithNulls(rosterStats, 'age'))
+      setSortAttribute('age')
+    } else if (category === 'draft') {
+      setSortedRoster(getSortedRosterDraft(rosterStats, 'overall'))
+      setSortAttribute('overall')
+    } else if (category === 'salary') {
+      setSortedRoster(getSortedRosterWithNulls(rosterStats, 'salary'))
+      setSortAttribute('salary')
     }
-    if (rosterStat === 'draft') {
-      setSortedRoster(getSortedRosterDraft(rosterStats))
-    }
-    if (rosterStat === 'salary') {
-      getSortedRosterWithNulls(rosterStats, 'salary')
-    }
-
-    // if (['age', 'weight'].includes(rosterStat)) {
-    //   setSortedRoster(getSortedRosterNumeric(rosterStats, rosterStat))
-    // } else if (['experience', 'salary'].includes(rosterStat)) {
-    //   setSortedRoster(getSortedRosterWithNulls(rosterStats, rosterStat))
-    // } else if (['height'].includes(rosterStat)) {
-    //   setSortedRoster(getSortedRosterHeight(rosterStats))
-    // } else if (['draft'].includes(rosterStat)) {
-    //   setSortedRoster(getSortedRosterDraft(rosterStats))
-    // } else if (['country'].includes(rosterStat)) {
-    //   setSortedRoster(getSortedRosterCountry(rosterStats))
-    // }
-    // getStatHeader(rosterStat, setStatHeader)
-  }, [rosterStat, rosterStats])
+  }, [category, rosterStats])
 
   const getSortedRosterNumeric = (roster: RosterStat[], attr: string) => {
     return roster.sort((a, b) => {
@@ -90,10 +93,21 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
     })
   }
 
-  const getSortedRosterDraft = (roster: RosterStat[]) => {
+  const getSortedRosterDraft = (roster: RosterStat[], attr: string) => {
     return roster.sort((a, b) => {
-      const draftA = a.draft.overall
-      const draftB = b.draft.overall
+      let draftA: number | null = null
+      let draftB: number | null = null
+
+      if (attr === 'round') {
+        draftA = parseInt(a.draft.round || '')
+        draftB = parseInt(b.draft.round || '')
+      } else if (attr === 'overall') {
+        draftA = a.draft.overall
+        draftB = b.draft.overall
+      } else if (attr === 'year') {
+        draftA = a.draft.year
+        draftB = b.draft.year
+      }
 
       // sort accending
       if (draftA && draftB) {
@@ -132,181 +146,352 @@ export const RosterStats: React.FC<RosterStatsProps> = ({ rosterStats }) => {
     })
   }
 
+  const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const target = event.currentTarget as HTMLButtonElement
+    const attr = target.value
+    console.log(attr)
+
+    if (attr) {
+      setSortedRoster(getSortedRosterWithNulls(rosterStats, attr))
+      setSortAttribute(attr)
+    }
+  }
+
+  const handleSortDraftColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const target = event.currentTarget as HTMLButtonElement
+    const attr = target.value
+    console.log(attr)
+
+    if (attr) {
+      setSortedRoster(getSortedRosterDraft(rosterStats, attr))
+      setSortAttribute(attr)
+    }
+  }
+  const handleSortCountryColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const target = event.currentTarget as HTMLButtonElement
+    const attr = target.value
+    console.log(attr)
+
+    if (attr) {
+      setSortedRoster(getSortedRosterCountry(rosterStats))
+      setSortAttribute(attr)
+    }
+  }
+  const handleSortHeightColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const target = event.currentTarget as HTMLButtonElement
+    const attr = target.value
+    console.log(attr)
+
+    if (attr) {
+      setSortedRoster(getSortedRosterHeight(rosterStats))
+      setSortAttribute(attr)
+    }
+  }
+
   return (
     <Box>
       {/* stat select */}
-      <Select
-        onChange={(e) => {
-          setRosterStat(e.target.value)
-        }}
-        bg='cyan.200'
-        defaultValue='bio'
-        my={3}
-        w='80%'
-        mx='auto'
-      >
-        <option value='salary'>Salary</option>
-        <option value='bio'>Bio</option>
-        <option value='draft'>Draft</option>
-      </Select>
+      <HStack mb={2}>
+        <Text>Categories:</Text>
+        <Select
+          onChange={(e) => {
+            setCategory(e.target.value)
+          }}
+          bg='cyan.200'
+          defaultValue='bio'
+        >
+          <option value='salary'>Salary</option>
+          <option value='bio'>Bio</option>
+          <option value='draft'>Draft</option>
+        </Select>
+      </HStack>
 
-      <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
-        {rosterStat === 'draft' && (
-          <Table size='sm'>
-            <Thead>
-              <Tr>
-                <Th px={1}>#</Th>
-                <Th px={1}>POS</Th>
-                <Th px={1}>Player</Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Age
-                </Th>
+      {category === 'draft' && (
+        <>
+          <HStack mb={2}>
+            <Text>Sort Column:</Text>
+            <Box d='flex' alignItems='center' justifyContent='center'>
+              <SortableButton
+                attribute='age'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                AGE
+              </SortableButton>
+              <SortableButton
+                attribute='round'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortDraftColumn}
+              >
+                RND
+              </SortableButton>
+              <SortableButton
+                attribute='year'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortDraftColumn}
+              >
+                YR
+              </SortableButton>
+              <SortableButton
+                attribute='overall'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortDraftColumn}
+              >
+                OVR
+              </SortableButton>
+            </Box>
+          </HStack>
+          <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
+            <Table size='sm'>
+              <Thead>
+                <Tr>
+                  <Th px={1}>#</Th>
+                  <Th px={1}>POS</Th>
+                  <Th px={1}>Player</Th>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='age'>
+                    AGE
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='round'>
+                    RND
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='year'>
+                    YR
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='overall'>
+                    OVR
+                  </SortableTh>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {sortedRoster.map((player) => {
+                  return (
+                    <Tr key={player.player_id}>
+                      <Td px={1}>{player.number}</Td>
+                      <Td px={1}>{player.position}</Td>
+                      <Td px={1}>
+                        {' '}
+                        <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                          {player.player}
+                        </Link>
+                      </Td>
+                      <Td px={1} isNumeric fontWeight={sortAttribute === 'age' ? 'bold' : 'normal'}>
+                        {player.age}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'round' ? 'bold' : 'normal'}
+                      >
+                        {player.draft.round}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'year' ? 'bold' : 'normal'}
+                      >
+                        {player.draft.year}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'overall' ? 'bold' : 'normal'}
+                      >
+                        {player.draft.overall}
+                      </Td>
+                    </Tr>
+                  )
+                })}
+              </Tbody>
+            </Table>
+          </Box>
+        </>
+      )}
 
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Round
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Year
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  OVRL
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {sortedRoster.map((player) => {
-                return (
-                  <Tr key={player.player_id}>
-                    <Td px={1}>{player.number}</Td>
-                    <Td px={1}>{player.position}</Td>
-                    <Td px={1}>
-                      {' '}
-                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
-                        {player.player}
-                      </Link>
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.age}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.draft.round}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.draft.year}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.draft.overall}
-                    </Td>
-                  </Tr>
-                )
-              })}
-            </Tbody>
-          </Table>
-        )}
+      {category === 'bio' && (
+        <>
+          <HStack mb={2}>
+            <Text>Sort Column:</Text>
+            <Box d='flex' alignItems='center' justifyContent='center'>
+              <SortableButton
+                attribute='age'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                AGE
+              </SortableButton>
+              <SortableButton
+                attribute='height'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortHeightColumn}
+              >
+                Ht
+              </SortableButton>
+              <SortableButton
+                attribute='weight'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                Wt
+              </SortableButton>
+              <SortableButton
+                attribute='country'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortCountryColumn}
+              >
+                CTRY
+              </SortableButton>
+            </Box>
+          </HStack>
 
-        {rosterStat === 'bio' && (
-          <Table size='sm'>
-            <Thead>
-              <Tr>
-                <Th px={1}>#</Th>
-                <Th px={1}>POS</Th>
-                <Th px={1}>Player</Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Age
-                </Th>
+          <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
+            <Table size='sm'>
+              <Thead>
+                <Tr>
+                  <Th px={1}>#</Th>
+                  <Th px={1}>POS</Th>
+                  <Th px={1}>Player</Th>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='age'>
+                    Age
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='height'>
+                    Ht
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='weight'>
+                    Wt
+                  </SortableTh>
+                  <SortableTh sortAttribute={sortAttribute} ThAttribute='country'>
+                    Country
+                  </SortableTh>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {sortedRoster.map((player) => {
+                  return (
+                    <Tr key={player.player_id}>
+                      <Td px={1}>{player.number}</Td>
+                      <Td px={1}>{player.position}</Td>
+                      <Td px={1}>
+                        {' '}
+                        <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                          {player.player}
+                        </Link>
+                      </Td>
+                      <Td px={1} isNumeric fontWeight={sortAttribute === 'age' ? 'bold' : 'normal'}>
+                        {player.age}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'height' ? 'bold' : 'normal'}
+                      >
+                        {player.height}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'weight' ? 'bold' : 'normal'}
+                      >
+                        {player.weight}
+                      </Td>
+                      <Td px={1} fontWeight={sortAttribute === 'country' ? 'bold' : 'normal'}>
+                        <Center>
+                          <Flag country={player.country.toUpperCase()} />
+                        </Center>
+                      </Td>
+                    </Tr>
+                  )
+                })}
+              </Tbody>
+            </Table>
+          </Box>
+        </>
+      )}
 
-                <Th px={1} isNumeric textDecoration='underline'>
-                  HT
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  WT
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  COUNTRY
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {sortedRoster.map((player) => {
-                return (
-                  <Tr key={player.player_id}>
-                    <Td px={1}>{player.number}</Td>
-                    <Td px={1}>{player.position}</Td>
-                    <Td px={1}>
-                      {' '}
-                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
-                        {player.player}
-                      </Link>
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.age}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.height}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.weight}
-                    </Td>
-                    <Td px={1}>
-                      <Center>
-                        <Flag country={player.country.toUpperCase()} />
-                      </Center>
-                    </Td>
-                  </Tr>
-                )
-              })}
-            </Tbody>
-          </Table>
-        )}
-
-        {rosterStat === 'salary' && (
-          <Table size='sm'>
-            <Thead>
-              <Tr>
-                <Th px={1}>#</Th>
-                <Th px={1}>POS</Th>
-                <Th px={1}>Player</Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Age
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  EXP
-                </Th>
-                <Th px={1} isNumeric textDecoration='underline'>
-                  Salary
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {sortedRoster.map((player) => {
-                return (
-                  <Tr key={player.player_id}>
-                    <Td px={1}>{player.number}</Td>
-                    <Td px={1}>{player.position}</Td>
-                    <Td px={1}>
-                      {' '}
-                      <Link as={RouterLink} to={`/player/${player.player_id}`}>
-                        {player.player}
-                      </Link>
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.age}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.experience}
-                    </Td>
-                    <Td px={1} isNumeric>
-                      {player.salary === null
-                        ? 'N/A'
-                        : '$' + Number(player.salary).toLocaleString()}
-                    </Td>
-                  </Tr>
-                )
-              })}
-            </Tbody>
-          </Table>
-        )}
-      </Box>
+      {category === 'salary' && (
+        <>
+          <HStack mb={2}>
+            <Text>Sort Column:</Text>
+            <Box d='flex' alignItems='center' justifyContent='center'>
+              <SortableButton
+                attribute='age'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                AGE
+              </SortableButton>
+              <SortableButton
+                attribute='experience'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                EXP
+              </SortableButton>
+              <SortableButton
+                attribute='salary'
+                sortAttribute={sortAttribute}
+                handleSortColumn={handleSortColumn}
+              >
+                SALARY
+              </SortableButton>
+            </Box>
+          </HStack>
+          <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
+            <Table size='sm'>
+              <Thead>
+                <Tr>
+                  <Th px={1}>#</Th>
+                  <Th px={1}>POS</Th>
+                  <Th px={1}>Player</Th>
+                  <SortableTh ThAttribute='age' sortAttribute={sortAttribute}>
+                    AGE
+                  </SortableTh>
+                  <SortableTh ThAttribute='experience' sortAttribute={sortAttribute}>
+                    EXP
+                  </SortableTh>
+                  <SortableTh ThAttribute='salary' sortAttribute={sortAttribute}>
+                    SALARY
+                  </SortableTh>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {sortedRoster.map((player) => {
+                  return (
+                    <Tr key={player.player_id}>
+                      <Td px={1}>{player.number}</Td>
+                      <Td px={1}>{player.position}</Td>
+                      <Td px={1}>
+                        {' '}
+                        <Link as={RouterLink} to={`/player/${player.player_id}`}>
+                          {player.player}
+                        </Link>
+                      </Td>
+                      <Td px={1} isNumeric fontWeight={sortAttribute === 'age' ? 'bold' : 'normal'}>
+                        {player.age}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'experience' ? 'bold' : 'normal'}
+                      >
+                        {player.experience}
+                      </Td>
+                      <Td
+                        px={1}
+                        isNumeric
+                        fontWeight={sortAttribute === 'salary' ? 'bold' : 'normal'}
+                      >
+                        {player.salary === null
+                          ? 'N/A'
+                          : '$' + Number(player.salary).toLocaleString()}
+                      </Td>
+                    </Tr>
+                  )
+                })}
+              </Tbody>
+            </Table>
+          </Box>
+        </>
+      )}
     </Box>
   )
 }
