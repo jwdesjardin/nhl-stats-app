@@ -13,6 +13,8 @@ import {
   Stack,
   Radio,
   Link,
+  Center,
+  Button,
 } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
@@ -33,7 +35,7 @@ export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ teamSumm
   const [teamGAIndex, setTeamGAIndex] = React.useState(0)
   const [leagueClosest, setLeagueClosest] = React.useState<GoalieScoring[]>([])
   const [leagueGAIndex, setLeagueGAIndex] = React.useState(0)
-  const [radioValue, setRadioValue] = React.useState('league')
+  const [radioValue, setRadioValue] = React.useState('team')
 
   React.useEffect(() => {
     setLeagueClosest(getClosestGA(goalies, goalie, setLeagueGAIndex))
@@ -76,8 +78,17 @@ export const GoalieGoalsAgainst: React.FC<GoalieGoalsAgainstProps> = ({ teamSumm
   return (
     <Box w='100%'>
       {/* stat select */}
-      <Box d='flex' alignItems='center' justifyContent='space-between'>
+      <Box d='flex' alignItems='center' minH='3.5rem' justifyContent='space-between'>
         <Heading textAlign='center'>Goals Against</Heading>
+        {radioValue === 'league' && (
+          <Center my={2}>
+            <Link as={RouterLink} to={`/leaders`}>
+              <Button m={0} bg='orange.300'>
+                Leaders
+              </Button>
+            </Link>
+          </Center>
+        )}
         <RadioGroup
           defaultValue='2'
           onChange={(e) => setRadioValue(e.toString())}

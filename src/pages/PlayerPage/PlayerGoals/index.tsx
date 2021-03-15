@@ -12,6 +12,8 @@ import {
   Stack,
   Radio,
   Link,
+  Center,
+  Button,
 } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'
@@ -51,20 +53,30 @@ export const PlayerGoals: React.FC<PlayerGoalsProps> = ({ skater, teamSummary })
 
     console.log(sorted_team, index)
 
-    if (index - 5 > 0) {
-      setGoalsIndex(index - 5)
-      return sorted_team.slice(index - 5, index + 6)
+    const startIndex = index - 5
+    if (startIndex > 0) {
+      setGoalsIndex(startIndex)
+      return sorted_team.slice(startIndex, startIndex + 10)
     } else {
       setGoalsIndex(0)
-      return sorted_team.slice(0, index + 6)
+      return sorted_team.slice(0, 10)
     }
   }
 
   return (
     <Box>
       {/* stat select */}
-      <Box d='flex' alignItems='center' justifyContent='space-between'>
+      <Box d='flex' alignItems='center' minH='3.5rem' justifyContent='space-between'>
         <Heading textAlign='center'>Goals</Heading>
+        {radioValue === 'league' && (
+          <Center my={2}>
+            <Link as={RouterLink} to={`/leaders`}>
+              <Button m={0} bg='orange.300'>
+                Leaders
+              </Button>
+            </Link>
+          </Center>
+        )}
         <RadioGroup
           defaultValue='team'
           onChange={(e) => setRadioValue(e.toString())}
