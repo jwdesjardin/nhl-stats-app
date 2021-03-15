@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 
 import { RosterStat } from '../../../types/team'
-import { getStatHeader } from '../../../utils/helper'
+
 import Flag from 'react-flagkit'
 import { Link as RouterLink } from 'react-router-dom'
 import { SortableButton } from '../../../utils/SortableButton'
