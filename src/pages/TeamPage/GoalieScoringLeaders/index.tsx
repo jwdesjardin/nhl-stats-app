@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { Box, Table, Tbody, Td, Th, Thead, Tr, Select, Link, HStack, Text } from '@chakra-ui/react'
+import { Box, Select, HStack, Text } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
 
-import { Link as RouterLink } from 'react-router-dom'
-import { SortableButton } from '../../../utils/SortableButton'
-import { SortableTh } from '../../../utils/SortableTh'
+import { GoalieSavesTable } from '../../../utils/ScoringTables/GoalieSavesTable'
+import { GoalieGoalsTable } from '../../../utils/ScoringTables/GoalieGoalsTable'
+
 interface GoalieScoringLeadersProps {
   goalieScoring: GoalieScoring[]
 }
@@ -35,6 +35,9 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
       const stat_B = (B.find((entry) => entry[0] === attr) || ['', ''])[1]
 
       if (stat_A !== null && stat_B !== null) {
+        if (attr === 'goals_against' || attr === 'goals_against_average') {
+          return parseFloat(stat_A) - parseFloat(stat_B)
+        }
         return parseFloat(stat_B) - parseFloat(stat_A)
       }
       //move nulls to the bottom
@@ -77,231 +80,19 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
       </HStack>
 
       {category === 'saves' && (
-        <>
-          <HStack mb={2}>
-            <Text>Sort Column:</Text>
-            <Box d='flex' alignItems='center' justifyContent='center'>
-              <SortableButton
-                attribute='games_started'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                GS
-              </SortableButton>
-              <SortableButton
-                attribute='saves'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                SV
-              </SortableButton>
-              <SortableButton
-                attribute='shots_against'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                SHOTS
-              </SortableButton>
-              <SortableButton
-                attribute='save_percentage'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                SV %
-              </SortableButton>
-            </Box>
-          </HStack>
-          <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
-            <Table size='sm'>
-              <Thead>
-                <Tr>
-                  <Th px={1}>RK</Th>
-                  <Th px={1}>POS</Th>
-                  <Th px={1}>Player</Th>
-                  <SortableTh ThAttribute='games_started' sortAttribute={sortAttribute}>
-                    GS
-                  </SortableTh>
-                  <SortableTh ThAttribute='saves' sortAttribute={sortAttribute}>
-                    SV
-                  </SortableTh>
-                  <SortableTh ThAttribute='shots_against' sortAttribute={sortAttribute}>
-                    SHOTS
-                  </SortableTh>
-                  <SortableTh ThAttribute='save_percentage' sortAttribute={sortAttribute}>
-                    SV%
-                  </SortableTh>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {sortedGoalies.map((goalie, idx) => {
-                  return (
-                    <Tr key={goalie.player_id}>
-                      <Td px={1}>{idx + 1}</Td>
-                      <Td px={1}>{goalie.position}</Td>
-                      <Td px={1}>
-                        <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
-                          {goalie.player}
-                        </Link>
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'games_started' ? 'bold' : 'normal'}
-                      >
-                        {goalie.games_started}
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'saves' ? 'bold' : 'normal'}
-                      >
-                        {goalie.saves}
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'shots_against' ? 'bold' : 'normal'}
-                      >
-                        {goalie.shots_against}
-                      </Td>
-
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'save_percentage' ? 'bold' : 'normal'}
-                      >
-                        {goalie.save_percentage}
-                      </Td>
-                    </Tr>
-                  )
-                })}
-              </Tbody>
-            </Table>
-          </Box>
-        </>
+        <GoalieSavesTable
+          sortAttribute={sortAttribute}
+          sortedGoalies={sortedGoalies}
+          handleSortColumn={handleSortColumn}
+        />
       )}
 
       {category === 'goals' && (
-        <>
-          <HStack mb={2}>
-            <Text>Sort Column:</Text>
-            <Box d='flex' alignItems='center' justifyContent='center'>
-              <SortableButton
-                attribute='games_started'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                GS
-              </SortableButton>
-              <SortableButton
-                attribute='goals_against'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                GA
-              </SortableButton>
-              <SortableButton
-                attribute='shots_against'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                SHOTS
-              </SortableButton>
-              <SortableButton
-                attribute='goals_against_average'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                GAA
-              </SortableButton>
-              <SortableButton
-                attribute='shutouts'
-                sortAttribute={sortAttribute}
-                handleSortColumn={handleSortColumn}
-              >
-                SO
-              </SortableButton>
-            </Box>
-          </HStack>
-
-          <Box bg='white' border='2px solid black' borderRadius='lg' px={1}>
-            <Table size='sm'>
-              <Thead>
-                <Tr>
-                  <Th px={1}>RKr</Th>
-                  <Th px={1}>POS</Th>
-                  <Th px={1}>Player</Th>
-                  <SortableTh sortAttribute={sortAttribute} ThAttribute='games_started'>
-                    GS
-                  </SortableTh>
-                  <SortableTh sortAttribute={sortAttribute} ThAttribute='goals_against'>
-                    GA
-                  </SortableTh>
-                  <SortableTh sortAttribute={sortAttribute} ThAttribute='shtos_on_goal'>
-                    SHOTS
-                  </SortableTh>
-                  <SortableTh sortAttribute={sortAttribute} ThAttribute='goals_against_average'>
-                    GAA
-                  </SortableTh>
-                  <SortableTh sortAttribute={sortAttribute} ThAttribute='shutouts'>
-                    SO
-                  </SortableTh>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {sortedGoalies.map((goalie, idx) => {
-                  return (
-                    <Tr key={goalie.player_id}>
-                      <Td px={1}>{idx + 1}</Td>
-                      <Td px={1}>{goalie.position}</Td>
-                      <Td px={1}>
-                        <Link as={RouterLink} to={`/player/${goalie.player_id}`}>
-                          {goalie.player}
-                        </Link>
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'games_started' ? 'bold' : 'normal'}
-                      >
-                        {goalie.games_started}
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'goals_against' ? 'bold' : 'normal'}
-                      >
-                        {goalie.goals_against}
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'shots_against' ? 'bold' : 'normal'}
-                      >
-                        {goalie.shots_against}
-                      </Td>
-
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'goals_against_average' ? 'bold' : 'normal'}
-                      >
-                        {goalie.goals_against_average}
-                      </Td>
-                      <Td
-                        px={1}
-                        isNumeric
-                        fontWeight={sortAttribute === 'shutouts' ? 'bold' : 'normal'}
-                      >
-                        {goalie.shutouts}
-                      </Td>
-                    </Tr>
-                  )
-                })}
-              </Tbody>
-            </Table>
-          </Box>
-        </>
+        <GoalieGoalsTable
+          sortAttribute={sortAttribute}
+          sortedGoalies={sortedGoalies}
+          handleSortColumn={handleSortColumn}
+        />
       )}
     </Box>
   )

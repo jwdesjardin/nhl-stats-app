@@ -80,22 +80,11 @@ export const LeadersPage = () => {
         <option disabled>SKATERS</option>
         <option value='points'>Points</option>
         <option value='goals'>Goals</option>
-        <option value='assists'>Assists</option>
-        <option value='gw_goals'>GW Goals</option>
-        <option value='sh_goals'>SH Goals</option>
-        <option value='pp_goals'>PP Goals</option>
-        <option value='ev_goals'>EV Goals</option>
-        <option value='penalty_minutes'>Penalty Minutes</option>
-        <option value='plus_minus'>Plus-Minus</option>
-        <option value='average_time_on_ice'>Avg. Time on Ice</option>
-        <option value='shots_on_goal'>Shots</option>
-        <option value='hits'>Hits</option>
-        <option value='faceoff_percentage'>Faceoff %</option>
-        <option value='faceoff_wins'>Faceoff Wins</option>
+        <option value='shooting'>Shooting</option>
+        <option value='penalties'>Penalties</option>
+        <option value='faceoffs'>Faceoffs</option>
+
         <option disabled>GOALIES</option>
-        <option value='goals_against_average'>Goals Against Avg.</option>
-        <option value='shutouts'>Shutouts</option>
-        <option value='save_percentage'>Save %</option>
         <option value='goals_against'>Goals Against</option>
         <option value='saves'>Saves</option>
       </Select>
