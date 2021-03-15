@@ -34,7 +34,11 @@ export const PlayerSeasonSummary: React.FC<PlayerSeasonSummaryProps> = ({ skater
             </Box>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Shooting %:</Text>
-              <Text>{skater.shooting_percentage}</Text>
+              {skater.shooting_percentage ? (
+                <Text>{skater.shooting_percentage.toFixed(1)}</Text>
+              ) : (
+                <Text>N/A</Text>
+              )}
             </Box>
             <Box d='flex' alignItems='center' justifyContent='space-between' w='100%'>
               <Text fontWeight='semibold'>Power-Play Goals: </Text>

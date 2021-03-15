@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { HStack } from '@chakra-ui/layout'
-import { Box, Image, Text, VStack } from '@chakra-ui/react'
+import { Center, HStack } from '@chakra-ui/layout'
+import { Box, Image, Text, VStack, Link } from '@chakra-ui/react'
 import { BoxScore } from '../../../types/gameSummary'
 import { teams } from '../../../data/teams'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface GameSummaryProps {
   boxScore: BoxScore
@@ -21,44 +22,57 @@ export const GameSummary: React.FC<GameSummaryProps> = ({ boxScore }) => {
     <Box border='2px solid black' p={4} bg='white' borderRadius='lg'>
       {/* header */}
       {home_team && away_team && (
-        <HStack>
-          {/* home team */}
-          <VStack>
-            <Image src={away_team.image_url} />
-            <Text textAlign='center'>{away_team.name}</Text>
-            <Text fontWeight='bold'>Away</Text>
-          </VStack>
-          {/* game details */}
-          <VStack>
-            <Box d='flex' alignItems='center'>
-              <Text fontSize={18} fontWeight='bold'>
-                {date.getMonth() + 1}
-                {'/'}
-                {date.getDate()}
-              </Text>
-              <Text fontSize={12} ml={2}>
-                {game_details.time}
-              </Text>
-            </Box>
-            {game_details.attendance && (
-              <VStack spacing={1}>
-                <Text fontWeight='bold'>Attendance: </Text> <Text>{game_details.attendance}</Text>
-              </VStack>
-            )}
-            {game_details.arena && (
-              <VStack spacing={1}>
-                <Text fontWeight='bold'>Arena: </Text>{' '}
-                <Text textAlign='center'>{game_details.arena}</Text>
-              </VStack>
-            )}
-          </VStack>
-          {/* away team */}
-          <VStack>
-            <Image src={home_team.image_url} />
-            <Text textAlign='center'>{home_team.name}</Text>
-            <Text fontWeight='bold'>Home</Text>
-          </VStack>
-        </HStack>
+        <>
+          <Center mb={4}>
+            {/* game details */}
+            <VStack>
+              <Box d='flex' alignItems='center'>
+                <Text fontSize={18} fontWeight='bold'>
+                  {date.getMonth() + 1}
+                  {'/'}
+                  {date.getDate()}
+                </Text>
+                <Text fontSize={12} ml={2}>
+                  {game_details.time}
+                </Text>
+              </Box>
+              {game_details.attendance && (
+                <HStack spacing={1}>
+                  <Text fontWeight='bold'>Attendance: </Text>{' '}
+                  <Text>{game_details.attendance.toLocaleString()}</Text>
+                </HStack>
+              )}
+              {game_details.arena && (
+                <HStack spacing={1}>
+                  <Text fontWeight='bold'>Arena: </Text>{' '}
+                  <Text textAlign='center'>{game_details.arena}</Text>
+                </HStack>
+              )}
+            </VStack>
+          </Center>
+
+          <Box d='flex' justifyContent='space-between' alignItems='center'>
+            {/* home team */}
+            <VStack>
+              <Image src={away_team.image_url} />
+              <Link as={RouterLink} to={`/team/${away_team_id}`}>
+                <Text textAlign='center'>{away_team.name}</Text>
+              </Link>
+
+              <Text fontWeight='bold'>Away</Text>
+            </VStack>
+
+            {/* away team */}
+            <VStack>
+              <Image src={home_team.image_url} />
+              <Link as={RouterLink} to={`/team/${home_team_id}`}>
+                <Text textAlign='center'>{home_team.name}</Text>
+              </Link>
+
+              <Text fontWeight='bold'>Home</Text>
+            </VStack>
+          </Box>
+        </>
       )}
 
       <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
@@ -80,7 +94,7 @@ export const GameSummary: React.FC<GameSummaryProps> = ({ boxScore }) => {
         <Box d='flex' w='80%' alignItems='center' justifyContent='space-between'>
           <Text>{away_scoring_total.shooting_percentage}</Text>
           <Text fontWeight='bold'>Shooting %</Text>
-          <Text>{home_scoring_total.shooting_percentage}</Text>
+          <Text>{home_scoring_total.shooting_percentage.toFixed(1)}</Text>
         </Box>
         {/* Power Play Goals */}
         <Box d='flex' w='80%' alignItems='center' justifyContent='space-between'>

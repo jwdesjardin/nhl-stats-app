@@ -81,7 +81,7 @@ export const PlayerPage: React.FC<PlayerPageProps> = ({ match }) => {
       {skater && team && teamSummary && (
         <VStack spacing={6}>
           <Box w='100%'>
-            <Heading d='flex' fontSize={32} mb={2} textAlign='center'>
+            <Heading size='2xl' my={4} textAlign='center'>
               {skater.player}
             </Heading>
             <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
@@ -93,11 +93,13 @@ export const PlayerPage: React.FC<PlayerPageProps> = ({ match }) => {
           </Box>
 
           <PlayerInjuries player_id={player_id}></PlayerInjuries>
+
           <Box w='100%'>
-            <Heading textAlign='center'>2020-21 Scoring</Heading>
+            <Heading>2020-21 Scoring</Heading>
             <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
             <PlayerSeasonSummary skater={skater}></PlayerSeasonSummary>
           </Box>
+
           <Box w='100%'>
             <PlayerGoals skater={skater} teamSummary={teamSummary}></PlayerGoals>
           </Box>
