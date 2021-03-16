@@ -1,29 +1,29 @@
-import { Box, VStack, Container, Heading } from '@chakra-ui/react'
 import React from 'react'
+import { Box, VStack, Container, Heading } from '@chakra-ui/react'
 
 import { Conference, GameStats } from '../../types/app'
+import { useStandings, useGamelog } from '../../context'
 import { ConferenceStandings } from '../../utils/ConferenceStandings'
 import { Game } from '../../utils/Game'
-import { useStandings, useGamelog } from '../../context'
 
 export const HomePage: React.FC = () => {
+  // context
   const { standings } = useStandings()
   const { gamelog } = useGamelog()
 
+  // state
   const [todaysGames, setTodaysGames] = React.useState<GameStats[]>([])
-
   const [westernConference, setWesternConference] = React.useState<Conference | undefined>()
   const [easternConference, setEasternConference] = React.useState<Conference | undefined>()
   const [centralConference, setCentralConference] = React.useState<Conference | undefined>()
   const [northernConference, setNorthernConference] = React.useState<Conference | undefined>()
 
+  // FUNCTION: get's games for today
   const getTodaysGames = (gamelog: GameStats[]): GameStats[] => {
     const today = new Date()
     const month = today.getMonth()
     const date = today.getDate()
     const year = today.getFullYear()
-
-    console.log(today, month, date, year)
 
     const todays_games = gamelog.filter((game) => {
       const game_date = new Date(game.date)
@@ -39,10 +39,11 @@ export const HomePage: React.FC = () => {
     return todays_games
   }
 
+  // get todays games and set conference state
   React.useEffect(() => {
     const todays_games = getTodaysGames(gamelog)
     setTodaysGames(todays_games)
-    console.log('todays games', todays_games)
+
     setWesternConference(standings.find((conference) => conference.name === 'West Division'))
     setEasternConference(standings.find((conference) => conference.name === 'East Division'))
     setNorthernConference(standings.find((conference) => conference.name === 'North Division'))

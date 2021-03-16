@@ -1,22 +1,22 @@
 import * as React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import { Center, HStack } from '@chakra-ui/layout'
 import { Box, Image, Text, VStack, Link } from '@chakra-ui/react'
+
 import { BoxScore } from '../../../types/gameSummary'
 import { teams } from '../../../data/teams'
-import { Link as RouterLink } from 'react-router-dom'
 
 interface GameSummaryProps {
   boxScore: BoxScore
 }
 
 export const GameSummary: React.FC<GameSummaryProps> = ({ boxScore }) => {
+  // get date of game and team ids
   const { game_details, home_scoring_total, away_scoring_total } = boxScore
-
   const { home_team_id, away_team_id } = game_details
-
-  const date = new Date(game_details.date)
   const away_team = teams.find((team) => team.teamID === away_team_id)
   const home_team = teams.find((team) => team.teamID === home_team_id)
+  const date = new Date(game_details.date)
 
   return (
     <Box border='2px solid black' p={4} bg='white' borderRadius='lg'>
@@ -58,7 +58,6 @@ export const GameSummary: React.FC<GameSummaryProps> = ({ boxScore }) => {
               <Link as={RouterLink} to={`/team/${away_team_id}`}>
                 <Text textAlign='center'>{away_team.name}</Text>
               </Link>
-
               <Text fontWeight='bold'>Away</Text>
             </VStack>
 
@@ -68,15 +67,16 @@ export const GameSummary: React.FC<GameSummaryProps> = ({ boxScore }) => {
               <Link as={RouterLink} to={`/team/${home_team_id}`}>
                 <Text textAlign='center'>{home_team.name}</Text>
               </Link>
-
               <Text fontWeight='bold'>Home</Text>
             </VStack>
           </Box>
         </>
       )}
 
+      {/* divider */}
       <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
 
+      {/* stat by stat summary */}
       <VStack>
         {/* Goals */}
         <Box d='flex' w='80%' alignItems='center' justifyContent='space-between'>

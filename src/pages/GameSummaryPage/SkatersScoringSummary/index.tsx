@@ -3,10 +3,8 @@ import { Box, HStack, Text, Select } from '@chakra-ui/react'
 import * as React from 'react'
 import { SkaterGame } from '../../../types/gameSummary'
 import { getSortedSkatersGame } from '../../../utils/helper'
-
-import { GoalsStatsTable } from './GoalsStatsTable'
-import { PointsStatsTable } from './PointsStatsTable'
-import { ShootingStatsTable } from './ShootingStatsTable'
+import { SmallStatTable } from '../../../utils/SmallStatTable'
+import { goalsColumns, pointsColumns, shootingColumns } from './tables'
 
 interface SkatersScoringSummaryProps {
   summary: SkaterGame[]
@@ -30,7 +28,7 @@ export const SkatersScoringSummary: React.FC<SkatersScoringSummaryProps> = ({ su
     }
   }, [category, summary])
 
-  const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  const handleSortSkaterGame: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     const target = event.currentTarget as HTMLButtonElement
     const attr = target.value
     console.log(attr)
@@ -59,24 +57,27 @@ export const SkatersScoringSummary: React.FC<SkatersScoringSummaryProps> = ({ su
       </HStack>
 
       {category === 'points' && (
-        <PointsStatsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
-          sortedSkaters={sortedSkaters}
-          handleSortColumn={handleSortColumn}
+          skaterGames={sortedSkaters}
+          handleSortColumn={handleSortSkaterGame}
+          columns={pointsColumns}
         />
       )}
       {category === 'goals' && (
-        <GoalsStatsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
-          sortedSkaters={sortedSkaters}
-          handleSortColumn={handleSortColumn}
+          skaterGames={sortedSkaters}
+          handleSortColumn={handleSortSkaterGame}
+          columns={goalsColumns}
         />
       )}
       {category === 'shooting' && (
-        <ShootingStatsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
-          sortedSkaters={sortedSkaters}
-          handleSortColumn={handleSortColumn}
+          skaterGames={sortedSkaters}
+          handleSortColumn={handleSortSkaterGame}
+          columns={shootingColumns}
         />
       )}
     </Box>
