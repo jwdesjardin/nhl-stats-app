@@ -4,8 +4,8 @@ import { Box, Select, HStack, Text } from '@chakra-ui/react'
 
 import { GoalieScoring } from '../../../types/app'
 
-import { GoalieSavesTable } from '../../../utils/ScoringTables/GoalieSavesTable'
-import { GoalieGoalsTable } from '../../../utils/ScoringTables/GoalieGoalsTable'
+import { SmallStatTable } from '../../../utils/SmallStatTable'
+import { goalsColumns, savesColumns } from './tables'
 
 interface GoalieScoringLeadersProps {
   goalieScoring: GoalieScoring[]
@@ -79,19 +79,22 @@ export const GoalieScoringLeaders: React.FC<GoalieScoringLeadersProps> = ({ goal
         </Select>
       </HStack>
 
+      {/* scaves */}
       {category === 'saves' && (
-        <GoalieSavesTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
-          sortedGoalies={sortedGoalies}
           handleSortColumn={handleSortColumn}
+          goalieScoring={sortedGoalies}
+          columns={savesColumns}
         />
       )}
-
+      {/* goals */}
       {category === 'goals' && (
-        <GoalieGoalsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
-          sortedGoalies={sortedGoalies}
           handleSortColumn={handleSortColumn}
+          goalieScoring={sortedGoalies}
+          columns={goalsColumns}
         />
       )}
     </Box>

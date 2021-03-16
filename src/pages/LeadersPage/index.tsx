@@ -5,13 +5,17 @@ import { usePlayers } from '../../context'
 import { GoalieScoring, SkaterScoring } from '../../types/app'
 
 import { getSortedGoalies, getSortedSkaters } from '../../utils/helper'
-import { SkaterPointsTable } from '../../utils/ScoringTables/SkaterPointsTable'
-import { SkaterFaceoffsTable } from '../../utils/ScoringTables/SkaterFaceoffsTable'
-import { SkaterPenaltiesTable } from '../../utils/ScoringTables/SkaterPenaltiesTable'
-import { SkaterShootingTable } from '../../utils/ScoringTables/SkaterShootingTable'
-import { SkaterGoalsTable } from '../../utils/ScoringTables/SkaterGoalsTable'
-import { GoalieGoalsTable } from '../../utils/ScoringTables/GoalieGoalsTable'
-import { GoalieSavesTable } from '../../utils/ScoringTables/GoalieSavesTable'
+
+import { SmallStatTable } from '../../utils/SmallStatTable'
+import {
+  faceoffsColumns,
+  goalsAgainstColumns,
+  goalsColumns,
+  penaltiesColumns,
+  pointsColumns,
+  savesColumns,
+  shootingColumns,
+} from './tables'
 
 export const LeadersPage = () => {
   const { skaters, goalies } = usePlayers()
@@ -22,6 +26,7 @@ export const LeadersPage = () => {
   const [category, setCategory] = React.useState('points')
 
   React.useEffect(() => {
+    // set default sort attributes for each category
     if (category === 'points') {
       setTopSkaters(getSortedSkaters(skaters, 'points').slice(0, 100))
       setTopGoalies([])
@@ -105,54 +110,68 @@ export const LeadersPage = () => {
         </Select>
       </HStack>
 
+      {/* scoring */}
       {category === 'points' && (
-        <SkaterPointsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortSkatersColumn}
-          sortedSkaters={topSkaters}
+          skaterScoring={topSkaters}
+          columns={pointsColumns}
         />
       )}
+      {/* goals */}
       {category === 'goals' && (
-        <SkaterGoalsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortSkatersColumn}
-          sortedSkaters={topSkaters}
+          skaterScoring={topSkaters}
+          columns={goalsColumns}
         />
       )}
+      {/* shooting */}
       {category === 'shooting' && (
-        <SkaterShootingTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortSkatersColumn}
-          sortedSkaters={topSkaters}
+          skaterScoring={topSkaters}
+          columns={shootingColumns}
         />
       )}
+      {/* penalties */}
       {category === 'penalties' && (
-        <SkaterPenaltiesTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortSkatersColumn}
-          sortedSkaters={topSkaters}
+          skaterScoring={topSkaters}
+          columns={penaltiesColumns}
         />
       )}
+      {/* faceoffs */}
       {category === 'faceoffs' && (
-        <SkaterFaceoffsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortSkatersColumn}
-          sortedSkaters={topSkaters}
+          skaterScoring={topSkaters}
+          columns={faceoffsColumns}
         />
       )}
 
+      {/* penalties */}
       {category === 'goals_against' && (
-        <GoalieGoalsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortGoaliesColumn}
-          sortedGoalies={topGoalies}
+          goalieScoring={topGoalies}
+          columns={goalsAgainstColumns}
         />
       )}
+      {/* faceoffs */}
       {category === 'saves' && (
-        <GoalieSavesTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortGoaliesColumn}
-          sortedGoalies={topGoalies}
+          goalieScoring={topGoalies}
+          columns={savesColumns}
         />
       )}
     </Container>

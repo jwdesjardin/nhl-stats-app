@@ -4,11 +4,15 @@ import { Box, Select, Text, HStack } from '@chakra-ui/react'
 
 import { SkaterScoring } from '../../../types/app'
 
-import { SkaterPointsTable } from '../../../utils/ScoringTables/SkaterPointsTable'
-import { SkaterGoalsTable } from '../../../utils/ScoringTables/SkaterGoalsTable'
-import { SkaterShootingTable } from '../../../utils/ScoringTables/SkaterShootingTable'
-import { SkaterPenaltiesTable } from '../../../utils/ScoringTables/SkaterPenaltiesTable'
-import { SkaterFaceoffsTable } from '../../../utils/ScoringTables/SkaterFaceoffsTable'
+import { getSortedSkaters } from '../../../utils/helper'
+import { SmallStatTable } from '../../../utils/SmallStatTable'
+import {
+  faceoffsColumns,
+  goalsColumns,
+  penaltiesColumns,
+  pointsColumns,
+  shootingColumns,
+} from './tables'
 
 interface SkaterScoringLeadersProps {
   skaterScoring: SkaterScoring[]
@@ -20,6 +24,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
   const [sortAttribute, setSortAttribute] = React.useState('')
 
   React.useEffect(() => {
+    // set default sort attributes for each category
     if (category === 'points') {
       setSortedSkaters(getSortedSkaters(skaterScoring, 'points'))
       setSortAttribute('points')
@@ -38,36 +43,6 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
     }
   }, [category, skaterScoring])
 
-  const getSortedSkaters = (skaters: SkaterScoring[], attr: string) => {
-    return skaters.sort((a, b) => {
-      let stat_A: number
-      let stat_B: number
-
-      if (attr === 'faceoff_taken') {
-        stat_A = a.faceoff_wins + a.faceoff_losses
-        stat_B = b.faceoff_wins + b.faceoff_losses
-      } else {
-        // either two stats values or two empty strings
-        const A = Object.entries(a)
-        stat_A = parseFloat((A.find((entry) => entry[0] === attr) || ['', ''])[1])
-        const B = Object.entries(b)
-        stat_B = parseFloat((B.find((entry) => entry[0] === attr) || ['', ''])[1])
-      }
-
-      if (stat_A !== null && stat_B !== null) {
-        return stat_B - stat_A
-      }
-      //move nulls to the bottom
-      if (stat_A === null) {
-        return 1
-      }
-      if (stat_B === null) {
-        return -1
-      }
-      return 0
-    })
-  }
-
   const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     const target = event.currentTarget as HTMLButtonElement
     const attr = target.value
@@ -81,7 +56,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
 
   return (
     <Box>
-      {/* stat select */}
+      {/* category select */}
       <HStack mb={2}>
         <Text>Categories:</Text>
         <Select
@@ -101,46 +76,47 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
 
       {/* scoring */}
       {category === 'points' && (
-        <SkaterPointsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortColumn}
-          sortedSkaters={sortedSkaters}
+          skaterScoring={sortedSkaters}
+          columns={pointsColumns}
         />
       )}
-
       {/* goals */}
       {category === 'goals' && (
-        <SkaterGoalsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortColumn}
-          sortedSkaters={sortedSkaters}
+          skaterScoring={sortedSkaters}
+          columns={goalsColumns}
         />
       )}
-
       {/* shooting */}
       {category === 'shooting' && (
-        <SkaterShootingTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortColumn}
-          sortedSkaters={sortedSkaters}
+          skaterScoring={sortedSkaters}
+          columns={shootingColumns}
         />
       )}
-
-      {/* physical */}
+      {/* penalties */}
       {category === 'penalties' && (
-        <SkaterPenaltiesTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortColumn}
-          sortedSkaters={sortedSkaters}
+          skaterScoring={sortedSkaters}
+          columns={penaltiesColumns}
         />
       )}
-
       {/* faceoffs */}
       {category === 'faceoffs' && (
-        <SkaterFaceoffsTable
+        <SmallStatTable
           sortAttribute={sortAttribute}
           handleSortColumn={handleSortColumn}
-          sortedSkaters={sortedSkaters}
+          skaterScoring={sortedSkaters}
+          columns={faceoffsColumns}
         />
       )}
     </Box>

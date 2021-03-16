@@ -22,8 +22,10 @@ interface SmallStatTableProps {
     isNumeric?: boolean
     attr: string
     isSkaterPercentage?: boolean
+    isGoaliePercentage?: boolean
     hasTeamLink?: boolean
     hasPlayerLink?: boolean
+    isFOTaken?: boolean
   }[]
 }
 
@@ -164,6 +166,24 @@ export const SmallStatTable: React.FC<SmallStatTableProps> = ({
                   )[0][1]
 
                   if (column.isSortable) {
+                    // CASE: sorted percentage
+                    if (column.isGoaliePercentage) {
+                      return (
+                        <Td
+                          key={idx}
+                          px={1}
+                          isNumeric={column.isNumeric ? true : false}
+                          fontWeight={sortAttribute === column.attr ? 'bold' : 'normal'}
+                        >
+                          {/* show percentage unless null show nothing */}
+                          {data === null
+                            ? ''
+                            : data === 1
+                            ? data.toFixed(3)
+                            : data.toFixed(3).toString().slice(1)}
+                        </Td>
+                      )
+                    }
                     // CASE sorted plain data
                     return (
                       <Td
@@ -199,12 +219,20 @@ export const SmallStatTable: React.FC<SmallStatTableProps> = ({
             ))}
 
             {/* skatersScoring */}
-            {players3?.map((player, idx) => (
+            {players3?.map((player, plyr_idx) => (
               <Tr key={player.player_id}>
                 {columns.map((column, idx) => {
-                  const data = Object.entries(player).filter(
-                    (entry) => entry[0] === column.attr
-                  )[0][1]
+                  let data: any
+                  if (column.attr === 'rank') {
+                    data = plyr_idx + 1
+                  } else if (column.attr === 'faceoff_taken') {
+                    data = player.faceoff_wins + player.faceoff_losses
+                  } else if (column.attr === 'average_time_on_ice') {
+                    data = player.average_time_on_ice.split(':')[0] + 'm'
+                  } else {
+                    data = Object.entries(player).filter((entry) => entry[0] === column.attr)[0][1]
+                  }
+
                   if (column.isSortable) {
                     // CASE: sorted percentage
                     if (column.isSkaterPercentage) {
@@ -215,11 +243,12 @@ export const SmallStatTable: React.FC<SmallStatTableProps> = ({
                           isNumeric={column.isNumeric ? true : false}
                           fontWeight={sortAttribute === column.attr ? 'bold' : 'normal'}
                         >
-                          {data.toFixed(1)}
+                          {/* show percentage unless null show nothing */}
+                          {data === null ? '' : data.toFixed(1)}
                         </Td>
                       )
                     }
-                    // CASE: sorted plain data
+
                     return (
                       <Td
                         key={idx}
@@ -265,12 +294,16 @@ export const SmallStatTable: React.FC<SmallStatTableProps> = ({
             ))}
 
             {/* goaliesScoring */}
-            {players4?.map((player, idx) => (
+            {players4?.map((player, plyr_idx) => (
               <Tr key={player.player_id}>
                 {columns.map((column, idx) => {
-                  const data = Object.entries(player).filter(
-                    (entry) => entry[0] === column.attr
-                  )[0][1]
+                  let data: any
+                  if (column.attr === 'rank') {
+                    data = plyr_idx + 1
+                  } else {
+                    data = Object.entries(player).filter((entry) => entry[0] === column.attr)[0][1]
+                  }
+
                   if (column.isSortable) {
                     // CASE: sorted plain data
                     return (
