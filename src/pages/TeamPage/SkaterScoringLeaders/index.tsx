@@ -43,6 +43,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
     }
   }, [category, skaterScoring])
 
+  // get attribute from button and set state with sort results
   const handleSortColumn: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     const target = event.currentTarget as HTMLButtonElement
     const attr = target.value
@@ -74,7 +75,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
         </Select>
       </HStack>
 
-      {/* scoring */}
+      {/* scoring table */}
       {category === 'points' && (
         <SmallStatTable
           sortAttribute={sortAttribute}
@@ -83,7 +84,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           columns={pointsColumns}
         />
       )}
-      {/* goals */}
+      {/* goals table */}
       {category === 'goals' && (
         <SmallStatTable
           sortAttribute={sortAttribute}
@@ -92,7 +93,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           columns={goalsColumns}
         />
       )}
-      {/* shooting */}
+      {/* shooting table */}
       {category === 'shooting' && (
         <SmallStatTable
           sortAttribute={sortAttribute}
@@ -101,7 +102,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           columns={shootingColumns}
         />
       )}
-      {/* penalties */}
+      {/* penalties table */}
       {category === 'penalties' && (
         <SmallStatTable
           sortAttribute={sortAttribute}
@@ -110,7 +111,7 @@ export const SkaterScoringLeaders: React.FC<SkaterScoringLeadersProps> = ({ skat
           columns={penaltiesColumns}
         />
       )}
-      {/* faceoffs */}
+      {/* faceoffs table */}
       {category === 'faceoffs' && (
         <SmallStatTable
           sortAttribute={sortAttribute}

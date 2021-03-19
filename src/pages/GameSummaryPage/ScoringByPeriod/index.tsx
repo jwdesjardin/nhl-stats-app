@@ -22,11 +22,13 @@ export const ScoringByPeriod: React.FC<ScoringByPeriodProps> = ({ scoringSummary
       <Table size='sm'>
         <Tbody>
           {regulation_scoring.map((period) => {
+            // get goals
             const goals = period.goals?.map((goal, idx) => (
               <GoalRow key={`${goal.scorer_id}${goal.count}`} goal={goal}></GoalRow>
             ))
 
             return (
+              // render period title and goals if they exist
               <>
                 <Tr key={period.title}>
                   <Th colSpan={5} textAlign='center' bg='blackAlpha.600' color='white'>
@@ -40,6 +42,7 @@ export const ScoringByPeriod: React.FC<ScoringByPeriodProps> = ({ scoringSummary
         </Tbody>
       </Table>
 
+      {/* if shootout period exists render shootout table */}
       {shootout && (
         <Table size='sm'>
           <Tbody>
@@ -48,6 +51,7 @@ export const ScoringByPeriod: React.FC<ScoringByPeriodProps> = ({ scoringSummary
                 Shootout
               </Th>
             </Tr>
+            {/* get shootout attempts if they exist */}
             {shootout.so_attempts?.map((attempt, idx) => (
               <SOAttemptRow key={idx} attempt={attempt}></SOAttemptRow>
             ))}

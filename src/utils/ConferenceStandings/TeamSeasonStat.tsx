@@ -21,6 +21,7 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
 
   return (
     <Tr bg={selected ? 'yellow.200' : 'white'}>
+      {/* team name */}
       {team && (
         <Td px={1}>
           <Link as={RouterLink} to={`/team/${team?.teamID}`}>
@@ -31,21 +32,27 @@ export const TeamSeasonStat: React.FC<TeamSeasonStatProps> = ({ stats, selected 
           </Link>
         </Td>
       )}
+      {/* games played */}
       <Td px={1} isNumeric>
         {stats.games}
       </Td>
+      {/* wins */}
       <Td px={1} isNumeric>
         {stats.wins}
       </Td>
+      {/* losses */}
       <Td px={1} isNumeric>
         {stats.losses}
       </Td>
+      {/* OT losses */}
       <Td px={1} isNumeric>
         {stats.losses_ot}
       </Td>
+      {/* points */}
       <Td px={1} fontWeight='bold' isNumeric>
         {stats.points}
       </Td>
+      {/* point percentage  */}
       <Td px={1} isNumeric>
         {stats.points_pct.toFixed(3).toString().slice(1)}
       </Td>

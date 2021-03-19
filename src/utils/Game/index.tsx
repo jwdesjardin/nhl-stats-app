@@ -59,8 +59,7 @@ export const Game: React.FC<GameProps> = ({ game, decision_team_id }) => {
       }
     }
 
-    // decision
-
+    // set decision
     if (game.home_goals !== null && game.away_goals !== null && dec_team) {
       const home_value = dec_team === 'home' ? game.home_goals : game.away_goals
       const away_value = dec_team === 'home' ? game.away_goals : game.home_goals

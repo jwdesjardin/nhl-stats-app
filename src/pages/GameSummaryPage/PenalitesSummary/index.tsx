@@ -18,6 +18,7 @@ export const PenaltiesSummary: React.FC<PenaltiesSummaryProps> = ({ penaltySumma
       <Table size='sm'>
         <Tbody>
           {penaltySummary.map((period) => {
+            // get penalties
             const penalties = period.penalties?.map((penalty) => (
               <PenaltyRow
                 key={`${penalty.player_id}${penalty.time}`}
@@ -26,6 +27,7 @@ export const PenaltiesSummary: React.FC<PenaltiesSummaryProps> = ({ penaltySumma
             ))
 
             return (
+              // render period title and penalties if they exist
               <>
                 <Tr key={period.title}>
                   <Th colSpan={5} textAlign='center' bg='blackAlpha.600' color='white'>
