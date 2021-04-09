@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, VStack, Container, Heading } from '@chakra-ui/react'
+import { Box, VStack, Container, Heading, Spinner, Center } from '@chakra-ui/react'
 
 import { Conference, GameStats } from '../../types/app'
 import { useStandings, useGamelog } from '../../context'
@@ -57,6 +57,20 @@ export const HomePage: React.FC = () => {
         <Box p={4} w='100%'>
           <Heading textAlign='center'>Today's Games</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+
+          {/* show spinner if games havent loaded */}
+          {todaysGames.length === 0 && (
+            <Center>
+              <Spinner
+                thickness='4px'
+                speed='0.85s'
+                emptyColor='gray.200'
+                color='black.500'
+                size='xl'
+              />
+            </Center>
+          )}
+
           {todaysGames.map((game) => (
             <Game key={game.id} game={game} />
           ))}
@@ -66,6 +80,20 @@ export const HomePage: React.FC = () => {
         <Box w='100%'>
           <Heading textAlign='center'>Standings</Heading>
           <Box h='2px' bg='gray.400' width='90%' my={2} mx='auto' />
+
+          {/* show spinner if standings havent loaded */}
+          {standings.length === 0 && (
+            <Center>
+              <Spinner
+                thickness='4px'
+                speed='0.85s'
+                emptyColor='gray.200'
+                color='black.500'
+                size='xl'
+              />
+            </Center>
+          )}
+
           {westernConference && <ConferenceStandings conference={westernConference} />}
           {easternConference && <ConferenceStandings conference={easternConference} />}
           {northernConference && <ConferenceStandings conference={northernConference} />}
